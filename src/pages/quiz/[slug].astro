@@ -9,8 +9,8 @@ export async function getStaticPaths() {
   const themes = await getCollection("themes");
   const quizSlugs = new Set(listQuizSlugs());
   return themes
-    .filter((t) => quizSlugs.has(t.data.slug))
-    .map((t) => ({ params: { slug: t.data.slug } }));
+    .filter((t) => quizSlugs.has(t.slug))
+    .map((t) => ({ params: { slug: t.slug } }));
 }
 
 const { slug } = Astro.params;

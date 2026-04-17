@@ -1,5 +1,4 @@
 ---
-slug: "geographie-culture"
 title: "Géographie et culture"
 order: 8
 summary: "La France est un pays diversifié : métropole, outre-mer, régions, langues, patrimoines. Sa culture mêle traditions et créations contemporaines, rayonnant largement dans le monde."

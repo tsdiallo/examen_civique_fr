@@ -1,5 +1,4 @@
 ---
-slug: "institutions"
 title: "Institutions politiques et administratives"
 order: 5
 summary: "La France est une République avec un président, un gouvernement, un Parlement et des collectivités locales. Chaque institution a un rôle précis, au service des citoyen·ne·s."

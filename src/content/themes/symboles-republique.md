@@ -1,5 +1,4 @@
 ---
-slug: "symboles-republique"
 title: "Symboles de la République"
 order: 2
 summary: "Le drapeau tricolore, Marianne, La Marseillaise, la devise et le 14 juillet incarnent la République au quotidien. Ces symboles rassemblent et rappellent les valeurs partagées."

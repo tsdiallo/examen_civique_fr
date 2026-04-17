@@ -1,5 +1,4 @@
 ---
-slug: "droits-devoirs"
 title: "Droits fondamentaux, devoirs et obligations"
 order: 4
 summary: "Toute personne qui vit en France bénéficie de droits fondamentaux et doit respecter des obligations. Ces droits et devoirs sont la base du vivre-ensemble et de l'égalité devant la loi."

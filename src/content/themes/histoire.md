@@ -1,5 +1,4 @@
 ---
-slug: "histoire"
 title: "Repères d'histoire de France"
 order: 7
 summary: "Quelques grandes dates structurent l'histoire de France : la Révolution, les Républiques, les deux guerres mondiales et la construction européenne. Ces repères aident à comprendre la société d'aujourd'hui."

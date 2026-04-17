@@ -1,5 +1,4 @@
 ---
-slug: "ue-international"
 title: "Union européenne et place de la France"
 order: 6
 summary: "La France est membre fondateur de l'Union européenne. L'UE protège des droits communs, favorise la libre circulation et pèse dans le monde à travers une coopération étroite entre États membres."

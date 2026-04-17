@@ -1,5 +1,4 @@
 ---
-slug: "laicite"
 title: "Laïcité"
 order: 3
 summary: "La laïcité garantit la liberté de croire ou de ne pas croire, et la neutralité de l'État face aux religions. Elle permet à chacun·e de vivre ses convictions dans le respect des autres."

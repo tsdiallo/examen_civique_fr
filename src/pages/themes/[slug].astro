@@ -8,14 +8,14 @@ import { getQuizBySlug } from "../../lib/quiz-loader";
 export async function getStaticPaths() {
   const themes = await getCollection("themes");
   return themes.map((t) => ({
-    params: { slug: t.data.slug },
+    params: { slug: t.slug },
     props: { entry: t },
   }));
 }
 
 const { entry } = Astro.props;
 const { Content } = await entry.render();
-const quiz = getQuizBySlug(entry.data.slug);
+const quiz = getQuizBySlug(entry.slug);
 ---
 <BaseLayout title={`${entry.data.title} — Examen civique`} description={entry.data.summary}>
   <section class="container-page py-10">
@@ -30,6 +30,6 @@ const quiz = getQuizBySlug(entry.data.slug);
     <article class="prose-fr">
       <Content />
     </article>
-    {quiz && <CTAQuiz slug={entry.data.slug} questionsCount={quiz.questions.length} />}
+    {quiz && <CTAQuiz slug={entry.slug} questionsCount={quiz.questions.length} />}
   </section>
 </BaseLayout>

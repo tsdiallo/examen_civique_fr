@@ -1,5 +1,4 @@
 ---
-slug: "valeurs-republique"
 title: "Principes et valeurs de la République"
 order: 1
 summary: "La France est une République indivisible, laïque, démocratique et sociale. Sa devise 'Liberté, Égalité, Fraternité' résume les valeurs qui fondent la vie commune et les droits de chacun·e."

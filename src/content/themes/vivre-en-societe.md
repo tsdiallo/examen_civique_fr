@@ -1,5 +1,4 @@
 ---
-slug: "vivre-en-societe"
 title: "Vivre dans la société française"
 order: 9
 summary: "Vivre en France, c'est partager des règles communes au quotidien : à l'école, au travail, dans la famille, dans le voisinage. Ces règles protègent les droits de chacun·e et facilitent la vie ensemble."

@@ -1,5 +1,4 @@
 ---
-slug: "egalite-situations"
 title: "Égalité femmes-hommes et mises en situation"
 order: 10
 summary: "L'égalité entre les femmes et les hommes est un principe fondamental. Elle s'applique à l'école, au travail, dans la famille et dans la vie publique, et elle se traduit par des droits protégés."
