@@ -1,0 +1,125 @@
+{
+  "themeSlug": "droits-devoirs",
+  "questions": [
+    {
+      "id": "dd-01",
+      "type": "qcm",
+      "themeSlug": "droits-devoirs",
+      "prompt": "Parmi ces libertés, laquelle est garantie en France ?",
+      "choices": [
+        { "id": "a", "text": "La liberté de censure" },
+        { "id": "b", "text": "La liberté d'expression" },
+        { "id": "c", "text": "La liberté d'imposer sa religion aux autres" },
+        { "id": "d", "text": "La liberté de frauder" }
+      ],
+      "answer": "b",
+      "explanation": "La liberté d'expression est une liberté fondamentale. Elle s'exerce dans le respect de la loi (pas d'injures, de diffamation ni d'incitation à la haine).",
+      "difficulty": 1
+    },
+    {
+      "id": "dd-02",
+      "type": "qcm",
+      "themeSlug": "droits-devoirs",
+      "prompt": "Jusqu'à quel âge la scolarité est-elle obligatoire en France ?",
+      "choices": [
+        { "id": "a", "text": "Jusqu'à 12 ans" },
+        { "id": "b", "text": "Jusqu'à 14 ans" },
+        { "id": "c", "text": "Jusqu'à 16 ans" },
+        { "id": "d", "text": "Jusqu'à 18 ans" }
+      ],
+      "answer": "c",
+      "explanation": "La scolarité est obligatoire de 3 à 16 ans pour tous les enfants vivant en France.",
+      "difficulty": 1
+    },
+    {
+      "id": "dd-03",
+      "type": "qcm",
+      "themeSlug": "droits-devoirs",
+      "prompt": "Qui peut voter aux élections nationales (présidentielle, législatives) ?",
+      "choices": [
+        { "id": "a", "text": "Toute personne qui vit en France" },
+        { "id": "b", "text": "Uniquement les citoyens français majeurs" },
+        { "id": "c", "text": "Les citoyens européens résidant en France" },
+        { "id": "d", "text": "Seuls les propriétaires" }
+      ],
+      "answer": "b",
+      "explanation": "Le droit de vote aux élections nationales est réservé aux citoyen·ne·s français·es majeur·e·s, inscrit·e·s sur les listes électorales.",
+      "difficulty": 2
+    },
+    {
+      "id": "dd-04",
+      "type": "qcm",
+      "themeSlug": "droits-devoirs",
+      "prompt": "Les citoyens européens résidant en France peuvent voter à quelles élections ?",
+      "choices": [
+        { "id": "a", "text": "À aucune" },
+        { "id": "b", "text": "Aux élections municipales et européennes" },
+        { "id": "c", "text": "Uniquement à la présidentielle" },
+        { "id": "d", "text": "À toutes les élections" }
+      ],
+      "answer": "b",
+      "explanation": "Les citoyens de l'Union européenne résidant en France peuvent voter aux élections municipales et aux élections européennes.",
+      "difficulty": 2
+    },
+    {
+      "id": "dd-05",
+      "type": "qcm",
+      "themeSlug": "droits-devoirs",
+      "prompt": "Parmi ces propositions, laquelle est une obligation en France ?",
+      "choices": [
+        { "id": "a", "text": "Adhérer à un parti politique" },
+        { "id": "b", "text": "Respecter la loi et payer ses impôts" },
+        { "id": "c", "text": "Parler une langue régionale" },
+        { "id": "d", "text": "Travailler dans le secteur public" }
+      ],
+      "answer": "b",
+      "explanation": "Respecter la loi et contribuer aux dépenses communes (impôts) font partie des obligations de toute personne vivant en France.",
+      "difficulty": 1
+    },
+    {
+      "id": "dd-06",
+      "type": "qcm",
+      "themeSlug": "droits-devoirs",
+      "prompt": "Que doit faire un jeune de 16 ans vivant en France ?",
+      "choices": [
+        { "id": "a", "text": "S'engager dans l'armée" },
+        { "id": "b", "text": "Se faire recenser en mairie (ou en ligne) en vue de la Journée défense et citoyenneté" },
+        { "id": "c", "text": "Payer ses premiers impôts" },
+        { "id": "d", "text": "Passer un examen civique" }
+      ],
+      "answer": "b",
+      "explanation": "À 16 ans, un recensement citoyen est obligatoire. Il permet ensuite d'être convoqué à la Journée défense et citoyenneté (JDC).",
+      "difficulty": 2
+    },
+    {
+      "id": "dd-07",
+      "type": "situation",
+      "themeSlug": "droits-devoirs",
+      "prompt": "Sur Internet, quelqu'un publie des propos qui appellent à la haine contre un groupe de personnes. Que prévoit la loi française ?",
+      "choices": [
+        { "id": "a", "text": "Rien : la liberté d'expression est absolue" },
+        { "id": "b", "text": "Ce type de propos peut être sanctionné par la loi" },
+        { "id": "c", "text": "Seuls les sites de presse sont concernés" },
+        { "id": "d", "text": "C'est autorisé si la personne est anonyme" }
+      ],
+      "answer": "b",
+      "explanation": "La liberté d'expression a des limites : l'incitation à la haine, la diffamation et l'injure peuvent être sanctionnées, y compris sur Internet.",
+      "difficulty": 2
+    },
+    {
+      "id": "dd-08",
+      "type": "situation",
+      "themeSlug": "droits-devoirs",
+      "prompt": "Une famille souhaite ne pas scolariser son enfant de 8 ans pour des raisons personnelles. Que prévoit la loi ?",
+      "choices": [
+        { "id": "a", "text": "Les parents sont libres de ne pas le scolariser" },
+        { "id": "b", "text": "La scolarité est obligatoire de 3 à 16 ans ; une instruction doit être assurée" },
+        { "id": "c", "text": "C'est autorisé si l'enfant sait lire" },
+        { "id": "d", "text": "La scolarité commence seulement à 10 ans" }
+      ],
+      "answer": "b",
+      "explanation": "L'instruction est obligatoire entre 3 et 16 ans. Les enfants doivent être scolarisés ou bénéficier d'une instruction encadrée par la loi.",
+      "difficulty": 2
+    }
+  ]
+}

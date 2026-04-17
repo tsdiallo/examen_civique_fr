@@ -1,0 +1,125 @@
+{
+  "themeSlug": "ue-international",
+  "questions": [
+    {
+      "id": "ue-01",
+      "type": "qcm",
+      "themeSlug": "ue-international",
+      "prompt": "Combien d'États membres compte l'Union européenne aujourd'hui ?",
+      "choices": [
+        { "id": "a", "text": "15" },
+        { "id": "b", "text": "20" },
+        { "id": "c", "text": "27" },
+        { "id": "d", "text": "30" }
+      ],
+      "answer": "c",
+      "explanation": "Depuis le retrait du Royaume-Uni en 2020, l'Union européenne compte 27 États membres.",
+      "difficulty": 1
+    },
+    {
+      "id": "ue-02",
+      "type": "qcm",
+      "themeSlug": "ue-international",
+      "prompt": "La France est-elle membre fondateur de l'Union européenne ?",
+      "choices": [
+        { "id": "a", "text": "Oui, depuis les années 1950" },
+        { "id": "b", "text": "Non, elle a rejoint l'UE en 1995" },
+        { "id": "c", "text": "Oui, depuis les années 1990" },
+        { "id": "d", "text": "Non, elle n'en est pas membre" }
+      ],
+      "answer": "a",
+      "explanation": "La France a participé à la construction européenne dès les années 1950 (CECA 1951, Traité de Rome 1957). C'est un État membre fondateur.",
+      "difficulty": 2
+    },
+    {
+      "id": "ue-03",
+      "type": "qcm",
+      "themeSlug": "ue-international",
+      "prompt": "Comment sont élus les député·e·s européen·ne·s ?",
+      "choices": [
+        { "id": "a", "text": "Par les parlements nationaux" },
+        { "id": "b", "text": "Au suffrage universel direct, tous les 5 ans" },
+        { "id": "c", "text": "Par la Commission européenne" },
+        { "id": "d", "text": "Par tirage au sort" }
+      ],
+      "answer": "b",
+      "explanation": "Les député·e·s européen·ne·s sont élu·e·s au suffrage universel direct, tous les 5 ans, dans chaque État membre.",
+      "difficulty": 2
+    },
+    {
+      "id": "ue-04",
+      "type": "qcm",
+      "themeSlug": "ue-international",
+      "prompt": "Quelle est la monnaie utilisée en France ?",
+      "choices": [
+        { "id": "a", "text": "Le franc" },
+        { "id": "b", "text": "L'euro" },
+        { "id": "c", "text": "La livre" },
+        { "id": "d", "text": "Le dollar" }
+      ],
+      "answer": "b",
+      "explanation": "La France utilise l'euro, monnaie commune de la zone euro, depuis le passage à la monnaie unique (pièces et billets en 2002).",
+      "difficulty": 1
+    },
+    {
+      "id": "ue-05",
+      "type": "qcm",
+      "themeSlug": "ue-international",
+      "prompt": "Qu'est-ce que l'espace Schengen ?",
+      "choices": [
+        { "id": "a", "text": "Un accord militaire européen" },
+        { "id": "b", "text": "Une zone de libre circulation des personnes, sans contrôles systématiques aux frontières internes" },
+        { "id": "c", "text": "Le nom du Parlement européen" },
+        { "id": "d", "text": "Une organisation humanitaire de l'UE" }
+      ],
+      "answer": "b",
+      "explanation": "L'espace Schengen permet la libre circulation des personnes entre les États membres, sans contrôles systématiques aux frontières internes.",
+      "difficulty": 2
+    },
+    {
+      "id": "ue-06",
+      "type": "qcm",
+      "themeSlug": "ue-international",
+      "prompt": "La France est membre permanent de quel organe international ?",
+      "choices": [
+        { "id": "a", "text": "Du G7 uniquement" },
+        { "id": "b", "text": "Du Conseil de sécurité de l'ONU" },
+        { "id": "c", "text": "Du Parlement européen" },
+        { "id": "d", "text": "Du Conseil de l'Europe" }
+      ],
+      "answer": "b",
+      "explanation": "La France est l'un des cinq membres permanents du Conseil de sécurité de l'ONU, avec un droit de veto.",
+      "difficulty": 2
+    },
+    {
+      "id": "ue-07",
+      "type": "situation",
+      "themeSlug": "ue-international",
+      "prompt": "Une voisine italienne vit en France depuis plusieurs années. Peut-elle voter aux élections municipales ?",
+      "choices": [
+        { "id": "a", "text": "Non, elle doit d'abord être française" },
+        { "id": "b", "text": "Oui, en tant que citoyenne d'un État de l'UE, elle peut voter aux municipales et aux européennes" },
+        { "id": "c", "text": "Uniquement aux élections présidentielles" },
+        { "id": "d", "text": "Seulement après 10 ans de résidence" }
+      ],
+      "answer": "b",
+      "explanation": "Les citoyen·ne·s d'un État membre de l'UE résidant en France peuvent voter aux élections municipales et européennes, à condition d'être inscrit·e·s.",
+      "difficulty": 2
+    },
+    {
+      "id": "ue-08",
+      "type": "situation",
+      "themeSlug": "ue-international",
+      "prompt": "On confond souvent « Union européenne » et « Conseil de l'Europe ». Quelle est la bonne distinction ?",
+      "choices": [
+        { "id": "a", "text": "Ce sont deux noms pour la même institution" },
+        { "id": "b", "text": "L'UE est une union politique et économique de 27 États ; le Conseil de l'Europe est une organisation distincte consacrée à la protection des droits humains" },
+        { "id": "c", "text": "Le Conseil de l'Europe est plus récent que l'UE" },
+        { "id": "d", "text": "L'UE siège à Strasbourg et le Conseil de l'Europe à Bruxelles" }
+      ],
+      "answer": "b",
+      "explanation": "L'UE et le Conseil de l'Europe sont distincts. Le Conseil de l'Europe, plus large, défend les droits humains (Cour européenne des droits de l'homme, Strasbourg).",
+      "difficulty": 3
+    }
+  ]
+}
