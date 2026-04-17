@@ -1,0 +1,16 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+  // Stub — les thèmes seront ajoutés en phase 5.
+  return [];
+}
+
+const { slug } = Astro.params;
+---
+<BaseLayout title={`Thème ${slug}`}>
+  <section class="container-page py-10">
+    <h1 class="text-3xl font-display">Fiche de révision</h1>
+    <p class="text-ink-700 mt-2">Contenu à venir pour le thème « {slug} ».</p>
+  </section>
+</BaseLayout>

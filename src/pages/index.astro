@@ -1,0 +1,34 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+<BaseLayout>
+  <section class="container-page py-12 sm:py-16">
+    <p class="badge mb-4">Plateforme d'entraînement — non officielle</p>
+    <h1 class="text-3xl sm:text-5xl font-display text-ink-900 max-w-3xl">
+      Préparez l'examen civique français, sereinement.
+    </h1>
+    <p class="mt-4 text-ink-700 max-w-2xl">
+      Fiches claires, quiz par thème, mises en situation et examen blanc chronométré.
+      Un français simple, des explications pas à pas, pour aborder votre démarche avec confiance.
+    </p>
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a href="/themes" class="btn-primary no-underline">Commencer par un thème</a>
+      <a href="/examen-blanc" class="btn-secondary no-underline">Faire l'examen blanc</a>
+    </div>
+  </section>
+
+  <section class="container-page pb-16 grid gap-4 sm:grid-cols-3">
+    <div class="card p-5">
+      <h2 class="font-display text-lg">40 questions</h2>
+      <p class="text-ink-700 text-sm mt-1">Examen blanc dans les conditions réelles : 45 min, seuil 32/40.</p>
+    </div>
+    <div class="card p-5">
+      <h2 class="font-display text-lg">10 thèmes</h2>
+      <p class="text-ink-700 text-sm mt-1">Valeurs, laïcité, institutions, histoire, vie quotidienne…</p>
+    </div>
+    <div class="card p-5">
+      <h2 class="font-display text-lg">Progression locale</h2>
+      <p class="text-ink-700 text-sm mt-1">Votre avancée reste sur votre appareil. Aucun compte requis.</p>
+    </div>
+  </section>
+</BaseLayout>

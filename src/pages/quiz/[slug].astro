@@ -1,0 +1,16 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+  // Stub — les quiz seront générés en phase 5.
+  return [];
+}
+
+const { slug } = Astro.params;
+---
+<BaseLayout title={`Quiz ${slug}`}>
+  <section class="container-page py-10">
+    <h1 class="text-3xl font-display">Quiz du thème</h1>
+    <p class="text-ink-700 mt-2">Quiz à venir pour « {slug} ».</p>
+  </section>
+</BaseLayout>
