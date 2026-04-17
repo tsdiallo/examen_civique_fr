@@ -1,0 +1,14 @@
+---
+interface Props {
+  slug: string;
+  questionsCount?: number;
+}
+const { slug, questionsCount } = Astro.props;
+---
+<aside class="mt-10 card p-6 bg-brand-50 border-brand-200">
+  <h2 class="font-display text-xl text-brand-900">Prêt·e à vous tester ?</h2>
+  <p class="text-sm text-ink-700 mt-1">
+    {questionsCount ? `${questionsCount} questions` : "Quelques questions"} vous attendent, avec correction expliquée.
+  </p>
+  <a href={`/quiz/${slug}`} class="btn-primary no-underline mt-4">Faire le quiz du thème</a>
+</aside>

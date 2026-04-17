@@ -1,13 +1,29 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import ExamRunner from "../components/exam/ExamRunner.astro";
+import Alert from "../components/ui/Alert.astro";
+import { getCollection } from "astro:content";
+import { getExam } from "../lib/quiz-loader";
+
+const exam = await getExam();
+const themes = await getCollection("themes");
+const themeTitles: Record<string, string> = Object.fromEntries(
+  themes.map((t) => [t.data.slug, t.data.title])
+);
 ---
 <BaseLayout title="Examen blanc — Examen civique">
   <section class="container-page py-10">
     <h1 class="text-3xl font-display">Examen blanc</h1>
     <p class="text-ink-700 mt-2 max-w-prose">
-      40 questions originales, 45 minutes, seuil de réussite indicatif de 32/40.
-      À lancer dans le calme, comme une vraie session.
+      Entraînez-vous dans des conditions proches de l'examen réel : {exam?.total ?? 40} questions,
+      {Math.round((exam?.durationSec ?? 2700) / 60)} minutes, seuil indicatif {exam?.passingScore ?? 32}/{exam?.total ?? 40}.
     </p>
-    <div class="card p-6 mt-6 text-ink-500 text-sm">L'examen blanc sera disponible en phase 6.</div>
+
+    <div class="mt-6">
+      {exam
+        ? <ExamRunner exam={exam} themeTitles={themeTitles} />
+        : <Alert tone="info" title="Examen en préparation">L'examen blanc sera ajouté en phase 6.</Alert>
+      }
+    </div>
   </section>
 </BaseLayout>
