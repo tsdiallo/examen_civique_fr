@@ -1,0 +1,125 @@
+{
+  "themeSlug": "institutions",
+  "questions": [
+    {
+      "id": "in-01",
+      "type": "qcm",
+      "themeSlug": "institutions",
+      "prompt": "Sous quel régime vit la France depuis 1958 ?",
+      "choices": [
+        { "id": "a", "text": "La IIIe République" },
+        { "id": "b", "text": "La IVe République" },
+        { "id": "c", "text": "La Ve République" },
+        { "id": "d", "text": "La VIe République" }
+      ],
+      "answer": "c",
+      "explanation": "La Constitution de 1958 a instauré la Ve République, toujours en vigueur aujourd'hui.",
+      "difficulty": 1
+    },
+    {
+      "id": "in-02",
+      "type": "qcm",
+      "themeSlug": "institutions",
+      "prompt": "Comment le président de la République est-il élu ?",
+      "choices": [
+        { "id": "a", "text": "Par l'Assemblée nationale" },
+        { "id": "b", "text": "Au suffrage universel direct, pour 5 ans" },
+        { "id": "c", "text": "Par le Sénat, pour 7 ans" },
+        { "id": "d", "text": "Par un collège électoral, pour 10 ans" }
+      ],
+      "answer": "b",
+      "explanation": "Le président de la République est élu au suffrage universel direct, pour un mandat de 5 ans, renouvelable une fois consécutivement.",
+      "difficulty": 1
+    },
+    {
+      "id": "in-03",
+      "type": "qcm",
+      "themeSlug": "institutions",
+      "prompt": "Le Parlement français se compose :",
+      "choices": [
+        { "id": "a", "text": "De l'Assemblée nationale uniquement" },
+        { "id": "b", "text": "De l'Assemblée nationale et du Sénat" },
+        { "id": "c", "text": "Du Sénat et du Conseil constitutionnel" },
+        { "id": "d", "text": "Du Premier ministre et des députés" }
+      ],
+      "answer": "b",
+      "explanation": "Le Parlement est composé de deux assemblées : l'Assemblée nationale et le Sénat.",
+      "difficulty": 1
+    },
+    {
+      "id": "in-04",
+      "type": "qcm",
+      "themeSlug": "institutions",
+      "prompt": "Combien y a-t-il de député·e·s à l'Assemblée nationale ?",
+      "choices": [
+        { "id": "a", "text": "348" },
+        { "id": "b", "text": "400" },
+        { "id": "c", "text": "577" },
+        { "id": "d", "text": "1 000" }
+      ],
+      "answer": "c",
+      "explanation": "L'Assemblée nationale compte 577 député·e·s, élu·e·s au suffrage universel direct pour 5 ans.",
+      "difficulty": 2
+    },
+    {
+      "id": "in-05",
+      "type": "qcm",
+      "themeSlug": "institutions",
+      "prompt": "Qui nomme le Premier ministre ?",
+      "choices": [
+        { "id": "a", "text": "L'Assemblée nationale" },
+        { "id": "b", "text": "Le Sénat" },
+        { "id": "c", "text": "Le président de la République" },
+        { "id": "d", "text": "Les citoyens, par un vote direct" }
+      ],
+      "answer": "c",
+      "explanation": "Le Premier ministre est nommé par le président de la République. Il conduit l'action du gouvernement.",
+      "difficulty": 1
+    },
+    {
+      "id": "in-06",
+      "type": "qcm",
+      "themeSlug": "institutions",
+      "prompt": "Quel est le rôle principal du Parlement ?",
+      "choices": [
+        { "id": "a", "text": "Juger les délits" },
+        { "id": "b", "text": "Voter la loi, voter le budget, contrôler le gouvernement" },
+        { "id": "c", "text": "Diriger l'armée" },
+        { "id": "d", "text": "Nommer les ambassadeurs" }
+      ],
+      "answer": "b",
+      "explanation": "Le Parlement vote la loi, vote le budget de l'État et contrôle l'action du gouvernement.",
+      "difficulty": 1
+    },
+    {
+      "id": "in-07",
+      "type": "situation",
+      "themeSlug": "institutions",
+      "prompt": "Vous avez besoin d'une pièce d'état civil (comme un acte de naissance). À quel service vous adressez-vous en premier ?",
+      "choices": [
+        { "id": "a", "text": "À la préfecture" },
+        { "id": "b", "text": "À la mairie de votre commune" },
+        { "id": "c", "text": "Au Parlement" },
+        { "id": "d", "text": "Au Conseil constitutionnel" }
+      ],
+      "answer": "b",
+      "explanation": "La mairie est le premier service de proximité pour les actes d'état civil (naissance, mariage, décès, etc.).",
+      "difficulty": 1
+    },
+    {
+      "id": "in-08",
+      "type": "situation",
+      "themeSlug": "institutions",
+      "prompt": "Après adoption par le Parlement, une loi est-elle applicable automatiquement ?",
+      "choices": [
+        { "id": "a", "text": "Oui, dès le vote du Parlement, sans autre étape" },
+        { "id": "b", "text": "Elle doit être promulguée par le président puis publiée au Journal officiel" },
+        { "id": "c", "text": "Elle doit être validée par les régions" },
+        { "id": "d", "text": "Elle doit être approuvée par référendum" }
+      ],
+      "answer": "b",
+      "explanation": "Une loi votée par le Parlement est ensuite promulguée par le président de la République, puis publiée au Journal officiel pour entrer en vigueur.",
+      "difficulty": 2
+    }
+  ]
+}

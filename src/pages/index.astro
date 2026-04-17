@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import ProgressSummary from "../components/ui/ProgressSummary.astro";
 ---
 <BaseLayout>
   <section class="container-page py-12 sm:py-16">
@@ -17,10 +18,14 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     </div>
   </section>
 
-  <section class="container-page pb-16 grid gap-4 sm:grid-cols-3">
+  <section class="container-page">
+    <ProgressSummary />
+  </section>
+
+  <section class="container-page pt-10 pb-16 grid gap-4 sm:grid-cols-3">
     <div class="card p-5">
       <h2 class="font-display text-lg">40 questions</h2>
-      <p class="text-ink-700 text-sm mt-1">Examen blanc dans les conditions réelles : 45 min, seuil 32/40.</p>
+      <p class="text-ink-700 text-sm mt-1">Examen blanc dans les conditions réelles : 45 min, seuil indicatif 32/40.</p>
     </div>
     <div class="card p-5">
       <h2 class="font-display text-lg">10 thèmes</h2>
@@ -29,6 +34,19 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <div class="card p-5">
       <h2 class="font-display text-lg">Progression locale</h2>
       <p class="text-ink-700 text-sm mt-1">Votre avancée reste sur votre appareil. Aucun compte requis.</p>
+    </div>
+  </section>
+
+  <section class="container-page pb-16">
+    <div class="card p-6 bg-brand-50 border-brand-200">
+      <h2 class="font-display text-xl text-brand-900">Comment bien réviser ?</h2>
+      <ol class="mt-3 list-decimal pl-5 text-ink-700 space-y-1 text-sm">
+        <li>Lisez la fiche d'un thème à votre rythme.</li>
+        <li>Faites le quiz : validez question par question pour lire les corrections.</li>
+        <li>Recommencez les quiz où vous êtes moins à l'aise.</li>
+        <li>Quand vous vous sentez prêt·e, lancez l'examen blanc.</li>
+        <li>Relisez les thèmes faibles indiqués dans le bilan, puis refaites un examen blanc.</li>
+      </ol>
     </div>
   </section>
 </BaseLayout>

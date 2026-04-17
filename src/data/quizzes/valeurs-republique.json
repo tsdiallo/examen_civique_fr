@@ -1,0 +1,125 @@
+{
+  "themeSlug": "valeurs-republique",
+  "questions": [
+    {
+      "id": "vr-01",
+      "type": "qcm",
+      "themeSlug": "valeurs-republique",
+      "prompt": "Quels sont les quatre principes qui caractérisent la République française ?",
+      "choices": [
+        { "id": "a", "text": "Libre, laïque, égalitaire, fraternelle" },
+        { "id": "b", "text": "Indivisible, laïque, démocratique, sociale" },
+        { "id": "c", "text": "Démocratique, fédérale, laïque, solidaire" },
+        { "id": "d", "text": "Unitaire, religieuse, démocratique, sociale" }
+      ],
+      "answer": "b",
+      "explanation": "La Constitution affirme que la France est une République indivisible, laïque, démocratique et sociale. Ces quatre mots définissent son identité politique.",
+      "difficulty": 1
+    },
+    {
+      "id": "vr-02",
+      "type": "qcm",
+      "themeSlug": "valeurs-republique",
+      "prompt": "Quelle est la devise de la République française ?",
+      "choices": [
+        { "id": "a", "text": "Liberté, Égalité, Fraternité" },
+        { "id": "b", "text": "Unité, Travail, Famille" },
+        { "id": "c", "text": "Ordre, Progrès, Paix" },
+        { "id": "d", "text": "Liberté, Sécurité, Solidarité" }
+      ],
+      "answer": "a",
+      "explanation": "La devise républicaine est 'Liberté, Égalité, Fraternité'. Elle figure notamment sur les frontons des mairies et des écoles publiques.",
+      "difficulty": 1
+    },
+    {
+      "id": "vr-03",
+      "type": "qcm",
+      "themeSlug": "valeurs-republique",
+      "prompt": "Que signifie le principe de souveraineté nationale ?",
+      "choices": [
+        { "id": "a", "text": "Le président décide seul des lois importantes" },
+        { "id": "b", "text": "Le pouvoir appartient au peuple, qui l'exerce par ses représentants et par le vote" },
+        { "id": "c", "text": "Chaque région peut adopter ses propres lois" },
+        { "id": "d", "text": "Seules les personnes nées en France peuvent décider" }
+      ],
+      "answer": "b",
+      "explanation": "La souveraineté appartient au peuple. Elle s'exprime par le vote et par les représentants élus. Aucun individu ni aucun groupe ne peut se l'approprier.",
+      "difficulty": 2
+    },
+    {
+      "id": "vr-04",
+      "type": "qcm",
+      "themeSlug": "valeurs-republique",
+      "prompt": "Qu'est-ce que le suffrage universel ?",
+      "choices": [
+        { "id": "a", "text": "Un vote réservé aux personnes les plus instruites" },
+        { "id": "b", "text": "Un vote ouvert à tous les citoyens majeurs, dans les mêmes conditions" },
+        { "id": "c", "text": "Un vote qui se fait uniquement par correspondance" },
+        { "id": "d", "text": "Un vote exclusivement local" }
+      ],
+      "answer": "b",
+      "explanation": "Le suffrage universel signifie que toutes les personnes majeures de nationalité française peuvent voter, dans les mêmes conditions, au moyen d'un bulletin secret.",
+      "difficulty": 1
+    },
+    {
+      "id": "vr-05",
+      "type": "qcm",
+      "themeSlug": "valeurs-republique",
+      "prompt": "Quel texte fondateur affirme, dès 1789, la liberté et l'égalité devant la loi ?",
+      "choices": [
+        { "id": "a", "text": "La Déclaration universelle des droits de l'homme" },
+        { "id": "b", "text": "Le Code civil" },
+        { "id": "c", "text": "La Déclaration des droits de l'homme et du citoyen" },
+        { "id": "d", "text": "La Charte européenne des droits fondamentaux" }
+      ],
+      "answer": "c",
+      "explanation": "La Déclaration des droits de l'homme et du citoyen a été adoptée en 1789. Elle affirme notamment la liberté, l'égalité devant la loi et la souveraineté de la nation.",
+      "difficulty": 2
+    },
+    {
+      "id": "vr-06",
+      "type": "qcm",
+      "themeSlug": "valeurs-republique",
+      "prompt": "Que signifie que la République est « sociale » ?",
+      "choices": [
+        { "id": "a", "text": "Qu'elle impose une religion commune" },
+        { "id": "b", "text": "Qu'elle cherche à réduire les inégalités par la solidarité (école, protection sociale…)" },
+        { "id": "c", "text": "Qu'elle interdit l'activité économique privée" },
+        { "id": "d", "text": "Qu'elle organise des événements publics" }
+      ],
+      "answer": "b",
+      "explanation": "Le principe social signifie que la République cherche à garantir la solidarité et à réduire les inégalités, par exemple grâce à l'école, à la santé et à la protection sociale.",
+      "difficulty": 2
+    },
+    {
+      "id": "vr-07",
+      "type": "situation",
+      "themeSlug": "valeurs-republique",
+      "prompt": "Pendant une réunion, quelqu'un affirme qu'en France, la loi ne s'applique pas de la même manière selon la religion de chacun. Quelle est la bonne réponse ?",
+      "choices": [
+        { "id": "a", "text": "C'est vrai : chaque religion a son propre droit" },
+        { "id": "b", "text": "C'est faux : la loi est la même pour tous, quelle que soit la religion" },
+        { "id": "c", "text": "Cela dépend de la région" },
+        { "id": "d", "text": "Seules les religions reconnues ont un droit particulier" }
+      ],
+      "answer": "b",
+      "explanation": "L'État de droit et le principe d'égalité impliquent que la loi s'applique de la même manière à toutes les personnes, sans distinction de religion.",
+      "difficulty": 2
+    },
+    {
+      "id": "vr-08",
+      "type": "situation",
+      "themeSlug": "valeurs-republique",
+      "prompt": "Un collègue dit : « En démocratie, il suffit de voter, le reste ne compte pas. » Que répondre ?",
+      "choices": [
+        { "id": "a", "text": "Il a raison : seule la participation électorale importe" },
+        { "id": "b", "text": "La démocratie, c'est aussi les libertés d'opinion, de presse et d'association, et le respect de la loi" },
+        { "id": "c", "text": "La démocratie n'a pas besoin de lois" },
+        { "id": "d", "text": "Le vote suffit tant qu'un seul parti est élu" }
+      ],
+      "answer": "b",
+      "explanation": "La démocratie ne se réduit pas au vote : elle suppose aussi des libertés fondamentales (opinion, presse, association) et le respect de l'État de droit.",
+      "difficulty": 2
+    }
+  ]
+}

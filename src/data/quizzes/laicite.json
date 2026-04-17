@@ -1,0 +1,125 @@
+{
+  "themeSlug": "laicite",
+  "questions": [
+    {
+      "id": "la-01",
+      "type": "qcm",
+      "themeSlug": "laicite",
+      "prompt": "Que garantit d'abord le principe de laïcité ?",
+      "choices": [
+        { "id": "a", "text": "L'obligation d'avoir une religion" },
+        { "id": "b", "text": "La liberté de croire ou de ne pas croire, et la neutralité de l'État" },
+        { "id": "c", "text": "L'interdiction de toutes les religions" },
+        { "id": "d", "text": "La création d'une religion officielle" }
+      ],
+      "answer": "b",
+      "explanation": "La laïcité garantit la liberté de conscience (croire, ne pas croire, changer de croyance) et la neutralité de l'État face aux religions.",
+      "difficulty": 1
+    },
+    {
+      "id": "la-02",
+      "type": "qcm",
+      "themeSlug": "laicite",
+      "prompt": "Quelle loi a séparé les Églises et l'État en France ?",
+      "choices": [
+        { "id": "a", "text": "La loi de 1789" },
+        { "id": "b", "text": "La loi de 1905" },
+        { "id": "c", "text": "La loi de 1946" },
+        { "id": "d", "text": "La loi de 2004" }
+      ],
+      "answer": "b",
+      "explanation": "La loi du 9 décembre 1905 est la loi de séparation des Églises et de l'État. Elle pose le cadre moderne de la laïcité.",
+      "difficulty": 1
+    },
+    {
+      "id": "la-03",
+      "type": "qcm",
+      "themeSlug": "laicite",
+      "prompt": "Dans les écoles publiques, les signes religieux ostensibles sont :",
+      "choices": [
+        { "id": "a", "text": "Autorisés pour tous sans limite" },
+        { "id": "b", "text": "Interdits aux élèves depuis 2004" },
+        { "id": "c", "text": "Obligatoires pour les enseignants" },
+        { "id": "d", "text": "Interdits uniquement pendant les examens" }
+      ],
+      "answer": "b",
+      "explanation": "La loi de 2004 interdit aux élèves des écoles, collèges et lycées publics le port de signes religieux ostensibles.",
+      "difficulty": 2
+    },
+    {
+      "id": "la-04",
+      "type": "qcm",
+      "themeSlug": "laicite",
+      "prompt": "Un agent public (par exemple un enseignant d'école publique) peut-il afficher ses convictions religieuses pendant son service ?",
+      "choices": [
+        { "id": "a", "text": "Oui, sans limite" },
+        { "id": "b", "text": "Non, il est tenu à la neutralité religieuse" },
+        { "id": "c", "text": "Oui, mais seulement s'il est en uniforme" },
+        { "id": "d", "text": "Seulement lors des fêtes religieuses" }
+      ],
+      "answer": "b",
+      "explanation": "Les agents publics sont tenus à la neutralité : ils ne peuvent pas manifester leurs convictions religieuses pendant leurs missions.",
+      "difficulty": 2
+    },
+    {
+      "id": "la-05",
+      "type": "qcm",
+      "themeSlug": "laicite",
+      "prompt": "La laïcité signifie-t-elle que les religions sont interdites ?",
+      "choices": [
+        { "id": "a", "text": "Oui, elles sont interdites dans l'espace public" },
+        { "id": "b", "text": "Non, elle protège le libre exercice des cultes" },
+        { "id": "c", "text": "Oui, uniquement dans la rue" },
+        { "id": "d", "text": "Non, elle impose une religion unique" }
+      ],
+      "answer": "b",
+      "explanation": "La laïcité protège le libre exercice des cultes. Elle ne s'oppose pas aux religions : elle organise la neutralité de l'État.",
+      "difficulty": 1
+    },
+    {
+      "id": "la-06",
+      "type": "qcm",
+      "themeSlug": "laicite",
+      "prompt": "Dans la rue, en dehors des cas prévus par la loi, une personne peut-elle porter un signe religieux ?",
+      "choices": [
+        { "id": "a", "text": "Non, c'est interdit partout" },
+        { "id": "b", "text": "Oui, dans le respect de l'ordre public et de la loi" },
+        { "id": "c", "text": "Seulement le dimanche" },
+        { "id": "d", "text": "Uniquement si elle a une autorisation" }
+      ],
+      "answer": "b",
+      "explanation": "Dans l'espace public, chacun peut porter des signes religieux, dans le respect de l'ordre public et des lois en vigueur.",
+      "difficulty": 2
+    },
+    {
+      "id": "la-07",
+      "type": "situation",
+      "themeSlug": "laicite",
+      "prompt": "Une usagère vient à la mairie avec un foulard. Un agent peut-il lui refuser l'accès au service uniquement pour ce motif ?",
+      "choices": [
+        { "id": "a", "text": "Oui, la laïcité l'impose" },
+        { "id": "b", "text": "Non, un usager peut porter des signes religieux en tant que public d'un service" },
+        { "id": "c", "text": "Oui, si le maire le demande" },
+        { "id": "d", "text": "Non, mais seulement s'il s'agit d'une mairie rurale" }
+      ],
+      "answer": "b",
+      "explanation": "La neutralité s'applique aux agents publics, pas aux usagers. Une personne qui vient dans un service public peut porter des signes religieux.",
+      "difficulty": 2
+    },
+    {
+      "id": "la-08",
+      "type": "situation",
+      "themeSlug": "laicite",
+      "prompt": "Un élève du collège public souhaite porter un grand symbole religieux visible. Que dit la loi ?",
+      "choices": [
+        { "id": "a", "text": "Il peut le porter sans restriction" },
+        { "id": "b", "text": "Les signes religieux ostensibles sont interdits aux élèves (loi de 2004)" },
+        { "id": "c", "text": "Il doit obtenir l'accord du recteur" },
+        { "id": "d", "text": "Cela dépend uniquement des parents" }
+      ],
+      "answer": "b",
+      "explanation": "Depuis la loi de 2004, les signes religieux ostensibles sont interdits aux élèves dans les écoles, collèges et lycées publics.",
+      "difficulty": 2
+    }
+  ]
+}

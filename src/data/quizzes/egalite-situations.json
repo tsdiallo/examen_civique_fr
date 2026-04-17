@@ -1,0 +1,125 @@
+{
+  "themeSlug": "egalite-situations",
+  "questions": [
+    {
+      "id": "eg-01",
+      "type": "qcm",
+      "themeSlug": "egalite-situations",
+      "prompt": "L'égalité entre les femmes et les hommes en France est :",
+      "choices": [
+        { "id": "a", "text": "Une simple recommandation morale" },
+        { "id": "b", "text": "Un principe garanti par la loi et la Constitution" },
+        { "id": "c", "text": "Une règle réservée au secteur public" },
+        { "id": "d", "text": "Appliquée uniquement en politique" }
+      ],
+      "answer": "b",
+      "explanation": "L'égalité entre les femmes et les hommes est un principe garanti par la Constitution et par la loi. Elle s'applique dans tous les domaines de la vie.",
+      "difficulty": 1
+    },
+    {
+      "id": "eg-02",
+      "type": "qcm",
+      "themeSlug": "egalite-situations",
+      "prompt": "En quelle année la loi encadrant l'IVG (interruption volontaire de grossesse) a-t-elle été adoptée ?",
+      "choices": [
+        { "id": "a", "text": "1944" },
+        { "id": "b", "text": "1967" },
+        { "id": "c", "text": "1975" },
+        { "id": "d", "text": "1999" }
+      ],
+      "answer": "c",
+      "explanation": "La loi dite 'loi Veil', du nom de Simone Veil, est adoptée en 1975. L'IVG a été inscrite dans la Constitution en 2024.",
+      "difficulty": 2
+    },
+    {
+      "id": "eg-03",
+      "type": "qcm",
+      "themeSlug": "egalite-situations",
+      "prompt": "Quel numéro appeler pour signaler des violences faites à une femme ?",
+      "choices": [
+        { "id": "a", "text": "Le 15" },
+        { "id": "b", "text": "Le 3919" },
+        { "id": "c", "text": "Le 112" },
+        { "id": "d", "text": "Le 18" }
+      ],
+      "answer": "b",
+      "explanation": "Le 3919 est le numéro d'information et d'écoute pour les violences faites aux femmes. En cas d'urgence immédiate, composer le 17 ou le 112.",
+      "difficulty": 1
+    },
+    {
+      "id": "eg-04",
+      "type": "qcm",
+      "themeSlug": "egalite-situations",
+      "prompt": "Au travail, refuser d'embaucher une candidate uniquement parce qu'elle est enceinte est :",
+      "choices": [
+        { "id": "a", "text": "Autorisé" },
+        { "id": "b", "text": "Interdit : c'est une discrimination punie par la loi" },
+        { "id": "c", "text": "Autorisé si l'entreprise est petite" },
+        { "id": "d", "text": "Autorisé si le poste est temporaire" }
+      ],
+      "answer": "b",
+      "explanation": "Refuser une embauche en raison d'une grossesse est une discrimination interdite. La loi protège la maternité et sanctionne ces pratiques.",
+      "difficulty": 2
+    },
+    {
+      "id": "eg-05",
+      "type": "qcm",
+      "themeSlug": "egalite-situations",
+      "prompt": "Dans un couple marié, qui exerce l'autorité parentale sur les enfants ?",
+      "choices": [
+        { "id": "a", "text": "Uniquement le père" },
+        { "id": "b", "text": "Uniquement la mère" },
+        { "id": "c", "text": "Les deux parents, conjointement" },
+        { "id": "d", "text": "Les grands-parents" }
+      ],
+      "answer": "c",
+      "explanation": "L'autorité parentale est exercée conjointement par les parents, dans l'intérêt de l'enfant. C'est l'un des effets de l'égalité des époux.",
+      "difficulty": 1
+    },
+    {
+      "id": "eg-06",
+      "type": "qcm",
+      "themeSlug": "egalite-situations",
+      "prompt": "Quel numéro est utilisable par SMS pour contacter les secours (notamment accessible aux personnes sourdes ou malentendantes) ?",
+      "choices": [
+        { "id": "a", "text": "Le 114" },
+        { "id": "b", "text": "Le 119" },
+        { "id": "c", "text": "Le 17" },
+        { "id": "d", "text": "Le 3919" }
+      ],
+      "answer": "a",
+      "explanation": "Le 114 est un numéro d'urgence accessible par SMS, fax ou appel visio, conçu notamment pour les personnes sourdes ou malentendantes.",
+      "difficulty": 2
+    },
+    {
+      "id": "eg-07",
+      "type": "situation",
+      "themeSlug": "egalite-situations",
+      "prompt": "Une candidate constate qu'à poste équivalent, un collègue homme gagne davantage qu'elle sans justification objective. Que dit la loi ?",
+      "choices": [
+        { "id": "a", "text": "C'est autorisé : chaque contrat est libre" },
+        { "id": "b", "text": "C'est interdit : le principe 'à travail égal, salaire égal' s'applique" },
+        { "id": "c", "text": "C'est autorisé dans le privé" },
+        { "id": "d", "text": "C'est admis si l'entreprise le prévoit" }
+      ],
+      "answer": "b",
+      "explanation": "La loi impose le principe 'à travail égal, salaire égal' entre les femmes et les hommes. Une différence non justifiée est illégale.",
+      "difficulty": 2
+    },
+    {
+      "id": "eg-08",
+      "type": "situation",
+      "themeSlug": "egalite-situations",
+      "prompt": "Un propriétaire refuse de louer un appartement à une famille en raison de son origine. Que fait la loi française ?",
+      "choices": [
+        { "id": "a", "text": "Elle autorise ce choix au nom de la liberté individuelle" },
+        { "id": "b", "text": "Elle interdit ce type de discrimination, qui peut être sanctionnée pénalement" },
+        { "id": "c", "text": "Elle ne s'applique qu'aux logements publics" },
+        { "id": "d", "text": "Elle tolère si le logement est petit" }
+      ],
+      "answer": "b",
+      "explanation": "Refuser un logement en raison de l'origine est une discrimination interdite par la loi et passible de sanctions pénales.",
+      "difficulty": 2
+    }
+  ]
+}

@@ -1,0 +1,125 @@
+{
+  "themeSlug": "histoire",
+  "questions": [
+    {
+      "id": "hi-01",
+      "type": "qcm",
+      "themeSlug": "histoire",
+      "prompt": "En quelle année a lieu la prise de la Bastille ?",
+      "choices": [
+        { "id": "a", "text": "1715" },
+        { "id": "b", "text": "1789" },
+        { "id": "c", "text": "1804" },
+        { "id": "d", "text": "1848" }
+      ],
+      "answer": "b",
+      "explanation": "La prise de la Bastille a lieu le 14 juillet 1789. Elle est devenue un symbole de la Révolution française.",
+      "difficulty": 1
+    },
+    {
+      "id": "hi-02",
+      "type": "qcm",
+      "themeSlug": "histoire",
+      "prompt": "En quelle année la République a-t-elle été proclamée pour la première fois en France ?",
+      "choices": [
+        { "id": "a", "text": "1789" },
+        { "id": "b", "text": "1792" },
+        { "id": "c", "text": "1848" },
+        { "id": "d", "text": "1870" }
+      ],
+      "answer": "b",
+      "explanation": "La Ire République est proclamée en 1792, après la chute de la monarchie.",
+      "difficulty": 2
+    },
+    {
+      "id": "hi-03",
+      "type": "qcm",
+      "themeSlug": "histoire",
+      "prompt": "Quand l'esclavage a-t-il été définitivement aboli en France ?",
+      "choices": [
+        { "id": "a", "text": "En 1789" },
+        { "id": "b", "text": "En 1848" },
+        { "id": "c", "text": "En 1905" },
+        { "id": "d", "text": "En 1946" }
+      ],
+      "answer": "b",
+      "explanation": "L'abolition définitive de l'esclavage dans les colonies françaises date de 1848, à l'initiative notamment de Victor Schœlcher.",
+      "difficulty": 2
+    },
+    {
+      "id": "hi-04",
+      "type": "qcm",
+      "themeSlug": "histoire",
+      "prompt": "Quelle date marque la fin de la Première Guerre mondiale en France ?",
+      "choices": [
+        { "id": "a", "text": "8 mai 1945" },
+        { "id": "b", "text": "11 novembre 1918" },
+        { "id": "c", "text": "14 juillet 1918" },
+        { "id": "d", "text": "18 juin 1940" }
+      ],
+      "answer": "b",
+      "explanation": "L'armistice de la Première Guerre mondiale est signé le 11 novembre 1918. Cette date est un jour férié et de commémoration en France.",
+      "difficulty": 1
+    },
+    {
+      "id": "hi-05",
+      "type": "qcm",
+      "themeSlug": "histoire",
+      "prompt": "À quelle date le général de Gaulle a-t-il lancé son appel à la Résistance depuis Londres ?",
+      "choices": [
+        { "id": "a", "text": "Le 8 mai 1945" },
+        { "id": "b", "text": "Le 18 juin 1940" },
+        { "id": "c", "text": "Le 11 novembre 1918" },
+        { "id": "d", "text": "Le 14 juillet 1789" }
+      ],
+      "answer": "b",
+      "explanation": "Le 18 juin 1940, depuis Londres, le général de Gaulle appelle les Français à la Résistance. Cet appel est fondateur.",
+      "difficulty": 2
+    },
+    {
+      "id": "hi-06",
+      "type": "qcm",
+      "themeSlug": "histoire",
+      "prompt": "Quand les femmes ont-elles obtenu le droit de vote en France ?",
+      "choices": [
+        { "id": "a", "text": "En 1848" },
+        { "id": "b", "text": "En 1905" },
+        { "id": "c", "text": "En 1944 (vote exercé en 1945)" },
+        { "id": "d", "text": "En 1974" }
+      ],
+      "answer": "c",
+      "explanation": "Le droit de vote des femmes a été accordé en 1944 ; elles ont voté pour la première fois aux élections de 1945.",
+      "difficulty": 2
+    },
+    {
+      "id": "hi-07",
+      "type": "situation",
+      "themeSlug": "histoire",
+      "prompt": "Lors d'une discussion, quelqu'un dit que le 14 juillet 1789 correspond à la fondation de la République. Que répondez-vous ?",
+      "choices": [
+        { "id": "a", "text": "C'est exact" },
+        { "id": "b", "text": "Non : le 14 juillet 1789 est la prise de la Bastille. La République est proclamée en 1792" },
+        { "id": "c", "text": "La République a été fondée en 1804" },
+        { "id": "d", "text": "La République n'a jamais été proclamée" }
+      ],
+      "answer": "b",
+      "explanation": "Le 14 juillet 1789 est la prise de la Bastille, événement fondateur de la Révolution. La proclamation de la République, elle, date de 1792.",
+      "difficulty": 2
+    },
+    {
+      "id": "hi-08",
+      "type": "situation",
+      "themeSlug": "histoire",
+      "prompt": "En quelle année a été abolie la peine de mort en France, et par qui le projet a-t-il été porté ?",
+      "choices": [
+        { "id": "a", "text": "1945, par le général de Gaulle" },
+        { "id": "b", "text": "1981, par Robert Badinter" },
+        { "id": "c", "text": "1958, par Michel Debré" },
+        { "id": "d", "text": "2005, par Simone Veil" }
+      ],
+      "answer": "b",
+      "explanation": "La peine de mort a été abolie en 1981 en France, sur un projet porté par Robert Badinter, alors garde des Sceaux.",
+      "difficulty": 2
+    }
+  ]
+}

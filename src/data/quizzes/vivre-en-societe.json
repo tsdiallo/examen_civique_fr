@@ -1,0 +1,125 @@
+{
+  "themeSlug": "vivre-en-societe",
+  "questions": [
+    {
+      "id": "vs-01",
+      "type": "qcm",
+      "themeSlug": "vivre-en-societe",
+      "prompt": "Quelle est la durée légale hebdomadaire du travail à temps plein en France ?",
+      "choices": [
+        { "id": "a", "text": "30 heures" },
+        { "id": "b", "text": "35 heures" },
+        { "id": "c", "text": "39 heures" },
+        { "id": "d", "text": "40 heures" }
+      ],
+      "answer": "b",
+      "explanation": "La durée légale hebdomadaire du travail à temps plein est de 35 heures en France. Des heures supplémentaires peuvent être effectuées dans un cadre précis.",
+      "difficulty": 1
+    },
+    {
+      "id": "vs-02",
+      "type": "qcm",
+      "themeSlug": "vivre-en-societe",
+      "prompt": "Que signifie « SMIC » ?",
+      "choices": [
+        { "id": "a", "text": "Salaire minimum interprofessionnel de croissance" },
+        { "id": "b", "text": "Service municipal d'information des citoyens" },
+        { "id": "c", "text": "Société médicale interrégionale des cantons" },
+        { "id": "d", "text": "Salaire moyen intermédiaire des cadres" }
+      ],
+      "answer": "a",
+      "explanation": "Le SMIC est le salaire minimum interprofessionnel de croissance : c'est le salaire horaire minimum légal en France.",
+      "difficulty": 1
+    },
+    {
+      "id": "vs-03",
+      "type": "qcm",
+      "themeSlug": "vivre-en-societe",
+      "prompt": "À partir de quel âge peut-on se marier en France ?",
+      "choices": [
+        { "id": "a", "text": "16 ans" },
+        { "id": "b", "text": "17 ans" },
+        { "id": "c", "text": "18 ans" },
+        { "id": "d", "text": "21 ans" }
+      ],
+      "answer": "c",
+      "explanation": "L'âge légal du mariage en France est 18 ans. Le mariage est célébré en mairie par un officier d'état civil.",
+      "difficulty": 1
+    },
+    {
+      "id": "vs-04",
+      "type": "qcm",
+      "themeSlug": "vivre-en-societe",
+      "prompt": "Depuis quelle année le mariage entre personnes de même sexe est-il autorisé en France ?",
+      "choices": [
+        { "id": "a", "text": "1999" },
+        { "id": "b", "text": "2004" },
+        { "id": "c", "text": "2013" },
+        { "id": "d", "text": "2020" }
+      ],
+      "answer": "c",
+      "explanation": "Le mariage entre personnes de même sexe est autorisé en France depuis la loi du 17 mai 2013.",
+      "difficulty": 2
+    },
+    {
+      "id": "vs-05",
+      "type": "qcm",
+      "themeSlug": "vivre-en-societe",
+      "prompt": "Quel numéro appeler pour les urgences médicales (SAMU) ?",
+      "choices": [
+        { "id": "a", "text": "15" },
+        { "id": "b", "text": "17" },
+        { "id": "c", "text": "18" },
+        { "id": "d", "text": "3919" }
+      ],
+      "answer": "a",
+      "explanation": "Le 15 est le numéro du SAMU (urgences médicales). Le 112 est le numéro d'urgence européen, valable partout en France.",
+      "difficulty": 1
+    },
+    {
+      "id": "vs-06",
+      "type": "qcm",
+      "themeSlug": "vivre-en-societe",
+      "prompt": "Que finance principalement l'impôt en France ?",
+      "choices": [
+        { "id": "a", "text": "Les salaires des entreprises privées" },
+        { "id": "b", "text": "Les services publics : santé, éducation, sécurité, infrastructures" },
+        { "id": "c", "text": "Uniquement les routes" },
+        { "id": "d", "text": "Uniquement les forces armées" }
+      ],
+      "answer": "b",
+      "explanation": "Les impôts financent les services publics : santé, éducation, sécurité, justice, infrastructures, culture, protection sociale.",
+      "difficulty": 1
+    },
+    {
+      "id": "vs-07",
+      "type": "situation",
+      "themeSlug": "vivre-en-societe",
+      "prompt": "Un employeur propose un contrat rémunéré en dessous du SMIC. Que faire ?",
+      "choices": [
+        { "id": "a", "text": "Accepter, car un contrat peut prévoir tout montant" },
+        { "id": "b", "text": "Refuser : le SMIC est un minimum légal. Vous pouvez vous informer auprès de l'inspection du travail" },
+        { "id": "c", "text": "Accepter pendant 6 mois, puis demander une revalorisation" },
+        { "id": "d", "text": "Proposer d'être payé en espèces" }
+      ],
+      "answer": "b",
+      "explanation": "Le SMIC est un minimum légal : un employeur ne peut pas payer en dessous. En cas de litige, l'inspection du travail peut être saisie.",
+      "difficulty": 2
+    },
+    {
+      "id": "vs-08",
+      "type": "situation",
+      "themeSlug": "vivre-en-societe",
+      "prompt": "Un enfant de 6 ans n'est pas scolarisé. Un adulte voisin ne sait pas quoi faire. Quelle est la bonne information ?",
+      "choices": [
+        { "id": "a", "text": "Ce n'est pas grave, l'école commence à 10 ans" },
+        { "id": "b", "text": "L'instruction est obligatoire de 3 à 16 ans ; la famille doit scolariser l'enfant ou organiser une instruction encadrée" },
+        { "id": "c", "text": "Il suffit de lui apprendre à lire à la maison" },
+        { "id": "d", "text": "Seule la mère peut décider" }
+      ],
+      "answer": "b",
+      "explanation": "L'instruction est obligatoire de 3 à 16 ans. Les enfants doivent être scolarisés, dans une école ou dans un cadre d'instruction encadré par la loi.",
+      "difficulty": 2
+    }
+  ]
+}

@@ -1,0 +1,616 @@
+{
+  "durationSec": 2700,
+  "passingScore": 32,
+  "total": 40,
+  "questions": [
+    {
+      "id": "ex-01",
+      "type": "qcm",
+      "themeSlug": "valeurs-republique",
+      "prompt": "Dans quel texte est inscrit le principe selon lequel la France est une République indivisible, laïque, démocratique et sociale ?",
+      "choices": [
+        { "id": "a", "text": "Dans la Déclaration universelle des droits de l'homme" },
+        { "id": "b", "text": "Dans la Constitution de la Ve République" },
+        { "id": "c", "text": "Dans le Code civil" },
+        { "id": "d", "text": "Dans la Charte des maires" }
+      ],
+      "answer": "b",
+      "explanation": "Ce principe est inscrit à l'article 1 de la Constitution de la Ve République (1958).",
+      "difficulty": 2
+    },
+    {
+      "id": "ex-02",
+      "type": "qcm",
+      "themeSlug": "valeurs-republique",
+      "prompt": "Que signifie le principe d'égalité dans la République française ?",
+      "choices": [
+        { "id": "a", "text": "Tout le monde gagne le même salaire" },
+        { "id": "b", "text": "La loi est la même pour tous, sans distinction d'origine, de sexe, de religion ou de situation" },
+        { "id": "c", "text": "Tout le monde doit vivre au même endroit" },
+        { "id": "d", "text": "Les décisions politiques doivent être unanimes" }
+      ],
+      "answer": "b",
+      "explanation": "L'égalité républicaine signifie que la loi s'applique de la même manière à toutes les personnes, sans distinction.",
+      "difficulty": 1
+    },
+    {
+      "id": "ex-03",
+      "type": "qcm",
+      "themeSlug": "valeurs-republique",
+      "prompt": "Que désigne l'expression « État de droit » ?",
+      "choices": [
+        { "id": "a", "text": "Un État où le gouvernement décide seul des règles" },
+        { "id": "b", "text": "Un État où chaque citoyen vote toutes les semaines" },
+        { "id": "c", "text": "Un État soumis à la loi, y compris dans son propre fonctionnement" },
+        { "id": "d", "text": "Un État sans juges" }
+      ],
+      "answer": "c",
+      "explanation": "L'État de droit signifie que l'État, ses administrations et ses agents sont soumis au respect de la loi, comme les citoyens.",
+      "difficulty": 2
+    },
+    {
+      "id": "ex-04",
+      "type": "situation",
+      "themeSlug": "valeurs-republique",
+      "prompt": "Dans votre quartier, un groupe propose de créer une règle locale qui ne s'appliquerait qu'à certaines personnes. Que dit la République ?",
+      "choices": [
+        { "id": "a", "text": "C'est possible si le maire est d'accord" },
+        { "id": "b", "text": "C'est contraire à l'égalité devant la loi : la loi est la même pour tous" },
+        { "id": "c", "text": "C'est autorisé seulement en zone rurale" },
+        { "id": "d", "text": "Cela dépend des traditions locales" }
+      ],
+      "answer": "b",
+      "explanation": "Aucune règle ne peut créer une inégalité de traitement devant la loi. La République est indivisible.",
+      "difficulty": 2
+    },
+
+    {
+      "id": "ex-05",
+      "type": "qcm",
+      "themeSlug": "symboles-republique",
+      "prompt": "Où la devise 'Liberté, Égalité, Fraternité' est-elle le plus souvent visible ?",
+      "choices": [
+        { "id": "a", "text": "Sur les emballages alimentaires" },
+        { "id": "b", "text": "Sur les bâtiments publics, comme les mairies et les écoles" },
+        { "id": "c", "text": "Uniquement dans les tribunaux" },
+        { "id": "d", "text": "Sur les billets d'entrée des musées" }
+      ],
+      "answer": "b",
+      "explanation": "La devise est gravée ou affichée sur les frontons des bâtiments publics, en particulier les mairies et les écoles.",
+      "difficulty": 1
+    },
+    {
+      "id": "ex-06",
+      "type": "qcm",
+      "themeSlug": "symboles-republique",
+      "prompt": "À quelle période le drapeau tricolore est-il devenu le drapeau national ?",
+      "choices": [
+        { "id": "a", "text": "Pendant la Révolution française" },
+        { "id": "b", "text": "Sous Louis XIV" },
+        { "id": "c", "text": "Après la Seconde Guerre mondiale" },
+        { "id": "d", "text": "Au XIXᵉ siècle, sous l'Empire" }
+      ],
+      "answer": "a",
+      "explanation": "Le drapeau bleu-blanc-rouge s'impose comme emblème national pendant la Révolution française.",
+      "difficulty": 2
+    },
+    {
+      "id": "ex-07",
+      "type": "qcm",
+      "themeSlug": "symboles-republique",
+      "prompt": "Que porte traditionnellement Marianne sur la tête ?",
+      "choices": [
+        { "id": "a", "text": "Une couronne de laurier" },
+        { "id": "b", "text": "Un bonnet phrygien, symbole de liberté" },
+        { "id": "c", "text": "Un casque militaire" },
+        { "id": "d", "text": "Un béret" }
+      ],
+      "answer": "b",
+      "explanation": "Marianne est souvent représentée coiffée d'un bonnet phrygien, symbole hérité de la Révolution et associé à la liberté.",
+      "difficulty": 2
+    },
+    {
+      "id": "ex-08",
+      "type": "situation",
+      "themeSlug": "symboles-republique",
+      "prompt": "Vous assistez à une cérémonie de naturalisation. Les nouveaux citoyens entendent La Marseillaise. Quel est son statut ?",
+      "choices": [
+        { "id": "a", "text": "C'est un chant régional" },
+        { "id": "b", "text": "C'est l'hymne national officiel de la France" },
+        { "id": "c", "text": "C'est une chanson récente" },
+        { "id": "d", "text": "C'est un hymne européen" }
+      ],
+      "answer": "b",
+      "explanation": "La Marseillaise est l'hymne national officiel, entonné lors des cérémonies publiques, dont les cérémonies de naturalisation.",
+      "difficulty": 1
+    },
+
+    {
+      "id": "ex-09",
+      "type": "qcm",
+      "themeSlug": "laicite",
+      "prompt": "La laïcité permet-elle le libre exercice des cultes ?",
+      "choices": [
+        { "id": "a", "text": "Non, elle interdit toutes les religions" },
+        { "id": "b", "text": "Oui, elle garantit la liberté de culte dans le respect de la loi" },
+        { "id": "c", "text": "Oui, mais uniquement pour les religions reconnues" },
+        { "id": "d", "text": "Non, les cultes sont autorisés seulement en privé" }
+      ],
+      "answer": "b",
+      "explanation": "La loi de 1905 garantit le libre exercice des cultes, tout en affirmant la neutralité de l'État.",
+      "difficulty": 2
+    },
+    {
+      "id": "ex-10",
+      "type": "qcm",
+      "themeSlug": "laicite",
+      "prompt": "Un enseignant dans une école publique peut-il porter un signe religieux visible pendant son cours ?",
+      "choices": [
+        { "id": "a", "text": "Oui, c'est sa liberté personnelle" },
+        { "id": "b", "text": "Non, il est tenu à la neutralité en tant qu'agent public" },
+        { "id": "c", "text": "Seulement s'il est remplaçant" },
+        { "id": "d", "text": "Oui, hors salle de classe" }
+      ],
+      "answer": "b",
+      "explanation": "Les agents publics doivent respecter une obligation de neutralité pendant leurs missions.",
+      "difficulty": 2
+    },
+    {
+      "id": "ex-11",
+      "type": "qcm",
+      "themeSlug": "laicite",
+      "prompt": "L'État finance-t-il, en règle générale, les cultes en France ?",
+      "choices": [
+        { "id": "a", "text": "Oui, chaque culte reçoit une subvention" },
+        { "id": "b", "text": "Non, la loi de 1905 pose la séparation et la non-reconnaissance des cultes par l'État" },
+        { "id": "c", "text": "Oui, en échange de services publics" },
+        { "id": "d", "text": "Non, il les interdit" }
+      ],
+      "answer": "b",
+      "explanation": "Selon le principe de séparation, la République ne reconnaît, ne salarie ni ne subventionne les cultes (sauf exceptions historiques encadrées).",
+      "difficulty": 3
+    },
+    {
+      "id": "ex-12",
+      "type": "situation",
+      "themeSlug": "laicite",
+      "prompt": "Une personne voudrait imposer à une autre de pratiquer la même religion qu'elle. Que dit la loi ?",
+      "choices": [
+        { "id": "a", "text": "C'est autorisé en famille" },
+        { "id": "b", "text": "C'est contraire à la liberté de conscience, qui laisse chacun libre de croire ou non" },
+        { "id": "c", "text": "C'est autorisé uniquement pour les enfants" },
+        { "id": "d", "text": "C'est permis si la personne y consent ensuite" }
+      ],
+      "answer": "b",
+      "explanation": "La laïcité protège la liberté de conscience : nul ne peut être contraint de pratiquer une religion.",
+      "difficulty": 2
+    },
+
+    {
+      "id": "ex-13",
+      "type": "qcm",
+      "themeSlug": "droits-devoirs",
+      "prompt": "Le droit à la santé en France est garanti par :",
+      "choices": [
+        { "id": "a", "text": "Un système de santé privé obligatoire" },
+        { "id": "b", "text": "La Sécurité sociale et des dispositifs d'accès aux soins" },
+        { "id": "c", "text": "Les assurances étrangères uniquement" },
+        { "id": "d", "text": "Aucun dispositif spécifique" }
+      ],
+      "answer": "b",
+      "explanation": "La Sécurité sociale et des dispositifs comme la Protection universelle maladie garantissent l'accès aux soins.",
+      "difficulty": 2
+    },
+    {
+      "id": "ex-14",
+      "type": "qcm",
+      "themeSlug": "droits-devoirs",
+      "prompt": "Pour organiser une manifestation sur la voie publique, il faut :",
+      "choices": [
+        { "id": "a", "text": "Ne rien déclarer" },
+        { "id": "b", "text": "Faire une déclaration préalable auprès de l'autorité compétente" },
+        { "id": "c", "text": "Demander l'autorisation du président" },
+        { "id": "d", "text": "Payer une taxe spéciale" }
+      ],
+      "answer": "b",
+      "explanation": "Le droit de manifester s'exerce dans le respect de la loi, avec une déclaration préalable auprès de la préfecture ou de la mairie.",
+      "difficulty": 2
+    },
+    {
+      "id": "ex-15",
+      "type": "qcm",
+      "themeSlug": "droits-devoirs",
+      "prompt": "À quoi servent principalement les impôts en France ?",
+      "choices": [
+        { "id": "a", "text": "À rembourser les dons" },
+        { "id": "b", "text": "À financer les services publics (santé, école, sécurité, infrastructures)" },
+        { "id": "c", "text": "À payer uniquement les élus" },
+        { "id": "d", "text": "À financer les partis politiques" }
+      ],
+      "answer": "b",
+      "explanation": "Les impôts financent les services publics et la protection sociale, au bénéfice de toutes et tous.",
+      "difficulty": 1
+    },
+    {
+      "id": "ex-16",
+      "type": "situation",
+      "themeSlug": "droits-devoirs",
+      "prompt": "Un ami vient d'avoir 16 ans. Il vous demande ce qu'il doit faire sur le plan citoyen. Que lui dites-vous ?",
+      "choices": [
+        { "id": "a", "text": "Rien, il n'y a pas de démarche" },
+        { "id": "b", "text": "Il doit se faire recenser (en mairie ou en ligne), avant d'être convoqué à la Journée défense et citoyenneté" },
+        { "id": "c", "text": "Il doit s'inscrire à un parti politique" },
+        { "id": "d", "text": "Il doit déclarer ses premiers impôts" }
+      ],
+      "answer": "b",
+      "explanation": "À 16 ans, chaque jeune doit être recensé. Il sera ensuite convoqué à la JDC (Journée défense et citoyenneté).",
+      "difficulty": 2
+    },
+
+    {
+      "id": "ex-17",
+      "type": "qcm",
+      "themeSlug": "institutions",
+      "prompt": "Pour combien d'années les sénateurs sont-ils élus ?",
+      "choices": [
+        { "id": "a", "text": "4 ans" },
+        { "id": "b", "text": "5 ans" },
+        { "id": "c", "text": "6 ans" },
+        { "id": "d", "text": "9 ans" }
+      ],
+      "answer": "c",
+      "explanation": "Les sénateurs sont élus pour 6 ans, le Sénat étant renouvelé par moitié tous les 3 ans.",
+      "difficulty": 2
+    },
+    {
+      "id": "ex-18",
+      "type": "qcm",
+      "themeSlug": "institutions",
+      "prompt": "Quel est le rôle du Conseil constitutionnel ?",
+      "choices": [
+        { "id": "a", "text": "Juger les affaires pénales" },
+        { "id": "b", "text": "Vérifier que les lois respectent la Constitution" },
+        { "id": "c", "text": "Nommer les ambassadeurs" },
+        { "id": "d", "text": "Organiser les manifestations" }
+      ],
+      "answer": "b",
+      "explanation": "Le Conseil constitutionnel contrôle la conformité des lois à la Constitution et veille à la régularité des élections nationales.",
+      "difficulty": 2
+    },
+    {
+      "id": "ex-19",
+      "type": "qcm",
+      "themeSlug": "institutions",
+      "prompt": "Qui représente l'État dans un département ?",
+      "choices": [
+        { "id": "a", "text": "Le maire" },
+        { "id": "b", "text": "Le préfet" },
+        { "id": "c", "text": "Le sénateur" },
+        { "id": "d", "text": "Le député" }
+      ],
+      "answer": "b",
+      "explanation": "Le préfet est le représentant de l'État dans le département. Il veille à l'application des lois et coordonne les services publics.",
+      "difficulty": 2
+    },
+    {
+      "id": "ex-20",
+      "type": "situation",
+      "themeSlug": "institutions",
+      "prompt": "Vous souhaitez contester une décision administrative qui vous concerne. Quel est, en général, le type de juridiction compétent ?",
+      "choices": [
+        { "id": "a", "text": "La justice pénale" },
+        { "id": "b", "text": "La justice administrative (tribunal administratif)" },
+        { "id": "c", "text": "Le Sénat" },
+        { "id": "d", "text": "Le Conseil constitutionnel" }
+      ],
+      "answer": "b",
+      "explanation": "Les décisions administratives sont contestées devant les juridictions administratives (tribunal administratif, cour administrative d'appel, Conseil d'État).",
+      "difficulty": 3
+    },
+
+    {
+      "id": "ex-21",
+      "type": "qcm",
+      "themeSlug": "ue-international",
+      "prompt": "Quelle est la date emblématique de la 'Journée de l'Europe' ?",
+      "choices": [
+        { "id": "a", "text": "Le 1er mai" },
+        { "id": "b", "text": "Le 9 mai" },
+        { "id": "c", "text": "Le 14 juillet" },
+        { "id": "d", "text": "Le 1er janvier" }
+      ],
+      "answer": "b",
+      "explanation": "La Journée de l'Europe est célébrée le 9 mai, en référence à la déclaration de Robert Schuman en 1950.",
+      "difficulty": 3
+    },
+    {
+      "id": "ex-22",
+      "type": "qcm",
+      "themeSlug": "ue-international",
+      "prompt": "Où siège principalement le Parlement européen ?",
+      "choices": [
+        { "id": "a", "text": "À Paris" },
+        { "id": "b", "text": "À Bruxelles uniquement" },
+        { "id": "c", "text": "À Strasbourg (et à Bruxelles, Luxembourg)" },
+        { "id": "d", "text": "À Genève" }
+      ],
+      "answer": "c",
+      "explanation": "Le Parlement européen siège à Strasbourg pour ses sessions plénières, à Bruxelles pour d'autres travaux, avec un secrétariat à Luxembourg.",
+      "difficulty": 3
+    },
+    {
+      "id": "ex-23",
+      "type": "qcm",
+      "themeSlug": "ue-international",
+      "prompt": "Combien d'étoiles figurent sur le drapeau européen ?",
+      "choices": [
+        { "id": "a", "text": "10" },
+        { "id": "b", "text": "12" },
+        { "id": "c", "text": "27" },
+        { "id": "d", "text": "50" }
+      ],
+      "answer": "b",
+      "explanation": "Le drapeau européen comporte 12 étoiles, symbole d'harmonie et d'unité. Ce nombre ne dépend pas du nombre d'États membres.",
+      "difficulty": 2
+    },
+    {
+      "id": "ex-24",
+      "type": "situation",
+      "themeSlug": "ue-international",
+      "prompt": "Un collègue pense que les eurodéputés sont nommés par les gouvernements. Comment le corriger ?",
+      "choices": [
+        { "id": "a", "text": "Il a raison" },
+        { "id": "b", "text": "Ils sont élus au suffrage universel direct par les citoyens européens, tous les 5 ans" },
+        { "id": "c", "text": "Ils sont tirés au sort" },
+        { "id": "d", "text": "Ils sont choisis par la Commission européenne" }
+      ],
+      "answer": "b",
+      "explanation": "Les eurodéputés sont élus au suffrage universel direct dans chaque État membre, pour un mandat de 5 ans.",
+      "difficulty": 2
+    },
+
+    {
+      "id": "ex-25",
+      "type": "qcm",
+      "themeSlug": "histoire",
+      "prompt": "Quelle loi du XIXᵉ siècle rend l'école primaire publique obligatoire, gratuite et laïque ?",
+      "choices": [
+        { "id": "a", "text": "La loi Jules Ferry (1881–1882)" },
+        { "id": "b", "text": "La loi Veil" },
+        { "id": "c", "text": "La loi de 1905" },
+        { "id": "d", "text": "La loi de séparation de 1789" }
+      ],
+      "answer": "a",
+      "explanation": "Les lois portées par Jules Ferry (1881 et 1882) ont rendu l'école primaire publique obligatoire, gratuite et laïque.",
+      "difficulty": 2
+    },
+    {
+      "id": "ex-26",
+      "type": "qcm",
+      "themeSlug": "histoire",
+      "prompt": "Quelle date marque la capitulation de l'Allemagne nazie en Europe ?",
+      "choices": [
+        { "id": "a", "text": "Le 11 novembre 1918" },
+        { "id": "b", "text": "Le 8 mai 1945" },
+        { "id": "c", "text": "Le 18 juin 1940" },
+        { "id": "d", "text": "Le 14 juillet 1944" }
+      ],
+      "answer": "b",
+      "explanation": "Le 8 mai 1945 marque la capitulation sans condition de l'Allemagne nazie. C'est un jour férié en France.",
+      "difficulty": 1
+    },
+    {
+      "id": "ex-27",
+      "type": "qcm",
+      "themeSlug": "histoire",
+      "prompt": "Qui a fait rédiger le Code civil entré en vigueur en 1804 ?",
+      "choices": [
+        { "id": "a", "text": "Louis XIV" },
+        { "id": "b", "text": "Napoléon Bonaparte" },
+        { "id": "c", "text": "Charles de Gaulle" },
+        { "id": "d", "text": "Robespierre" }
+      ],
+      "answer": "b",
+      "explanation": "Le Code civil, encore en partie en vigueur, a été commandé et promulgué sous Napoléon Bonaparte en 1804.",
+      "difficulty": 2
+    },
+    {
+      "id": "ex-28",
+      "type": "situation",
+      "themeSlug": "histoire",
+      "prompt": "Une personne demande quand les Françaises ont voté pour la première fois. Que répondre ?",
+      "choices": [
+        { "id": "a", "text": "En 1848" },
+        { "id": "b", "text": "En 1945, après l'ordonnance de 1944" },
+        { "id": "c", "text": "En 1981" },
+        { "id": "d", "text": "En 1905" }
+      ],
+      "answer": "b",
+      "explanation": "Le droit de vote des femmes a été accordé par l'ordonnance du 21 avril 1944. Les Françaises ont voté pour la première fois en 1945.",
+      "difficulty": 2
+    },
+
+    {
+      "id": "ex-29",
+      "type": "qcm",
+      "themeSlug": "geographie-culture",
+      "prompt": "Parmi ces pays, lequel est frontalier de la France métropolitaine ?",
+      "choices": [
+        { "id": "a", "text": "Le Portugal" },
+        { "id": "b", "text": "L'Espagne" },
+        { "id": "c", "text": "La Grèce" },
+        { "id": "d", "text": "La Pologne" }
+      ],
+      "answer": "b",
+      "explanation": "L'Espagne partage une frontière terrestre avec la France dans les Pyrénées. Les voisins terrestres incluent aussi la Belgique, le Luxembourg, l'Allemagne, la Suisse, l'Italie, Monaco et Andorre.",
+      "difficulty": 2
+    },
+    {
+      "id": "ex-30",
+      "type": "qcm",
+      "themeSlug": "geographie-culture",
+      "prompt": "Parmi ces auteurs, qui est une figure majeure de la littérature française du XIXᵉ siècle ?",
+      "choices": [
+        { "id": "a", "text": "Molière" },
+        { "id": "b", "text": "Victor Hugo" },
+        { "id": "c", "text": "Albert Einstein" },
+        { "id": "d", "text": "Charles Dickens" }
+      ],
+      "answer": "b",
+      "explanation": "Victor Hugo, auteur des Misérables et de Notre-Dame de Paris, est une figure majeure du XIXᵉ siècle français.",
+      "difficulty": 1
+    },
+    {
+      "id": "ex-31",
+      "type": "qcm",
+      "themeSlug": "geographie-culture",
+      "prompt": "La gastronomie française est-elle reconnue au patrimoine immatériel de l'UNESCO ?",
+      "choices": [
+        { "id": "a", "text": "Oui, le 'repas gastronomique des Français' y est inscrit" },
+        { "id": "b", "text": "Non, elle n'est pas reconnue par l'UNESCO" },
+        { "id": "c", "text": "Oui, mais seulement pour la pâtisserie" },
+        { "id": "d", "text": "Non, seules les spécialités régionales le sont" }
+      ],
+      "answer": "a",
+      "explanation": "Le 'repas gastronomique des Français' est inscrit au patrimoine culturel immatériel de l'UNESCO depuis 2010.",
+      "difficulty": 2
+    },
+    {
+      "id": "ex-32",
+      "type": "situation",
+      "themeSlug": "geographie-culture",
+      "prompt": "Une personne dit que la Guyane est un pays étranger. Comment la corriger ?",
+      "choices": [
+        { "id": "a", "text": "C'est exact, la Guyane est étrangère" },
+        { "id": "b", "text": "La Guyane est un territoire français d'outre-mer, situé en Amérique du Sud" },
+        { "id": "c", "text": "La Guyane est une ancienne colonie aujourd'hui indépendante" },
+        { "id": "d", "text": "La Guyane est une région d'Espagne" }
+      ],
+      "answer": "b",
+      "explanation": "La Guyane est un département et une région française d'outre-mer, situé en Amérique du Sud. Elle fait partie de la République.",
+      "difficulty": 2
+    },
+
+    {
+      "id": "ex-33",
+      "type": "qcm",
+      "themeSlug": "vivre-en-societe",
+      "prompt": "Combien de semaines de congés payés un salarié à temps plein a-t-il droit par an, au minimum ?",
+      "choices": [
+        { "id": "a", "text": "2 semaines" },
+        { "id": "b", "text": "3 semaines" },
+        { "id": "c", "text": "5 semaines" },
+        { "id": "d", "text": "8 semaines" }
+      ],
+      "answer": "c",
+      "explanation": "La loi française garantit 5 semaines de congés payés par an pour un·e salarié·e à temps plein sur une année complète de travail.",
+      "difficulty": 2
+    },
+    {
+      "id": "ex-34",
+      "type": "qcm",
+      "themeSlug": "vivre-en-societe",
+      "prompt": "Qu'est-ce que le PACS ?",
+      "choices": [
+        { "id": "a", "text": "Un contrat de travail spécifique" },
+        { "id": "b", "text": "Un partenariat civil de solidarité, ouvert aux couples de même sexe ou de sexes différents" },
+        { "id": "c", "text": "Un document fiscal annuel" },
+        { "id": "d", "text": "Un permis de séjour" }
+      ],
+      "answer": "b",
+      "explanation": "Le pacte civil de solidarité (PACS) est un contrat entre deux personnes majeures, formant un couple, qui organise leur vie commune.",
+      "difficulty": 2
+    },
+    {
+      "id": "ex-35",
+      "type": "qcm",
+      "themeSlug": "vivre-en-societe",
+      "prompt": "Quelle est la mission principale de la Sécurité sociale ?",
+      "choices": [
+        { "id": "a", "text": "Vendre des contrats d'assurance auto" },
+        { "id": "b", "text": "Garantir une protection contre les risques sociaux (santé, famille, retraite, accidents du travail)" },
+        { "id": "c", "text": "Gérer les banques" },
+        { "id": "d", "text": "Organiser les élections" }
+      ],
+      "answer": "b",
+      "explanation": "La Sécurité sociale protège contre les principaux risques sociaux : maladie, famille, vieillesse, accidents du travail et maladies professionnelles.",
+      "difficulty": 2
+    },
+    {
+      "id": "ex-36",
+      "type": "situation",
+      "themeSlug": "vivre-en-societe",
+      "prompt": "Vous êtes témoin d'un accident sur la route. Quel numéro composez-vous en priorité ?",
+      "choices": [
+        { "id": "a", "text": "Le 119" },
+        { "id": "b", "text": "Le 3919" },
+        { "id": "c", "text": "Le 112 (numéro d'urgence européen) ou le 15/18" },
+        { "id": "d", "text": "La mairie" }
+      ],
+      "answer": "c",
+      "explanation": "Le 112 est le numéro d'urgence européen, accessible partout. Le 15 (SAMU) et le 18 (pompiers) sont aussi utilisés en cas d'accident.",
+      "difficulty": 2
+    },
+
+    {
+      "id": "ex-37",
+      "type": "qcm",
+      "themeSlug": "egalite-situations",
+      "prompt": "Le harcèlement au travail est :",
+      "choices": [
+        { "id": "a", "text": "Toléré s'il n'est pas public" },
+        { "id": "b", "text": "Interdit par la loi et susceptible de sanctions pénales et disciplinaires" },
+        { "id": "c", "text": "Autorisé entre collègues" },
+        { "id": "d", "text": "Autorisé si la personne ne se plaint pas" }
+      ],
+      "answer": "b",
+      "explanation": "Le harcèlement moral ou sexuel est interdit par la loi. L'employeur a une obligation de prévention et de protection des salarié·e·s.",
+      "difficulty": 2
+    },
+    {
+      "id": "ex-38",
+      "type": "qcm",
+      "themeSlug": "egalite-situations",
+      "prompt": "Que vise la 'parité' en politique ?",
+      "choices": [
+        { "id": "a", "text": "Payer le même salaire à tous les élus" },
+        { "id": "b", "text": "Assurer une représentation équilibrée des femmes et des hommes dans les fonctions électives" },
+        { "id": "c", "text": "Mettre une femme maire dans chaque commune" },
+        { "id": "d", "text": "Interdire les hommes dans les partis politiques" }
+      ],
+      "answer": "b",
+      "explanation": "La parité vise une représentation équilibrée des femmes et des hommes dans les fonctions électives et certains autres postes à responsabilité.",
+      "difficulty": 2
+    },
+    {
+      "id": "ex-39",
+      "type": "qcm",
+      "themeSlug": "egalite-situations",
+      "prompt": "Quel numéro appeler pour signaler une situation d'enfant en danger ?",
+      "choices": [
+        { "id": "a", "text": "Le 17" },
+        { "id": "b", "text": "Le 119" },
+        { "id": "c", "text": "Le 3919" },
+        { "id": "d", "text": "Le 112" }
+      ],
+      "answer": "b",
+      "explanation": "Le 119 est le numéro national d'écoute et de signalement pour l'enfance en danger. Il est gratuit et disponible 24 h/24.",
+      "difficulty": 1
+    },
+    {
+      "id": "ex-40",
+      "type": "situation",
+      "themeSlug": "egalite-situations",
+      "prompt": "Lors d'un entretien d'embauche, une candidate est écartée après une question sur ses projets familiaux. Que dit la loi ?",
+      "choices": [
+        { "id": "a", "text": "C'est normal, l'employeur est libre de choisir" },
+        { "id": "b", "text": "Cette question est discriminatoire ; écarter une candidate pour ce motif est interdit" },
+        { "id": "c", "text": "C'est autorisé dans le privé" },
+        { "id": "d", "text": "C'est autorisé si l'entreprise est petite" }
+      ],
+      "answer": "b",
+      "explanation": "Les questions sur la vie privée (grossesse, maternité, famille) et toute décision d'embauche fondée dessus sont discriminatoires et interdites.",
+      "difficulty": 2
+    }
+  ]
+}
