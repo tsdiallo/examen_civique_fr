@@ -1,0 +1,35 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import FicheHeader from "../../components/fiche/FicheHeader.astro";
+import CTAQuiz from "../../components/fiche/CTAQuiz.astro";
+import { getCollection } from "astro:content";
+import { getQuizBySlug } from "../../lib/quiz-loader";
+
+export async function getStaticPaths() {
+  const themes = await getCollection("themes");
+  return themes.map((t) => ({
+    params: { slug: t.data.slug },
+    props: { entry: t },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+const quiz = getQuizBySlug(entry.data.slug);
+---
+<BaseLayout title={`${entry.data.title} — Examen civique`} description={entry.data.summary}>
+  <section class="container-page py-10">
+    <a href="/themes" class="text-sm text-ink-500 no-underline hover:underline">← Tous les thèmes</a>
+    <FicheHeader
+      order={entry.data.order}
+      title={entry.data.title}
+      summary={entry.data.summary}
+      durationMin={entry.data.durationMin}
+      tags={entry.data.tags}
+    />
+    <article class="prose-fr">
+      <Content />
+    </article>
+    {quiz && <CTAQuiz slug={entry.data.slug} questionsCount={quiz.questions.length} />}
+  </section>
+</BaseLayout>

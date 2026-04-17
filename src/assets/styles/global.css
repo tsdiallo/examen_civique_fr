@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --focus-ring: 0 0 0 3px rgba(30, 79, 214, 0.35);
+  }
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-ink-50 text-ink-900 font-sans antialiased;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display tracking-tight;
+  }
+  :focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+    border-radius: 6px;
+  }
+  a {
+    @apply text-brand-600 underline-offset-2 hover:underline;
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-5xl px-4 sm:px-6 lg:px-8;
+  }
+  .card {
+    @apply rounded-xl2 bg-white border border-ink-100 shadow-sm;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5
+           font-medium transition active:scale-[.99] disabled:opacity-60 disabled:cursor-not-allowed;
+  }
+  .btn-primary { @apply btn bg-brand-600 text-white hover:bg-brand-700; }
+  .btn-secondary { @apply btn bg-white text-ink-900 border border-ink-300 hover:bg-ink-100; }
+  .btn-ghost { @apply btn text-ink-700 hover:bg-ink-100; }
+  .badge {
+    @apply inline-flex items-center rounded-full bg-ink-100 px-2.5 py-0.5
+           text-xs font-medium text-ink-700;
+  }
+  .prose-fr {
+    @apply max-w-prose text-ink-900 leading-relaxed;
+  }
+  .prose-fr h2 { @apply text-2xl mt-8 mb-3; }
+  .prose-fr h3 { @apply text-lg mt-6 mb-2; }
+  .prose-fr p { @apply my-3; }
+  .prose-fr ul { @apply list-disc pl-6 my-3 space-y-1; }
+  .prose-fr strong { @apply text-brand-700; }
+}
+
+/* Respect des préférences utilisateur */
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}

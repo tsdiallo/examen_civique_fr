@@ -1,0 +1,277 @@
+---
+import type { ExamPayload } from "../../lib/types";
+
+interface Props {
+  exam: ExamPayload;
+  themeTitles: Record<string, string>;
+}
+const { exam, themeTitles } = Astro.props;
+const payload = JSON.stringify({ exam, themeTitles });
+---
+<section class="exam-root" data-exam={payload} aria-live="polite">
+  <!-- Intro -->
+  <div class="card p-6" data-ex-intro>
+    <h1 class="text-2xl font-display">Examen blanc</h1>
+    <p class="text-ink-700 mt-2 max-w-prose">
+      {exam.total} questions · {Math.round(exam.durationSec / 60)} minutes · seuil indicatif de réussite {exam.passingScore}/{exam.total}.
+      Une fois l'examen démarré, le chronomètre ne s'arrête pas.
+    </p>
+    <ul class="mt-4 text-sm text-ink-700 list-disc pl-5 space-y-1">
+      <li>Répondez à chaque question puis passez à la suivante.</li>
+      <li>Vous pouvez revenir en arrière pour modifier vos réponses.</li>
+      <li>La correction détaillée s'affiche à la fin.</li>
+    </ul>
+    <button type="button" class="btn-primary mt-6" data-ex-start>Commencer l'examen</button>
+  </div>
+
+  <!-- En cours -->
+  <div class="card p-6 hidden" data-ex-play>
+    <div class="flex items-center justify-between text-sm">
+      <span class="text-ink-500" data-ex-progress>Question 1 / {exam.total}</span>
+      <span class="font-mono text-ink-900" data-ex-timer>45:00</span>
+    </div>
+    <div class="mt-2 h-1.5 rounded-full bg-ink-100 overflow-hidden">
+      <div class="h-full bg-brand-600 transition-[width] duration-300" style="width: 0%" data-ex-bar></div>
+    </div>
+
+    <p class="mt-3 text-xs text-ink-500" data-ex-theme></p>
+    <h2 class="mt-1 text-lg sm:text-xl font-display text-ink-900" data-ex-prompt></h2>
+
+    <fieldset class="mt-5 space-y-2" data-ex-choices>
+      <legend class="sr-only">Choisissez une réponse</legend>
+    </fieldset>
+
+    <div class="mt-6 flex items-center justify-between gap-3">
+      <button type="button" class="btn-ghost" data-ex-prev>← Précédent</button>
+      <div class="flex gap-2">
+        <button type="button" class="btn-secondary" data-ex-next>Suivant →</button>
+        <button type="button" class="btn-primary hidden" data-ex-finish>Terminer l'examen</button>
+      </div>
+    </div>
+
+    <p class="mt-4 text-xs text-ink-500">
+      <span data-ex-answered>0</span> / {exam.total} répondues
+    </p>
+  </div>
+
+  <!-- Résultat -->
+  <div class="card p-6 mt-0 hidden" data-ex-result>
+    <div class="flex items-start justify-between gap-4">
+      <div>
+        <p class="badge" data-ex-verdict>Résultat</p>
+        <h2 class="font-display text-2xl mt-2">
+          <span data-ex-score>0</span> / <span>{exam.total}</span>
+        </h2>
+        <p class="text-ink-700 mt-1" data-ex-feedback></p>
+      </div>
+      <p class="text-sm text-ink-500">Temps utilisé : <span data-ex-time-used>—</span></p>
+    </div>
+
+    <div class="mt-4">
+      <div class="h-2 rounded-full bg-ink-100 overflow-hidden">
+        <div class="h-full" style="width: 0%" data-ex-score-bar></div>
+      </div>
+    </div>
+
+    <h3 class="mt-6 font-display text-lg">Résultats par thème</h3>
+    <ul class="mt-3 space-y-3" data-ex-breakdown></ul>
+
+    <h3 class="mt-6 font-display text-lg">Recommandations</h3>
+    <ul class="mt-3 list-disc pl-5 space-y-1 text-sm text-ink-700" data-ex-reco></ul>
+
+    <details class="mt-6">
+      <summary class="cursor-pointer font-medium text-brand-700">Voir la correction détaillée</summary>
+      <ol class="mt-4 space-y-4" data-ex-corrections></ol>
+    </details>
+
+    <div class="mt-6 flex flex-wrap gap-3">
+      <button type="button" class="btn-primary" data-ex-retry>Refaire un examen</button>
+      <a href="/themes" class="btn-secondary no-underline">Réviser mes thèmes faibles</a>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { saveExamAttempt } from "../../lib/progress";
+  import { computeScore, weakThemes, type Answer } from "../../lib/scoring";
+  import { shuffle } from "../../lib/shuffle";
+  import type { ExamPayload, Question, ChoiceId } from "../../lib/types";
+
+  const root = document.querySelector<HTMLElement>(".exam-root")!;
+  const data = JSON.parse(root.dataset.exam || "{}") as {
+    exam: ExamPayload;
+    themeTitles: Record<string, string>;
+  };
+  const exam = data.exam;
+  const titles = data.themeTitles;
+
+  const $ = <T extends HTMLElement = HTMLElement>(name: string) =>
+    root.querySelector<T>(`[data-ex-${name}]`)!;
+
+  const els = {
+    intro: $("intro"), play: $("play"), result: $("result"),
+    start: $("start") as HTMLButtonElement,
+    progress: $("progress"), timer: $("timer"),
+    bar: $("bar"), theme: $("theme"), prompt: $("prompt"),
+    choices: $("choices") as HTMLFieldSetElement,
+    prev: $("prev") as HTMLButtonElement,
+    next: $("next") as HTMLButtonElement,
+    finish: $("finish") as HTMLButtonElement,
+    answered: $("answered"),
+    verdict: $("verdict"), score: $("score"), feedback: $("feedback"),
+    timeUsed: $("time-used"), scoreBar: $("score-bar"),
+    breakdown: $("breakdown") as HTMLUListElement,
+    reco: $("reco") as HTMLUListElement,
+    corrections: $("corrections") as HTMLOListElement,
+    retry: $("retry") as HTMLButtonElement,
+  };
+
+  let questions: Question[] = [];
+  let selected: (ChoiceId | null)[] = [];
+  let index = 0;
+  let startedAt = 0;
+  let endAt = 0;
+  let timerId: number | null = null;
+  let finished = false;
+
+  function startExam() {
+    questions = shuffle(exam.questions).slice(0, exam.total);
+    selected = questions.map(() => null);
+    index = 0;
+    finished = false;
+    startedAt = Date.now();
+    endAt = startedAt + exam.durationSec * 1000;
+    els.intro.classList.add("hidden");
+    els.play.classList.remove("hidden");
+    els.result.classList.add("hidden");
+    render();
+    tickTimer();
+    timerId = window.setInterval(tickTimer, 1000);
+  }
+
+  function tickTimer() {
+    const remaining = Math.max(0, endAt - Date.now());
+    const m = Math.floor(remaining / 60000);
+    const s = Math.floor((remaining % 60000) / 1000);
+    els.timer.textContent = `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+    if (remaining <= 0 && !finished) finishExam(true);
+  }
+
+  function render() {
+    const q = questions[index];
+    els.progress.textContent = `Question ${index + 1} / ${exam.total}`;
+    els.prompt.textContent = q.prompt;
+    els.theme.textContent = (q.themeSlug && titles[q.themeSlug]) ? titles[q.themeSlug] : "";
+    els.bar.style.width = `${((index) / exam.total) * 100}%`;
+    els.answered.textContent = String(selected.filter(Boolean).length);
+
+    els.choices.innerHTML = "";
+    q.choices.forEach((c) => {
+      const label = document.createElement("label");
+      label.className = "flex items-start gap-3 p-3 rounded-lg border border-ink-100 hover:bg-ink-50 cursor-pointer has-[:checked]:border-brand-500 has-[:checked]:bg-brand-50";
+      label.innerHTML = `
+        <input type="radio" name="q-${q.id}" value="${c.id}" class="mt-1 accent-brand-600" ${selected[index] === c.id ? "checked" : ""} />
+        <span class="text-ink-900"><span class="font-semibold mr-1">${c.id.toUpperCase()}.</span>${c.text}</span>
+      `;
+      const input = label.querySelector<HTMLInputElement>("input")!;
+      input.addEventListener("change", () => {
+        selected[index] = input.value as ChoiceId;
+        els.answered.textContent = String(selected.filter(Boolean).length);
+      });
+      els.choices.appendChild(label);
+    });
+
+    els.prev.disabled = index === 0;
+    const last = index === exam.total - 1;
+    els.next.classList.toggle("hidden", last);
+    els.finish.classList.toggle("hidden", !last);
+  }
+
+  els.start.addEventListener("click", startExam);
+  els.prev.addEventListener("click", () => { if (index > 0) { index -= 1; render(); } });
+  els.next.addEventListener("click", () => { if (index < exam.total - 1) { index += 1; render(); } });
+  els.finish.addEventListener("click", () => finishExam(false));
+  els.retry.addEventListener("click", () => {
+    els.result.classList.add("hidden");
+    els.intro.classList.remove("hidden");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  function finishExam(timeOut: boolean) {
+    if (finished) return;
+    finished = true;
+    if (timerId) { clearInterval(timerId); timerId = null; }
+
+    const answers: Answer[] = questions.map((q, i) => ({ questionId: q.id, selected: selected[i] }));
+    const result = computeScore(questions, answers, exam.passingScore);
+    const weak = weakThemes(result);
+    saveExamAttempt(result.correct, weak);
+
+    const used = Math.min(exam.durationSec, Math.floor((Date.now() - startedAt) / 1000));
+    const m = Math.floor(used / 60), s = used % 60;
+
+    els.score.textContent = String(result.correct);
+    els.verdict.textContent = result.passed ? "Réussi" : (timeOut ? "Temps écoulé" : "Non atteint");
+    els.verdict.className = `badge ${result.passed ? "bg-success-100 text-success-600" : "bg-warning-100 text-warning-600"}`;
+    els.feedback.textContent = result.passed
+      ? `Bravo, vous avez franchi le seuil indicatif de ${exam.passingScore}/${exam.total}.`
+      : `Il manque ${Math.max(0, exam.passingScore - result.correct)} bonne(s) réponse(s) pour atteindre le seuil indicatif.`;
+    els.timeUsed.textContent = `${m} min ${s.toString().padStart(2, "0")} s`;
+    const pct = (result.correct / exam.total) * 100;
+    els.scoreBar.style.width = `${pct}%`;
+    (els.scoreBar as HTMLElement).className = `h-full ${result.passed ? "bg-success-600" : "bg-warning-600"}`;
+
+    // Breakdown
+    els.breakdown.innerHTML = "";
+    Object.entries(result.byTheme)
+      .sort(([a], [b]) => (titles[a] || a).localeCompare(titles[b] || b))
+      .forEach(([slug, v]) => {
+        const pc = v.total ? Math.round((v.correct / v.total) * 100) : 0;
+        const tone = pc >= 70 ? "bg-success-600" : pc >= 50 ? "bg-warning-600" : "bg-danger-600";
+        const li = document.createElement("li");
+        li.innerHTML = `
+          <div class="flex justify-between text-sm">
+            <span class="text-ink-900">${titles[slug] || slug}</span>
+            <span class="text-ink-500">${v.correct}/${v.total}</span>
+          </div>
+          <div class="h-1.5 rounded-full bg-ink-100 overflow-hidden mt-1"><div class="h-full ${tone}" style="width:${pc}%"></div></div>
+        `;
+        els.breakdown.appendChild(li);
+      });
+
+    // Recommendations
+    els.reco.innerHTML = "";
+    const recos = weak.slice(0, 3).map((slug) => {
+      const t = titles[slug] || slug;
+      return `Revoir la fiche <a class="text-brand-600 underline" href="/themes/${slug}">${t}</a> puis refaire son quiz.`;
+    });
+    if (recos.length === 0) recos.push("Maintenez le rythme : refaites un examen blanc pour consolider.");
+    recos.forEach((r) => { const li = document.createElement("li"); li.innerHTML = r; els.reco.appendChild(li); });
+
+    // Corrections
+    els.corrections.innerHTML = "";
+    questions.forEach((q, i) => {
+      const ok = selected[i] === q.answer;
+      const correctText = q.choices.find((c) => c.id === q.answer)?.text || "";
+      const pickedText = q.choices.find((c) => c.id === selected[i])?.text || "Pas de réponse";
+      const li = document.createElement("li");
+      li.className = "border-l-4 pl-4 " + (ok ? "border-success-600" : "border-danger-600");
+      li.innerHTML = `
+        <p class="text-sm text-ink-500">Question ${i + 1} — ${titles[q.themeSlug || ""] || ""}</p>
+        <p class="font-medium text-ink-900">${q.prompt}</p>
+        <p class="text-sm mt-1">Votre réponse : <strong>${pickedText}</strong></p>
+        ${ok ? "" : `<p class="text-sm">Bonne réponse : <strong>${correctText}</strong></p>`}
+        <p class="text-sm text-ink-700 mt-1">${q.explanation}</p>
+      `;
+      els.corrections.appendChild(li);
+    });
+
+    els.play.classList.add("hidden");
+    els.result.classList.remove("hidden");
+    els.result.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  window.addEventListener("beforeunload", (e) => {
+    if (!finished && startedAt > 0) { e.preventDefault(); e.returnValue = ""; }
+  });
+</script>

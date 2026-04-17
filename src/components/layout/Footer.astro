@@ -1,0 +1,18 @@
+---
+const year = new Date().getFullYear();
+---
+<footer class="mt-16 border-t border-ink-100 bg-white">
+  <div class="container-page py-8 text-sm text-ink-500 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+    <p class="max-w-prose">
+      Plateforme d'entraînement indépendante. <strong class="text-ink-700">Ce site n'est pas un service officiel de l'État français.</strong>
+      Contenus pédagogiques originaux à visée éducative.
+    </p>
+    <nav aria-label="Liens légaux">
+      <ul class="flex gap-4">
+        <li><a href="/a-propos">À propos</a></li>
+        <li><a href="/mentions-legales">Mentions légales</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="container-page pb-6 text-xs text-ink-500">© {year} Examen civique — Entraînement.</div>
+</footer>

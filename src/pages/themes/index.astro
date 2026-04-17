@@ -1,0 +1,40 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ThemeCard from "../../components/ui/ThemeCard.astro";
+import Alert from "../../components/ui/Alert.astro";
+import { getCollection } from "astro:content";
+
+const themes = (await getCollection("themes")).sort(
+  (a, b) => a.data.order - b.data.order
+);
+---
+<BaseLayout title="Thèmes — Examen civique">
+  <section class="container-page py-10">
+    <h1 class="text-3xl font-display">Thèmes de révision</h1>
+    <p class="text-ink-700 mt-2 max-w-prose">
+      Dix thèmes couvrant les grands domaines de l'examen. Commencez par ceux qui vous rassurent le plus,
+      puis enchaînez avec ceux où vous vous sentez moins à l'aise.
+    </p>
+
+    {themes.length === 0 ? (
+      <div class="mt-8">
+        <Alert tone="info" title="Contenus en préparation">
+          Les fiches et quiz seront ajoutés dans la prochaine phase. Vous pouvez déjà explorer la navigation.
+        </Alert>
+      </div>
+    ) : (
+      <div class="mt-8 grid gap-4 sm:grid-cols-2">
+        {themes.map((t) => (
+          <ThemeCard
+            slug={t.data.slug}
+            title={t.data.title}
+            summary={t.data.summary}
+            order={t.data.order}
+            durationMin={t.data.durationMin}
+            tags={t.data.tags}
+          />
+        ))}
+      </div>
+    )}
+  </section>
+</BaseLayout>

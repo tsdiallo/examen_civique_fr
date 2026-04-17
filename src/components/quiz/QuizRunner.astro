@@ -1,0 +1,209 @@
+---
+import type { Quiz } from "../../lib/types";
+
+interface Props {
+  quiz: Quiz;
+  themeTitle: string;
+}
+const { quiz, themeTitle } = Astro.props;
+const payload = JSON.stringify(quiz);
+---
+<section
+  class="quiz-root"
+  data-quiz={payload}
+  data-theme-slug={quiz.themeSlug}
+  data-theme-title={themeTitle}
+  aria-live="polite"
+>
+  <div class="card p-6">
+    <div class="flex items-center justify-between text-sm text-ink-500">
+      <span data-qr-progress-label>Question 1 sur {quiz.questions.length}</span>
+      <span class="badge" data-qr-type>QCM</span>
+    </div>
+    <div class="mt-2">
+      <div class="h-1.5 rounded-full bg-ink-100 overflow-hidden">
+        <div class="h-full bg-brand-600 transition-[width] duration-300" style="width: 0%" data-qr-bar></div>
+      </div>
+    </div>
+
+    <h2 class="mt-5 text-lg sm:text-xl font-display text-ink-900" data-qr-prompt></h2>
+
+    <fieldset class="mt-5 space-y-2" data-qr-choices>
+      <legend class="sr-only">Choisissez une réponse</legend>
+    </fieldset>
+
+    <div class="mt-5 hidden" data-qr-explanation>
+      <div class="rounded-lg border border-ink-100 bg-ink-50 p-4 text-sm">
+        <p class="font-semibold mb-1" data-qr-verdict></p>
+        <p class="text-ink-700" data-qr-explanation-text></p>
+      </div>
+    </div>
+
+    <div class="mt-6 flex items-center justify-between gap-3">
+      <button type="button" class="btn-ghost" data-qr-prev>← Précédent</button>
+      <div class="flex gap-2">
+        <button type="button" class="btn-secondary" data-qr-check>Valider</button>
+        <button type="button" class="btn-primary hidden" data-qr-next>Suivant →</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card p-6 mt-6 hidden" data-qr-result>
+    <h2 class="font-display text-2xl text-ink-900">Résultat</h2>
+    <p class="mt-1 text-ink-700">
+      Vous avez obtenu <strong data-qr-score></strong> sur <strong data-qr-total></strong>.
+    </p>
+    <div class="mt-4">
+      <div class="h-2 rounded-full bg-ink-100 overflow-hidden">
+        <div class="h-full bg-success-600" style="width: 0%" data-qr-score-bar></div>
+      </div>
+    </div>
+    <p class="mt-4 text-sm text-ink-700" data-qr-feedback></p>
+    <div class="mt-5 flex flex-wrap gap-3">
+      <button type="button" class="btn-secondary" data-qr-retry>Recommencer</button>
+      <a href="/themes" class="btn-ghost no-underline">Retour aux thèmes</a>
+      <a href="/examen-blanc" class="btn-primary no-underline">Tenter l'examen blanc</a>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { saveThemeAttempt } from "../../lib/progress";
+  import type { Quiz, Question, ChoiceId } from "../../lib/types";
+
+  const root = document.querySelector<HTMLElement>(".quiz-root");
+  if (!root) throw new Error("QuizRunner root missing");
+  const quiz: Quiz = JSON.parse(root.dataset.quiz || "{}");
+  const slug = root.dataset.themeSlug || "";
+
+  const $ = <T extends HTMLElement = HTMLElement>(sel: string) =>
+    root.querySelector<T>(`[data-qr-${sel}]`);
+
+  const els = {
+    progress: $("progress-label")!,
+    type: $("type")!,
+    bar: $("bar") as HTMLElement,
+    prompt: $("prompt")!,
+    choices: $("choices") as HTMLFieldSetElement,
+    explanation: $("explanation")!,
+    explanationText: $("explanation-text")!,
+    verdict: $("verdict")!,
+    prev: $("prev") as HTMLButtonElement,
+    check: $("check") as HTMLButtonElement,
+    next: $("next") as HTMLButtonElement,
+    result: $("result")!,
+    score: $("score")!,
+    total: $("total")!,
+    scoreBar: $("score-bar") as HTMLElement,
+    feedback: $("feedback")!,
+    retry: $("retry") as HTMLButtonElement,
+  };
+
+  let index = 0;
+  let selected: (ChoiceId | null)[] = quiz.questions.map(() => null);
+  let validated: boolean[] = quiz.questions.map(() => false);
+  let finalSaved = false;
+
+  function render() {
+    const q: Question = quiz.questions[index];
+    els.progress.textContent = `Question ${index + 1} sur ${quiz.questions.length}`;
+    els.type.textContent = q.type === "situation" ? "Mise en situation" : "QCM";
+    els.prompt.textContent = q.prompt;
+    els.bar.style.width = `${((index) / quiz.questions.length) * 100}%`;
+
+    els.choices.innerHTML = "";
+    q.choices.forEach((c) => {
+      const id = `q${q.id}-${c.id}`;
+      const label = document.createElement("label");
+      label.className = "flex items-start gap-3 p-3 rounded-lg border border-ink-100 hover:bg-ink-50 cursor-pointer has-[:checked]:border-brand-500 has-[:checked]:bg-brand-50";
+      label.innerHTML = `
+        <input type="radio" id="${id}" name="q-${q.id}" value="${c.id}" class="mt-1 accent-brand-600" ${selected[index] === c.id ? "checked" : ""} ${validated[index] ? "disabled" : ""} />
+        <span class="text-ink-900"><span class="font-semibold mr-1">${c.id.toUpperCase()}.</span>${c.text}</span>
+      `;
+      const input = label.querySelector<HTMLInputElement>("input")!;
+      input.addEventListener("change", () => {
+        selected[index] = input.value as ChoiceId;
+        els.check.disabled = false;
+      });
+      els.choices.appendChild(label);
+
+      if (validated[index]) {
+        if (c.id === q.answer) {
+          label.classList.add("border-success-600/40", "bg-success-100");
+        } else if (c.id === selected[index]) {
+          label.classList.add("border-danger-600/40", "bg-danger-100");
+        }
+      }
+    });
+
+    if (validated[index]) {
+      const ok = selected[index] === q.answer;
+      els.explanation.classList.remove("hidden");
+      els.verdict.textContent = ok ? "✓ Bonne réponse" : "✗ Réponse incorrecte";
+      els.verdict.className = `font-semibold mb-1 ${ok ? "text-success-600" : "text-danger-600"}`;
+      els.explanationText.textContent = q.explanation;
+      els.check.classList.add("hidden");
+      els.next.classList.remove("hidden");
+      els.next.textContent = index === quiz.questions.length - 1 ? "Voir le résultat" : "Suivant →";
+    } else {
+      els.explanation.classList.add("hidden");
+      els.check.classList.remove("hidden");
+      els.next.classList.add("hidden");
+      els.check.disabled = selected[index] == null;
+    }
+
+    els.prev.disabled = index === 0;
+  }
+
+  els.check.addEventListener("click", () => {
+    if (selected[index] == null) return;
+    validated[index] = true;
+    render();
+  });
+  els.next.addEventListener("click", () => {
+    if (index < quiz.questions.length - 1) {
+      index += 1;
+      render();
+    } else {
+      showResult();
+    }
+  });
+  els.prev.addEventListener("click", () => {
+    if (index > 0) { index -= 1; render(); }
+  });
+  els.retry.addEventListener("click", () => {
+    index = 0;
+    selected = quiz.questions.map(() => null);
+    validated = quiz.questions.map(() => false);
+    finalSaved = false;
+    els.result.classList.add("hidden");
+    render();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  function showResult() {
+    const correct = quiz.questions.reduce(
+      (acc, q, i) => acc + (selected[i] === q.answer ? 1 : 0),
+      0
+    );
+    const total = quiz.questions.length;
+    els.score.textContent = String(correct);
+    els.total.textContent = String(total);
+    els.scoreBar.style.width = `${(correct / total) * 100}%`;
+    const pct = Math.round((correct / total) * 100);
+    els.feedback.textContent =
+      pct >= 80 ? "Excellent — vous maîtrisez ce thème."
+      : pct >= 60 ? "Bon début — relisez les pièges fréquents."
+      : "À retravailler — reprenez la fiche, puis refaites le quiz.";
+    els.result.classList.remove("hidden");
+    els.bar.style.width = "100%";
+
+    if (!finalSaved && slug) {
+      saveThemeAttempt(slug, correct);
+      finalSaved = true;
+    }
+    els.result.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  render();
+</script>

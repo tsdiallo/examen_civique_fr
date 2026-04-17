@@ -1,0 +1,38 @@
+---
+const nav = [
+  { href: "/", label: "Accueil" },
+  { href: "/themes", label: "Thèmes" },
+  { href: "/examen-blanc", label: "Examen blanc" },
+  { href: "/a-propos", label: "À propos" },
+];
+const current = Astro.url.pathname;
+---
+<header class="border-b border-ink-100 bg-white/80 backdrop-blur sticky top-0 z-40">
+  <div class="container-page flex items-center justify-between h-16">
+    <a href="/" class="flex items-center gap-2 no-underline">
+      <span aria-hidden="true" class="inline-block w-8 h-8 rounded-lg bg-brand-600 text-white grid place-items-center font-display font-bold">C</span>
+      <span class="font-display text-lg text-ink-900">Examen civique</span>
+      <span class="badge ml-2 hidden sm:inline-flex">Entraînement</span>
+    </a>
+    <nav aria-label="Navigation principale">
+      <ul class="flex items-center gap-1 sm:gap-2 text-sm">
+        {nav.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class:list={[
+                "px-3 py-2 rounded-md no-underline",
+                current === item.href
+                  ? "bg-brand-50 text-brand-700"
+                  : "text-ink-700 hover:bg-ink-100"
+              ]}
+              aria-current={current === item.href ? "page" : undefined}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</header>
