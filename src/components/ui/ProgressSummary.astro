@@ -1,0 +1,59 @@
+---
+// Client-only summary of the learner's local progression
+---
+<section class="card p-6 progress-summary hidden" aria-label="Votre progression">
+  <div class="flex items-center justify-between gap-4 flex-wrap">
+    <div>
+      <p class="badge mb-1">Votre progression</p>
+      <h2 class="font-display text-xl text-ink-900">Vous avez déjà avancé</h2>
+      <p class="text-sm text-ink-700 mt-1" data-ps-summary></p>
+    </div>
+    <div class="flex flex-wrap gap-3">
+      <a href="/themes" class="btn-secondary no-underline">Reprendre un thème</a>
+      <a href="/examen-blanc" class="btn-primary no-underline">Faire l'examen blanc</a>
+    </div>
+  </div>
+  <div class="mt-4">
+    <div class="h-2 rounded-full bg-ink-100 overflow-hidden">
+      <div class="h-full bg-brand-600 transition-[width] duration-500" style="width: 0%" data-ps-bar></div>
+    </div>
+    <p class="text-xs text-ink-500 mt-1"><span data-ps-done>0</span> thème(s) travaillé(s) sur 10</p>
+  </div>
+  <button type="button" class="mt-4 text-xs text-ink-500 underline" data-ps-reset>Réinitialiser ma progression</button>
+</section>
+
+<script>
+  import { getProgress } from "../../lib/progress";
+  import { clearProgress } from "../../lib/storage";
+
+  const root = document.querySelector<HTMLElement>(".progress-summary");
+  if (root) {
+    const state = getProgress();
+    const themeKeys = Object.keys(state.themes);
+    const done = themeKeys.length;
+    const hasExam = state.exam != null;
+
+    if (done > 0 || hasExam) {
+      root.classList.remove("hidden");
+      const summary = root.querySelector<HTMLElement>("[data-ps-summary]")!;
+      const bar = root.querySelector<HTMLElement>("[data-ps-bar]")!;
+      const doneEl = root.querySelector<HTMLElement>("[data-ps-done]")!;
+
+      const pct = Math.min(100, Math.round((done / 10) * 100));
+      bar.style.width = `${pct}%`;
+      doneEl.textContent = String(done);
+
+      const parts: string[] = [];
+      if (done > 0) parts.push(`${done} thème(s) commencé(s)`);
+      if (hasExam && state.exam) parts.push(`meilleur score examen : ${state.exam.bestScore}/40`);
+      summary.textContent = parts.join(" · ");
+    }
+
+    root.querySelector<HTMLButtonElement>("[data-ps-reset]")?.addEventListener("click", () => {
+      if (confirm("Voulez-vous vraiment effacer votre progression locale ?")) {
+        clearProgress();
+        location.reload();
+      }
+    });
+  }
+</script>
