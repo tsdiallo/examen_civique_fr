@@ -1,0 +1,125 @@
+{
+  "themeSlug": "geographie-culture",
+  "questions": [
+    {
+      "id": "gc-01",
+      "type": "qcm",
+      "themeSlug": "geographie-culture",
+      "prompt": "Quelle est la capitale de la France ?",
+      "choices": [
+        { "id": "a", "text": "Lyon" },
+        { "id": "b", "text": "Marseille" },
+        { "id": "c", "text": "Paris" },
+        { "id": "d", "text": "Strasbourg" }
+      ],
+      "answer": "c",
+      "explanation": "Paris est la capitale de la France. Elle est située sur la Seine.",
+      "difficulty": 1
+    },
+    {
+      "id": "gc-02",
+      "type": "qcm",
+      "themeSlug": "geographie-culture",
+      "prompt": "Parmi ces territoires, lequel fait partie de la France d'outre-mer ?",
+      "choices": [
+        { "id": "a", "text": "Le Québec" },
+        { "id": "b", "text": "La Martinique" },
+        { "id": "c", "text": "La Belgique" },
+        { "id": "d", "text": "Le Maroc" }
+      ],
+      "answer": "b",
+      "explanation": "La Martinique est un territoire français d'outre-mer, dans la région caraïbe. Elle fait pleinement partie de la République.",
+      "difficulty": 1
+    },
+    {
+      "id": "gc-03",
+      "type": "qcm",
+      "themeSlug": "geographie-culture",
+      "prompt": "Combien de régions compte la France métropolitaine depuis la réforme de 2015–2016 ?",
+      "choices": [
+        { "id": "a", "text": "10" },
+        { "id": "b", "text": "13" },
+        { "id": "c", "text": "22" },
+        { "id": "d", "text": "27" }
+      ],
+      "answer": "b",
+      "explanation": "Depuis la réforme de 2015–2016, la France métropolitaine compte 13 régions, contre 22 auparavant.",
+      "difficulty": 2
+    },
+    {
+      "id": "gc-04",
+      "type": "qcm",
+      "themeSlug": "geographie-culture",
+      "prompt": "Parmi ces fleuves, lequel traverse la France ?",
+      "choices": [
+        { "id": "a", "text": "Le Danube" },
+        { "id": "b", "text": "La Loire" },
+        { "id": "c", "text": "L'Èbre" },
+        { "id": "d", "text": "La Volga" }
+      ],
+      "answer": "b",
+      "explanation": "La Loire est le plus long fleuve de France. D'autres grands fleuves français sont la Seine, le Rhône et la Garonne.",
+      "difficulty": 1
+    },
+    {
+      "id": "gc-05",
+      "type": "qcm",
+      "themeSlug": "geographie-culture",
+      "prompt": "Quelle chaîne de montagnes abrite le mont Blanc ?",
+      "choices": [
+        { "id": "a", "text": "Les Pyrénées" },
+        { "id": "b", "text": "Le Massif central" },
+        { "id": "c", "text": "Les Alpes" },
+        { "id": "d", "text": "Les Vosges" }
+      ],
+      "answer": "c",
+      "explanation": "Le mont Blanc se trouve dans les Alpes. Il est un repère géographique majeur, côté français.",
+      "difficulty": 1
+    },
+    {
+      "id": "gc-06",
+      "type": "qcm",
+      "themeSlug": "geographie-culture",
+      "prompt": "Quelle est la langue officielle de la France ?",
+      "choices": [
+        { "id": "a", "text": "Le français" },
+        { "id": "b", "text": "Le français et l'anglais" },
+        { "id": "c", "text": "Le français et le breton" },
+        { "id": "d", "text": "Aucune langue officielle" }
+      ],
+      "answer": "a",
+      "explanation": "Le français est la langue officielle de la République française. Les langues régionales sont reconnues comme patrimoine.",
+      "difficulty": 1
+    },
+    {
+      "id": "gc-07",
+      "type": "situation",
+      "themeSlug": "geographie-culture",
+      "prompt": "Un ami vous demande si les habitants de La Réunion sont de nationalité française. Que répondez-vous ?",
+      "choices": [
+        { "id": "a", "text": "Non, La Réunion est un pays indépendant" },
+        { "id": "b", "text": "Oui, La Réunion est un territoire français d'outre-mer ; ses habitants sont Français" },
+        { "id": "c", "text": "Ils sont citoyens européens mais pas français" },
+        { "id": "d", "text": "Seuls les fonctionnaires y sont Français" }
+      ],
+      "answer": "b",
+      "explanation": "La Réunion est un département et une région française d'outre-mer. Ses habitant·e·s sont Français·es et citoyen·ne·s de l'UE.",
+      "difficulty": 2
+    },
+    {
+      "id": "gc-08",
+      "type": "situation",
+      "themeSlug": "geographie-culture",
+      "prompt": "On vous demande de citer un élément du patrimoine culturel français reconnu à l'UNESCO. Lequel citez-vous correctement ?",
+      "choices": [
+        { "id": "a", "text": "Le Mont-Saint-Michel" },
+        { "id": "b", "text": "La tour de Pise" },
+        { "id": "c", "text": "La Grande Muraille" },
+        { "id": "d", "text": "Le Machu Picchu" }
+      ],
+      "answer": "a",
+      "explanation": "Le Mont-Saint-Michel est un site français inscrit au patrimoine mondial de l'UNESCO. La cuisine française, les rives de la Seine ou Versailles le sont aussi.",
+      "difficulty": 2
+    }
+  ]
+}
