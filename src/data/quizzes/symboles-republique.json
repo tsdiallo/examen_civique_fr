@@ -1,0 +1,125 @@
+{
+  "themeSlug": "symboles-republique",
+  "questions": [
+    {
+      "id": "sy-01",
+      "type": "qcm",
+      "themeSlug": "symboles-republique",
+      "prompt": "Quelles sont les couleurs du drapeau français ?",
+      "choices": [
+        { "id": "a", "text": "Bleu, blanc, vert" },
+        { "id": "b", "text": "Bleu, blanc, rouge" },
+        { "id": "c", "text": "Rouge, blanc, noir" },
+        { "id": "d", "text": "Bleu, jaune, rouge" }
+      ],
+      "answer": "b",
+      "explanation": "Le drapeau français est bleu, blanc, rouge. Il est devenu le drapeau national pendant la Révolution française.",
+      "difficulty": 1
+    },
+    {
+      "id": "sy-02",
+      "type": "qcm",
+      "themeSlug": "symboles-republique",
+      "prompt": "Quel est l'hymne national de la France ?",
+      "choices": [
+        { "id": "a", "text": "Le chant des partisans" },
+        { "id": "b", "text": "La Marseillaise" },
+        { "id": "c", "text": "Le chant du départ" },
+        { "id": "d", "text": "L'hymne à la joie" }
+      ],
+      "answer": "b",
+      "explanation": "La Marseillaise est l'hymne national. Elle a été écrite par Rouget de Lisle en 1792, pendant la Révolution.",
+      "difficulty": 1
+    },
+    {
+      "id": "sy-03",
+      "type": "qcm",
+      "themeSlug": "symboles-republique",
+      "prompt": "Qui représente la République sous les traits d'une figure féminine ?",
+      "choices": [
+        { "id": "a", "text": "Jeanne d'Arc" },
+        { "id": "b", "text": "Marianne" },
+        { "id": "c", "text": "Olympe de Gouges" },
+        { "id": "d", "text": "La Liberté guidant le peuple" }
+      ],
+      "answer": "b",
+      "explanation": "Marianne incarne la République. On la trouve dans les mairies, sur des timbres et sur certaines pièces de monnaie.",
+      "difficulty": 1
+    },
+    {
+      "id": "sy-04",
+      "type": "qcm",
+      "themeSlug": "symboles-republique",
+      "prompt": "Que commémore la fête nationale du 14 juillet ?",
+      "choices": [
+        { "id": "a", "text": "La fin de la Seconde Guerre mondiale" },
+        { "id": "b", "text": "La prise de la Bastille (1789) et la Fête de la Fédération (1790)" },
+        { "id": "c", "text": "La naissance de la Ve République" },
+        { "id": "d", "text": "La signature de la Déclaration universelle des droits de l'homme" }
+      ],
+      "answer": "b",
+      "explanation": "Le 14 juillet commémore la prise de la Bastille en 1789, puis la Fête de la Fédération de 1790, symbole de l'unité nationale.",
+      "difficulty": 2
+    },
+    {
+      "id": "sy-05",
+      "type": "qcm",
+      "themeSlug": "symboles-republique",
+      "prompt": "Le coq gaulois est-il un symbole officiel de la République française ?",
+      "choices": [
+        { "id": "a", "text": "Oui, c'est un symbole officiel inscrit dans la Constitution" },
+        { "id": "b", "text": "Non, c'est un emblème populaire, non officiel" },
+        { "id": "c", "text": "Oui, comme le drapeau et la Marseillaise" },
+        { "id": "d", "text": "Non, il n'est utilisé que pour le sport" }
+      ],
+      "answer": "b",
+      "explanation": "Le coq gaulois est un emblème populaire, très utilisé notamment dans le sport, mais il n'est pas un symbole officiel.",
+      "difficulty": 2
+    },
+    {
+      "id": "sy-06",
+      "type": "qcm",
+      "themeSlug": "symboles-republique",
+      "prompt": "Qui est l'auteur de La Marseillaise ?",
+      "choices": [
+        { "id": "a", "text": "Victor Hugo" },
+        { "id": "b", "text": "Rouget de Lisle" },
+        { "id": "c", "text": "Gustave Eiffel" },
+        { "id": "d", "text": "Marianne Leclerc" }
+      ],
+      "answer": "b",
+      "explanation": "La Marseillaise a été composée par Rouget de Lisle en 1792. Elle tire son nom des volontaires marseillais qui l'ont chantée à Paris.",
+      "difficulty": 2
+    },
+    {
+      "id": "sy-07",
+      "type": "situation",
+      "themeSlug": "symboles-republique",
+      "prompt": "Lors d'une cérémonie officielle, on entend La Marseillaise. Quelle attitude adopter ?",
+      "choices": [
+        { "id": "a", "text": "Continuer à parler, cela n'a aucune importance" },
+        { "id": "b", "text": "Observer une attitude respectueuse, debout et en silence" },
+        { "id": "c", "text": "Quitter la salle par politesse" },
+        { "id": "d", "text": "Applaudir pendant l'hymne" }
+      ],
+      "answer": "b",
+      "explanation": "Pendant l'hymne national, on adopte une attitude respectueuse : on se tient debout et on reste silencieux, par respect des symboles de la République.",
+      "difficulty": 1
+    },
+    {
+      "id": "sy-08",
+      "type": "situation",
+      "themeSlug": "symboles-republique",
+      "prompt": "Dans une mairie, vous remarquez un buste de Marianne et la devise 'Liberté, Égalité, Fraternité'. Que représentent-ils ?",
+      "choices": [
+        { "id": "a", "text": "Des décorations touristiques" },
+        { "id": "b", "text": "Les symboles de la République présents dans les lieux publics" },
+        { "id": "c", "text": "Les signes d'un parti politique" },
+        { "id": "d", "text": "Des objets privés appartenant au maire" }
+      ],
+      "answer": "b",
+      "explanation": "Marianne et la devise sont des symboles officiels de la République. Ils sont présents dans les mairies et d'autres lieux publics.",
+      "difficulty": 1
+    }
+  ]
+}
