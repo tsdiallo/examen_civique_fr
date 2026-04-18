@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ProgressSummary from "../components/ui/ProgressSummary.astro";
+import AffiliateBlock from "../components/ui/AffiliateBlock.astro";
 
 const siteUrl = Astro.site?.toString() ?? "https://examen-civique-fr.netlify.app/";
 
@@ -238,6 +239,17 @@ const keywords = [
         </div>
       </aside>
     </div>
+  </section>
+
+  <!-- Ressources complémentaires -->
+  <section class="container-page pt-14 sm:pt-20">
+    <div class="max-w-2xl">
+      <p class="eyebrow">Ressources complémentaires</p>
+      <h2 class="mt-4 font-display text-3xl sm:text-4xl lg:text-5xl text-balance leading-[1.1]">
+        Quelques lectures pour <em class="italic-accent">approfondir</em>.
+      </h2>
+    </div>
+    <AffiliateBlock title="Notre sélection" />
   </section>
 
   <!-- Soutien -->
