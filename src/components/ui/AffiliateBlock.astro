@@ -9,18 +9,21 @@ interface Props {
   items?: Suggestion[];
 }
 
-// Les liens ci-dessous sont des placeholders — remplacer par de vrais liens affiliés (Amazon, librairies partenaires, etc.)
-// Inclure #affiliate ou ?tag=... une fois configuré.
+// Amazon Partenaires — tag: sadoudo-2
+const AMAZON_TAG = "sadoudo-2";
+const amazonSearch = (query: string) =>
+  `https://www.amazon.fr/s?k=${encodeURIComponent(query)}&tag=${AMAZON_TAG}`;
+
 const DEFAULT_ITEMS: Suggestion[] = [
   {
     title: "Manuel de préparation à la naturalisation",
-    subtitle: "Ouvrage de référence, niveau A2 / B1",
-    url: "https://www.amazon.fr/s?k=naturalisation+francaise+manuel",
+    subtitle: "Ouvrages de référence, niveau A2 / B1",
+    url: amazonSearch("naturalisation francaise manuel"),
   },
   {
     title: "Guide du citoyen français",
     subtitle: "Institutions, valeurs, histoire — synthèse claire",
-    url: "https://www.amazon.fr/s?k=guide+citoyen+francais",
+    url: amazonSearch("guide citoyen francais institutions"),
   },
 ];
 
