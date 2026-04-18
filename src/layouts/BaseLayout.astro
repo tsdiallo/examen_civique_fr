@@ -6,27 +6,106 @@ import Footer from "../components/layout/Footer.astro";
 interface Props {
   title?: string;
   description?: string;
+  ogImage?: string;
+  ogType?: "website" | "article";
+  noindex?: boolean;
+  keywords?: string[];
+  /** Extra JSON-LD objects to inject in head */
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
+
 const {
-  title = "Examen civique — Plateforme d'entraînement",
-  description = "Révisez l'examen civique français avec des fiches, des QCM, des mises en situation et un examen blanc. Plateforme d'entraînement non officielle."
+  title = "Examen civique français — Préparation en ligne",
+  description = "Préparez l'examen civique français (naturalisation, titre de séjour) avec 10 fiches, plus de 200 QCM et un examen blanc chronométré. Gratuit, sans compte, non officiel.",
+  ogImage = "/og-default.svg",
+  ogType = "website",
+  noindex = false,
+  keywords = [
+    "examen civique",
+    "naturalisation française",
+    "QCM civique",
+    "test citoyenneté France",
+    "préparation naturalisation",
+    "valeurs République",
+  ],
+  jsonLd,
 } = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site ?? "https://examen-civique-fr.netlify.app").toString();
+const ogImageAbs = new URL(ogImage, Astro.site ?? "https://examen-civique-fr.netlify.app").toString();
+const siteName = "Examen civique";
+const fullTitle = title.includes("Examen civique") ? title : `${title} — Examen civique`;
+
+const websiteLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: siteName,
+  url: Astro.site?.toString() ?? "https://examen-civique-fr.netlify.app/",
+  inLanguage: "fr-FR",
+  description,
+  publisher: {
+    "@type": "Organization",
+    name: siteName,
+    url: Astro.site?.toString() ?? "https://examen-civique-fr.netlify.app/",
+  },
+};
+
+const jsonLdArray = [
+  websiteLd,
+  ...(Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : []),
+];
 ---
 <!doctype html>
 <html lang="fr">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
     <meta name="description" content={description} />
+    {keywords.length > 0 && <meta name="keywords" content={keywords.join(", ")} />}
     <meta name="theme-color" content="#000091" />
+    <meta name="author" content={siteName} />
+    {noindex
+      ? <meta name="robots" content="noindex, nofollow" />
+      : <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    }
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="fr" href={canonical} />
+    <link rel="alternate" hreflang="x-default" href={canonical} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:image" content={ogImageAbs} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${siteName} — ${description}`} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageAbs} />
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital,wght@0,400;1,400&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
     />
-    <title>{title}</title>
+
+    <!-- Structured data -->
+    {jsonLdArray.map((obj) => (
+      <script type="application/ld+json" set:html={JSON.stringify(obj)} />
+    ))}
   </head>
   <body class="min-h-screen flex flex-col overflow-x-hidden">
     <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:bg-france-700 focus:text-white focus:px-4 focus:py-2 focus:rounded-full focus:shadow-lift">

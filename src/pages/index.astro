@@ -1,8 +1,83 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ProgressSummary from "../components/ui/ProgressSummary.astro";
+
+const siteUrl = Astro.site?.toString() ?? "https://examen-civique-fr.netlify.app/";
+
+const orgLd = {
+  "@context": "https://schema.org",
+  "@type": "EducationalOrganization",
+  name: "Examen civique",
+  url: siteUrl,
+  logo: new URL("/favicon.svg", siteUrl).toString(),
+  description: "Plateforme gratuite et indépendante pour préparer l'examen civique français (naturalisation, titre de séjour).",
+  inLanguage: "fr-FR",
+  areaServed: "FR",
+  educationalCredentialAwarded: "Préparation à l'examen civique français",
+};
+
+const faqLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "Qu'est-ce que l'examen civique français ?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "L'examen civique est un test introduit le 1er janvier 2026 dans le cadre de la naturalisation française et de certaines demandes de titre de séjour. Il porte sur les valeurs de la République, la laïcité, les institutions, l'histoire et la vie quotidienne en France.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Ce site est-il officiel ?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Non. Examen civique est une plateforme indépendante d'entraînement, à but pédagogique. Elle ne reproduit pas les supports ou banques de questions officiels et n'est affiliée à aucune administration.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Faut-il créer un compte ?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Non. L'accès est libre, gratuit et sans inscription. Votre progression est enregistrée localement dans votre navigateur (localStorage), elle n'est jamais envoyée à un serveur.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Combien de questions contient l'examen blanc ?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "L'examen blanc propose 40 questions à répondre en 45 minutes, avec un seuil indicatif de 32 bonnes réponses, proche des conditions réelles.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Quel niveau de français est requis ?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Les contenus sont rédigés pour un niveau A2 à B1 : phrases courtes, vocabulaire accessible, explications pas à pas après chaque question.",
+      },
+    },
+  ],
+};
+
+const keywords = [
+  "examen civique français",
+  "naturalisation française",
+  "préparation naturalisation",
+  "QCM examen civique",
+  "test citoyenneté France",
+  "examen blanc naturalisation",
+  "valeurs République française",
+  "fiches révision civique",
+];
 ---
-<BaseLayout>
+<BaseLayout
+  keywords={keywords}
+  jsonLd={[orgLd, faqLd]}
+>
   <!-- HERO -->
   <section class="relative overflow-hidden">
     <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10 bg-warm-mesh"></div>

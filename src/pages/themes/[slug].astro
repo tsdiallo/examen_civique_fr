@@ -2,6 +2,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import FicheHeader from "../../components/fiche/FicheHeader.astro";
 import CTAQuiz from "../../components/fiche/CTAQuiz.astro";
+import AffiliateBlock from "../../components/ui/AffiliateBlock.astro";
 import { getCollection } from "astro:content";
 import { getQuizBySlug } from "../../lib/quiz-loader";
 
@@ -16,8 +17,48 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { Content } = await entry.render();
 const quiz = getQuizBySlug(entry.slug);
+
+const pageTitle = `${entry.data.title} — Fiche de révision`;
+const description = `${entry.data.summary} Fiche de révision gratuite pour l'examen civique français (naturalisation, titre de séjour). Niveau A2 / B1.`;
+const keywords = [
+  entry.data.title.toLowerCase(),
+  "examen civique",
+  "naturalisation",
+  "fiche révision",
+  ...(entry.data.tags ?? []),
+];
+
+const courseLd = {
+  "@context": "https://schema.org",
+  "@type": "Course",
+  name: entry.data.title,
+  description: entry.data.summary,
+  inLanguage: "fr-FR",
+  educationalLevel: "A2/B1",
+  learningResourceType: "Lesson",
+  teaches: entry.data.title,
+  timeRequired: entry.data.durationMin ? `PT${entry.data.durationMin}M` : undefined,
+  url: new URL(`/themes/${entry.slug}`, Astro.site ?? "https://examen-civique-fr.netlify.app").toString(),
+  provider: {
+    "@type": "Organization",
+    name: "Examen civique",
+    url: Astro.site?.toString() ?? "https://examen-civique-fr.netlify.app/",
+  },
+  hasCourseInstance: {
+    "@type": "CourseInstance",
+    courseMode: "online",
+    courseWorkload: entry.data.durationMin ? `PT${entry.data.durationMin}M` : "PT10M",
+    inLanguage: "fr-FR",
+  },
+};
 ---
-<BaseLayout title={`${entry.data.title} — Examen civique`} description={entry.data.summary}>
+<BaseLayout
+  title={pageTitle}
+  description={description}
+  keywords={keywords}
+  ogType="article"
+  jsonLd={courseLd}
+>
   <section class="container-page pt-10 pb-6">
     <a href="/themes" class="inline-flex items-center gap-1.5 text-sm text-ink-500 hover:text-france-700 no-underline hover:underline">
       <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 19l-7-7 7-7"/></svg>
@@ -36,5 +77,6 @@ const quiz = getQuizBySlug(entry.slug);
       <Content />
     </article>
     {quiz && <CTAQuiz slug={entry.slug} questionsCount={quiz.questions.length} />}
+    <AffiliateBlock />
   </section>
 </BaseLayout>

@@ -1,0 +1,71 @@
+---
+interface Suggestion {
+  title: string;
+  subtitle: string;
+  url: string;
+}
+interface Props {
+  title?: string;
+  items?: Suggestion[];
+}
+
+// Les liens ci-dessous sont des placeholders — remplacer par de vrais liens affiliés (Amazon, librairies partenaires, etc.)
+// Inclure #affiliate ou ?tag=... une fois configuré.
+const DEFAULT_ITEMS: Suggestion[] = [
+  {
+    title: "Manuel de préparation à la naturalisation",
+    subtitle: "Ouvrage de référence, niveau A2 / B1",
+    url: "https://www.amazon.fr/s?k=naturalisation+francaise+manuel",
+  },
+  {
+    title: "Guide du citoyen français",
+    subtitle: "Institutions, valeurs, histoire — synthèse claire",
+    url: "https://www.amazon.fr/s?k=guide+citoyen+francais",
+  },
+];
+
+const {
+  title = "Pour aller plus loin",
+  items = DEFAULT_ITEMS,
+} = Astro.props;
+---
+<aside class="mt-10 rounded-2xl border border-paper-300 bg-paper-50 p-5 sm:p-6">
+  <div class="flex items-start justify-between gap-3 flex-wrap">
+    <div class="min-w-0">
+      <p class="eyebrow">{title}</p>
+      <p class="mt-2 text-sm text-ink-700">
+        Quelques lectures complémentaires — sélection non officielle.
+      </p>
+    </div>
+    <span class="shrink-0 text-[0.68rem] uppercase tracking-[0.14em] text-ink-500 font-semibold">
+      Liens affiliés
+    </span>
+  </div>
+
+  <ul class="mt-4 grid gap-3 sm:grid-cols-2">
+    {items.map((item) => (
+      <li>
+        <a
+          href={item.url}
+          rel="nofollow sponsored noopener"
+          target="_blank"
+          class="group block rounded-xl border border-paper-300 bg-white p-4 no-underline hover:border-france-300 hover:shadow-soft transition"
+        >
+          <p class="font-display text-lg text-ink-900 group-hover:text-france-700">{item.title}</p>
+          <p class="mt-1 text-sm text-ink-600">{item.subtitle}</p>
+          <p class="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-france-700">
+            Voir la référence
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12h14M13 5l7 7-7 7"/>
+            </svg>
+          </p>
+        </a>
+      </li>
+    ))}
+  </ul>
+
+  <p class="mt-4 text-[0.72rem] text-ink-500 leading-relaxed">
+    En tant que partenaire affilié, ce site peut percevoir une petite commission sur les achats effectués via
+    ces liens, sans coût supplémentaire pour vous. Merci pour votre soutien.
+  </p>
+</aside>

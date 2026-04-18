@@ -10,8 +10,44 @@ const themes = await getCollection("themes");
 const themeTitles: Record<string, string> = Object.fromEntries(
   themes.map((t) => [t.slug, t.data.title])
 );
+
+const total = exam?.total ?? 40;
+const durationMin = Math.round((exam?.durationSec ?? 2700) / 60);
+const passing = exam?.passingScore ?? 32;
+
+const description = `Entraînez-vous en conditions réelles : ${total} questions, ${durationMin} minutes, seuil indicatif ${passing}/${total}. Examen blanc gratuit pour la naturalisation française.`;
+const keywords = [
+  "examen blanc civique",
+  "simulation naturalisation",
+  "test chronométré citoyenneté",
+  "QCM examen civique",
+  "préparation examen naturalisation",
+];
+
+const examLd = {
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  name: "Examen blanc — Examen civique français",
+  description,
+  inLanguage: "fr-FR",
+  educationalLevel: "A2/B1",
+  learningResourceType: "Assessment",
+  timeRequired: `PT${durationMin}M`,
+  url: new URL("/examen-blanc", Astro.site ?? "https://examen-civique-fr.netlify.app").toString(),
+  provider: {
+    "@type": "Organization",
+    name: "Examen civique",
+    url: Astro.site?.toString() ?? "https://examen-civique-fr.netlify.app/",
+  },
+};
 ---
-<BaseLayout title="Examen blanc — Examen civique">
+<BaseLayout
+  title={`Examen blanc — ${total} questions en ${durationMin} minutes`}
+  description={description}
+  keywords={keywords}
+  ogType="article"
+  jsonLd={examLd}
+>
   <section class="container-page pt-12 pb-6">
     <p class="eyebrow">Conditions réelles</p>
     <h1 class="mt-4 font-display text-display-sm sm:text-display text-balance">

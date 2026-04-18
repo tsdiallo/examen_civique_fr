@@ -1,7 +1,29 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+const description = "À propos d'Examen civique : une plateforme gratuite et indépendante pour préparer l'examen civique français (naturalisation, titre de séjour). Sans inscription, sans tracking.";
+const keywords = [
+  "à propos examen civique",
+  "plateforme naturalisation",
+  "préparation indépendante examen civique",
+  "site gratuit citoyenneté française",
+];
+
+const aboutLd = {
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  name: "À propos — Examen civique",
+  description,
+  inLanguage: "fr-FR",
+  url: new URL("/a-propos", Astro.site ?? "https://examen-civique-fr.netlify.app").toString(),
+};
 ---
-<BaseLayout title="À propos — Examen civique">
+<BaseLayout
+  title="À propos — Plateforme indépendante pour l'examen civique"
+  description={description}
+  keywords={keywords}
+  jsonLd={aboutLd}
+>
   <section class="container-page pt-12 pb-6">
     <p class="eyebrow">Pourquoi ce site</p>
     <h1 class="mt-4 font-display text-display-sm sm:text-display text-balance">

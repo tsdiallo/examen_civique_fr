@@ -16,8 +16,40 @@ export async function getStaticPaths() {
 const { slug } = Astro.params;
 const theme = await getEntry("themes", slug!);
 const quiz = getQuizBySlug(slug!);
+
+const themeTitle = theme?.data.title ?? slug;
+const description = `Quiz gratuit : ${quiz?.questions.length ?? ""} questions pour vous entraîner sur le thème « ${themeTitle} » de l'examen civique français. Correction expliquée à chaque étape.`;
+const keywords = [
+  `quiz ${themeTitle?.toLowerCase()}`,
+  "QCM examen civique",
+  "test naturalisation",
+  "entraînement examen civique",
+];
+
+const quizLd = {
+  "@context": "https://schema.org",
+  "@type": "Quiz",
+  name: `Quiz — ${themeTitle}`,
+  about: themeTitle,
+  inLanguage: "fr-FR",
+  educationalLevel: "A2/B1",
+  learningResourceType: "Quiz",
+  numberOfQuestions: quiz?.questions.length,
+  url: new URL(`/quiz/${slug}`, Astro.site ?? "https://examen-civique-fr.netlify.app").toString(),
+  provider: {
+    "@type": "Organization",
+    name: "Examen civique",
+    url: Astro.site?.toString() ?? "https://examen-civique-fr.netlify.app/",
+  },
+};
 ---
-<BaseLayout title={`Quiz — ${theme?.data.title ?? slug}`}>
+<BaseLayout
+  title={`Quiz : ${themeTitle} — ${quiz?.questions.length ?? ""} questions`}
+  description={description}
+  keywords={keywords}
+  ogType="article"
+  jsonLd={quizLd}
+>
   <section class="container-page pt-10 pb-6">
     <a href={`/themes/${slug}`} class="inline-flex items-center gap-1.5 text-sm text-ink-500 hover:text-france-700 no-underline hover:underline">
       <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 19l-7-7 7-7"/></svg>

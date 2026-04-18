@@ -1,0 +1,37 @@
+---
+interface Props {
+  variant?: "compact" | "card";
+}
+const { variant = "compact" } = Astro.props;
+
+// TODO: remplacer par le vrai lien Ko-fi / Buy Me a Coffee / Liberapay
+const DONATION_URL = "https://ko-fi.com/examencivique";
+---
+{variant === "card" ? (
+  <aside class="card-france p-5 sm:p-6">
+    <p class="eyebrow">Soutenir ce site</p>
+    <p class="mt-3 text-sm text-ink-800">
+      Ce site est gratuit, sans publicité, sans inscription. Si les fiches vous ont aidé·e, vous
+      pouvez offrir un café — c'est totalement facultatif.
+    </p>
+    <a href={DONATION_URL} rel="nofollow noopener" target="_blank" class="btn-primary mt-4 justify-center">
+      <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M17 8h1a4 4 0 1 1 0 8h-1M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V8zM6 2v3M10 2v3M14 2v3"/>
+      </svg>
+      Offrir un café
+    </a>
+  </aside>
+) : (
+  <a
+    href={DONATION_URL}
+    rel="nofollow noopener"
+    target="_blank"
+    class="inline-flex items-center gap-2 text-sm text-ink-700 hover:text-france-700 no-underline hover:underline"
+    aria-label="Soutenir le site sur Ko-fi (ouvre un nouvel onglet)"
+  >
+    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M17 8h1a4 4 0 1 1 0 8h-1M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V8zM6 2v3M10 2v3M14 2v3"/>
+    </svg>
+    <span>Soutenir le site — offrir un café</span>
+  </a>
+)}

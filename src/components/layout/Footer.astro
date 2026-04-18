@@ -1,4 +1,5 @@
 ---
+import DonationCTA from "../ui/DonationCTA.astro";
 const year = new Date().getFullYear();
 ---
 <footer class="mt-16 sm:mt-24 border-t border-paper-300 bg-white">
@@ -17,6 +18,9 @@ const year = new Date().getFullYear();
         Plateforme d'entraînement indépendante. <strong class="text-ink-900">Ce site n'est pas un service officiel de l'État français.</strong>
         Contenus pédagogiques originaux à visée éducative.
       </p>
+      <div class="mt-5">
+        <DonationCTA />
+      </div>
     </div>
 
     <nav class="md:col-span-3 min-w-0" aria-label="Naviguer">

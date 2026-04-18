@@ -1,7 +1,11 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
-<BaseLayout title="Mentions légales — Examen civique">
+<BaseLayout
+  title="Mentions légales — Examen civique"
+  description="Mentions légales du site Examen civique : éditeur, hébergement, contenus, données personnelles, liens d'affiliation."
+  noindex={true}
+>
   <section class="container-page pt-12 pb-6">
     <p class="eyebrow">Informations</p>
     <h1 class="mt-4 font-display text-display-sm sm:text-display text-balance">Mentions légales</h1>
@@ -24,6 +28,25 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       </p>
       <h2>Hébergement</h2>
       <p>Netlify, Inc.</p>
+      <h2>Liens d'affiliation</h2>
+      <p>
+        Certaines pages peuvent contenir des <strong>liens d'affiliation</strong> vers des ouvrages ou ressources
+        complémentaires. Ces liens, clairement identifiés, n'entraînent <em>aucun coût supplémentaire</em> pour
+        vous : si vous effectuez un achat après avoir cliqué, le site peut percevoir une petite commission qui
+        contribue à couvrir ses frais. Les références suggérées sont choisies sur critères pédagogiques, sans
+        contrepartie des éditeurs.
+      </p>
+      <h2>Soutien facultatif</h2>
+      <p>
+        Un lien de don ponctuel peut être proposé (par exemple via Ko-fi). Le don est entièrement facultatif et
+        ne donne accès à aucune fonctionnalité supplémentaire — tout le contenu du site reste gratuit.
+      </p>
+      <h2>Publicité</h2>
+      <p>
+        Ce site <strong>n'affiche pas de publicité</strong> et ne pose <strong>aucun cookie de traçage</strong>.
+        Si cela devait changer à l'avenir, un bandeau de consentement conforme au RGPD / CNIL serait mis en place
+        avant toute activation.
+      </p>
     </article>
   </section>
 </BaseLayout>

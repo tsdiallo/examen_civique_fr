@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FBFAF6"/>
+      <stop offset="1" stop-color="#ECECFE"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="0" y="0" width="400" height="630" fill="#000091"/>
+  <rect x="800" y="0" width="400" height="630" fill="#E1000F"/>
+  <rect x="400" y="0" width="400" height="630" fill="#FFFFFF"/>
+  <g transform="translate(600, 230)" text-anchor="middle">
+    <text font-family="Georgia, serif" font-size="76" font-weight="400" fill="#0F172A" font-style="italic">Examen civique</text>
+    <text y="72" font-family="Georgia, serif" font-size="44" font-weight="400" fill="#3D3C37">Préparez-vous sereinement</text>
+    <text y="160" font-family="Inter, system-ui, sans-serif" font-size="24" font-weight="600" fill="#000091" letter-spacing="4">LIBERTÉ · ÉGALITÉ · FRATERNITÉ</text>
+  </g>
+</svg>

@@ -7,8 +7,39 @@ import { getCollection } from "astro:content";
 const themes = (await getCollection("themes")).sort(
   (a, b) => a.data.order - b.data.order
 );
+
+const siteUrl = Astro.site?.toString() ?? "https://examen-civique-fr.netlify.app/";
+const itemListLd = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "Thèmes de l'examen civique français",
+  description: "Les dix thèmes officiels de l'examen civique pour la naturalisation française.",
+  itemListOrder: "https://schema.org/ItemListOrderAscending",
+  numberOfItems: themes.length,
+  itemListElement: themes.map((t, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    name: t.data.title,
+    url: new URL(`/themes/${t.slug}`, siteUrl).toString(),
+  })),
+};
+
+const description = "Dix thèmes essentiels pour préparer l'examen civique français : valeurs, laïcité, institutions, histoire, vie quotidienne. Fiches gratuites, niveau A2 / B1.";
+const keywords = [
+  "thèmes examen civique",
+  "programme naturalisation",
+  "fiches révision citoyenneté",
+  "valeurs République française",
+  "institutions France",
+  "histoire France",
+];
 ---
-<BaseLayout title="Thèmes — Examen civique">
+<BaseLayout
+  title="Thèmes — 10 fiches pour préparer l'examen civique"
+  description={description}
+  keywords={keywords}
+  jsonLd={itemListLd}
+>
   <section class="container-page pt-12 pb-6">
     <p class="eyebrow">Bibliothèque de révision</p>
     <h1 class="mt-4 font-display text-display-sm sm:text-display text-balance">
