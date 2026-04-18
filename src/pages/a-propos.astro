@@ -2,23 +2,48 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 <BaseLayout title="À propos — Examen civique">
-  <section class="container-page py-10 prose-fr">
-    <h1 class="text-3xl font-display">À propos</h1>
-    <p>
-      Cette plateforme est un outil <strong>d'entraînement indépendant</strong> à destination des personnes
-      préparant l'examen civique demandé dans le cadre de la naturalisation française et de certaines demandes
-      de titres de séjour, en vigueur depuis le 1er janvier 2026.
-    </p>
-    <p>
-      <strong>Ce site n'est pas un service officiel de l'État.</strong> Les contenus proposés sont rédigés de
-      manière originale, à des fins pédagogiques. Ils ne reproduisent pas les supports officiels.
-    </p>
-    <h2>Ce que vous trouverez ici</h2>
-    <ul>
-      <li>Des fiches claires, en français simple.</li>
-      <li>Des QCM et des mises en situation, avec correction expliquée.</li>
-      <li>Un examen blanc chronométré (45 min, 40 questions).</li>
-      <li>Une progression visible, enregistrée localement sur votre appareil.</li>
-    </ul>
+  <section class="container-page pt-12 pb-6">
+    <p class="eyebrow">Pourquoi ce site</p>
+    <h1 class="mt-4 font-display text-display-sm sm:text-display text-balance">
+      Une préparation <span class="text-gradient">claire et indépendante</span>.
+    </h1>
+  </section>
+  <section class="container-page pb-20 grid gap-10 lg:grid-cols-12">
+    <article class="prose-fr lg:col-span-7">
+      <p>
+        Cette plateforme est un outil <strong>d'entraînement indépendant</strong> à destination des personnes
+        préparant l'examen civique demandé dans le cadre de la naturalisation française et de certaines demandes
+        de titres de séjour, en vigueur depuis le 1<sup>er</sup> janvier 2026.
+      </p>
+      <p>
+        <strong>Ce site n'est pas un service officiel de l'État.</strong> Les contenus proposés sont rédigés de
+        manière originale, à des fins pédagogiques. Ils ne reproduisent pas les supports officiels.
+      </p>
+      <h2>Ce que vous trouverez ici</h2>
+      <ul>
+        <li>Des fiches claires, en français simple.</li>
+        <li>Des QCM et des mises en situation, avec correction expliquée.</li>
+        <li>Un examen blanc chronométré (45 min, 40 questions).</li>
+        <li>Une progression visible, enregistrée localement sur votre appareil.</li>
+      </ul>
+    </article>
+    <aside class="lg:col-span-5 space-y-4">
+      <div class="card-france p-6">
+        <p class="eyebrow">Notre engagement</p>
+        <ul class="mt-4 space-y-3 text-sm text-ink-800">
+          <li class="flex gap-2"><span class="text-france-700">✔</span> Contenus originaux, niveau A2 / B1.</li>
+          <li class="flex gap-2"><span class="text-france-700">✔</span> Aucun compte, aucun tracking.</li>
+          <li class="flex gap-2"><span class="text-france-700">✔</span> Accessible (clavier, lecteurs d'écran).</li>
+          <li class="flex gap-2"><span class="text-france-700">✔</span> Mobile et hors-ligne friendly.</li>
+        </ul>
+      </div>
+      <div class="card p-6">
+        <p class="text-xs uppercase tracking-[0.16em] text-ink-500 font-semibold">Démarrer maintenant</p>
+        <div class="mt-4 flex flex-wrap gap-3">
+          <a href="/themes" class="btn-primary">Voir les thèmes</a>
+          <a href="/examen-blanc" class="btn-secondary">Examen blanc</a>
+        </div>
+      </div>
+    </aside>
   </section>
 </BaseLayout>

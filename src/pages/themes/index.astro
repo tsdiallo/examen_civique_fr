@@ -9,21 +9,26 @@ const themes = (await getCollection("themes")).sort(
 );
 ---
 <BaseLayout title="Thèmes — Examen civique">
-  <section class="container-page py-10">
-    <h1 class="text-3xl font-display">Thèmes de révision</h1>
-    <p class="text-ink-700 mt-2 max-w-prose">
-      Dix thèmes couvrant les grands domaines de l'examen. Commencez par ceux qui vous rassurent le plus,
-      puis enchaînez avec ceux où vous vous sentez moins à l'aise.
+  <section class="container-page pt-12 pb-6">
+    <p class="eyebrow">Bibliothèque de révision</p>
+    <h1 class="mt-4 font-display text-display-sm sm:text-display text-balance">
+      Dix thèmes pour <span class="text-gradient">tout couvrir</span>.
+    </h1>
+    <p class="mt-5 max-w-2xl text-ink-700 text-pretty">
+      Commencez par les thèmes qui vous rassurent le plus, puis enchaînez avec ceux où vous vous sentez moins à
+      l'aise. Chaque fiche se lit en moins de 10 minutes.
     </p>
+  </section>
 
+  <section class="container-page pb-20">
     {themes.length === 0 ? (
-      <div class="mt-8">
+      <div class="mt-4">
         <Alert tone="info" title="Contenus en préparation">
           Les fiches et quiz seront ajoutés dans la prochaine phase. Vous pouvez déjà explorer la navigation.
         </Alert>
       </div>
     ) : (
-      <div class="mt-8 grid gap-4 sm:grid-cols-2">
+      <div class="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {themes.map((t) => (
           <ThemeCard
             slug={t.slug}

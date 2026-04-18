@@ -5,13 +5,26 @@ interface Props {
 }
 const { tone = "info", title } = Astro.props;
 const styles = {
-  info:    "bg-brand-50 text-brand-900 border-brand-200",
-  success: "bg-success-100 text-success-600 border-success-600/20",
-  warning: "bg-warning-100 text-warning-600 border-warning-600/20",
-  danger:  "bg-danger-100 text-danger-600 border-danger-600/20",
+  info:    "bg-france-50/80 text-france-900 border-france-200",
+  success: "bg-success-50 text-success-700 border-success-100",
+  warning: "bg-warning-50 text-warning-700 border-warning-100",
+  danger:  "bg-danger-50 text-danger-700 border-danger-100",
+}[tone];
+const icon = {
+  info: "M12 9v4m0 4h.01M12 3l9 16H3l9-16Z",
+  success: "M5 13l4 4L19 7",
+  warning: "M12 9v4m0 4h.01M12 3l9 16H3l9-16Z",
+  danger: "M6 6l12 12M18 6l-12 12",
 }[tone];
 ---
-<div class={`border rounded-lg p-4 ${styles}`} role={tone === "danger" ? "alert" : "status"}>
-  {title && <p class="font-semibold mb-1">{title}</p>}
-  <div class="text-sm"><slot /></div>
+<div class={`relative rounded-2xl border p-4 sm:p-5 flex gap-3 ${styles}`} role={tone === "danger" ? "alert" : "status"}>
+  <span aria-hidden="true" class="shrink-0 mt-0.5">
+    <svg viewBox="0 0 24 24" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d={icon}/>
+    </svg>
+  </span>
+  <div class="flex-1">
+    {title && <p class="font-semibold mb-1">{title}</p>}
+    <div class="text-sm leading-relaxed"><slot /></div>
+  </div>
 </div>

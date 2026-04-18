@@ -12,18 +12,21 @@ const themeTitles: Record<string, string> = Object.fromEntries(
 );
 ---
 <BaseLayout title="Examen blanc — Examen civique">
-  <section class="container-page py-10">
-    <h1 class="text-3xl font-display">Examen blanc</h1>
-    <p class="text-ink-700 mt-2 max-w-prose">
-      Entraînez-vous dans des conditions proches de l'examen réel : {exam?.total ?? 40} questions,
-      {Math.round((exam?.durationSec ?? 2700) / 60)} minutes, seuil indicatif {exam?.passingScore ?? 32}/{exam?.total ?? 40}.
+  <section class="container-page pt-12 pb-6">
+    <p class="eyebrow">Conditions réelles</p>
+    <h1 class="mt-4 font-display text-display-sm sm:text-display text-balance">
+      Examen <span class="text-gradient">blanc</span>.
+    </h1>
+    <p class="mt-5 max-w-2xl text-ink-700 text-pretty">
+      Entraînez-vous dans des conditions proches de l'examen réel : <strong>{exam?.total ?? 40} questions</strong>,
+      <strong>{Math.round((exam?.durationSec ?? 2700) / 60)} minutes</strong>, seuil indicatif <strong>{exam?.passingScore ?? 32}/{exam?.total ?? 40}</strong>.
     </p>
+  </section>
 
-    <div class="mt-6">
-      {exam
-        ? <ExamRunner exam={exam} themeTitles={themeTitles} />
-        : <Alert tone="info" title="Examen en préparation">L'examen blanc sera ajouté en phase 6.</Alert>
-      }
-    </div>
+  <section class="container-page pb-20">
+    {exam
+      ? <ExamRunner exam={exam} themeTitles={themeTitles} />
+      : <Alert tone="info" title="Examen en préparation">L'examen blanc sera ajouté en phase 6.</Alert>
+    }
   </section>
 </BaseLayout>

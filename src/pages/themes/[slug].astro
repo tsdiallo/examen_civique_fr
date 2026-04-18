@@ -18,8 +18,11 @@ const { Content } = await entry.render();
 const quiz = getQuizBySlug(entry.slug);
 ---
 <BaseLayout title={`${entry.data.title} — Examen civique`} description={entry.data.summary}>
-  <section class="container-page py-10">
-    <a href="/themes" class="text-sm text-ink-500 no-underline hover:underline">← Tous les thèmes</a>
+  <section class="container-page pt-10 pb-6">
+    <a href="/themes" class="inline-flex items-center gap-1.5 text-sm text-ink-500 hover:text-france-700 no-underline hover:underline">
+      <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 19l-7-7 7-7"/></svg>
+      Tous les thèmes
+    </a>
     <FicheHeader
       order={entry.data.order}
       title={entry.data.title}
@@ -27,6 +30,8 @@ const quiz = getQuizBySlug(entry.slug);
       durationMin={entry.data.durationMin}
       tags={entry.data.tags}
     />
+  </section>
+  <section class="container-page pb-20">
     <article class="prose-fr">
       <Content />
     </article>

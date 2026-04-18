@@ -4,57 +4,231 @@
 
 @layer base {
   :root {
-    --focus-ring: 0 0 0 3px rgba(30, 79, 214, 0.35);
+    --focus-ring: 0 0 0 3px rgba(0, 0, 145, 0.35);
+    --paper-grid: radial-gradient(rgba(0,0,145,0.07) 1px, transparent 1px);
   }
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
   }
   body {
-    @apply bg-ink-50 text-ink-900 font-sans antialiased;
+    @apply bg-paper-50 text-ink-900 font-sans antialiased;
+    background-image:
+      radial-gradient(900px 500px at 8% -10%, rgba(0,0,145,0.07), transparent 60%),
+      radial-gradient(700px 400px at 100% 0%, rgba(225,0,15,0.04), transparent 55%);
+    background-attachment: fixed;
   }
   h1, h2, h3, h4 {
-    @apply font-display tracking-tight;
+    @apply font-display tracking-tight text-ink-900;
+    font-feature-settings: "ss01", "ss02";
   }
   :focus-visible {
     outline: none;
     box-shadow: var(--focus-ring);
-    border-radius: 6px;
+    border-radius: 8px;
   }
   a {
-    @apply text-brand-600 underline-offset-2 hover:underline;
+    @apply text-france-700 underline-offset-2 hover:underline;
   }
+  ::selection {
+    background: rgba(0, 0, 145, 0.22);
+    color: #FFFFFF;
+  }
+  hr { @apply border-paper-300; }
 }
 
 @layer components {
   .container-page {
-    @apply mx-auto w-full max-w-5xl px-4 sm:px-6 lg:px-8;
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
   }
+  .container-narrow {
+    @apply mx-auto w-full max-w-3xl px-4 sm:px-6;
+  }
+
+  /* Cards */
   .card {
-    @apply rounded-xl2 bg-white border border-ink-100 shadow-sm;
+    @apply rounded-2xl bg-white border border-paper-300 shadow-soft;
   }
+  .card-hover {
+    @apply transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lift hover:border-france-300;
+  }
+  .card-paper {
+    @apply rounded-2xl bg-paper-100 border border-paper-300;
+  }
+  .card-france {
+    @apply rounded-2xl border border-france-200/70 shadow-soft;
+    background:
+      linear-gradient(135deg, rgba(0,0,145,0.07), rgba(0,0,145,0.02)),
+      #FFFFFF;
+  }
+  .card-marianne {
+    @apply rounded-2xl border border-marianne-200/60 shadow-soft;
+    background:
+      linear-gradient(135deg, rgba(225,0,15,0.06), rgba(225,0,15,0.01)),
+      #FFFFFF;
+  }
+  .card-feature {
+    @apply rounded-3xl bg-white border border-paper-300 p-6 sm:p-8 shadow-soft;
+  }
+
+  /* Buttons */
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5
-           font-medium transition active:scale-[.99] disabled:opacity-60 disabled:cursor-not-allowed;
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5
+           text-sm font-semibold transition-all duration-200
+           active:scale-[.98] disabled:opacity-50 disabled:cursor-not-allowed
+           no-underline whitespace-nowrap;
   }
-  .btn-primary { @apply btn bg-brand-600 text-white hover:bg-brand-700; }
-  .btn-secondary { @apply btn bg-white text-ink-900 border border-ink-300 hover:bg-ink-100; }
-  .btn-ghost { @apply btn text-ink-700 hover:bg-ink-100; }
+  .btn-primary {
+    @apply btn text-white;
+    background-color: #000091;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.25) inset, 0 1px 2px rgba(0,0,145,0.18);
+  }
+  .btn-primary:hover {
+    background-color: #1212A8;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.25) inset, 0 6px 16px -8px rgba(0,0,145,0.55);
+  }
+  .btn-secondary {
+    @apply btn bg-white text-france-700 border border-france-700 hover:bg-france-50;
+  }
+  .btn-ghost {
+    @apply btn text-ink-700 hover:bg-paper-100;
+  }
+  .btn-marianne {
+    @apply btn text-white;
+    background-color: #E1000F;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.25) inset, 0 1px 2px rgba(225,0,15,0.18);
+  }
+  .btn-marianne:hover {
+    background-color: #C9191E;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.25) inset, 0 6px 16px -8px rgba(225,0,15,0.55);
+  }
+  .btn-dark {
+    @apply btn bg-ink-900 text-paper-50 hover:bg-ink-800;
+  }
+  .btn-lg { @apply px-6 py-3 text-base; }
+
+  /* Badges */
   .badge {
-    @apply inline-flex items-center rounded-full bg-ink-100 px-2.5 py-0.5
+    @apply inline-flex items-center rounded-full bg-paper-200 px-2.5 py-0.5
            text-xs font-medium text-ink-700;
   }
-  .prose-fr {
-    @apply max-w-prose text-ink-900 leading-relaxed;
+  .badge-france {
+    @apply inline-flex items-center rounded-full bg-france-50 px-2.5 py-0.5
+           text-xs font-medium text-france-700 ring-1 ring-inset ring-france-200/70;
   }
-  .prose-fr h2 { @apply text-2xl mt-8 mb-3; }
-  .prose-fr h3 { @apply text-lg mt-6 mb-2; }
-  .prose-fr p { @apply my-3; }
-  .prose-fr ul { @apply list-disc pl-6 my-3 space-y-1; }
-  .prose-fr strong { @apply text-brand-700; }
+  .badge-marianne {
+    @apply inline-flex items-center rounded-full bg-marianne-50 px-2.5 py-0.5
+           text-xs font-medium text-marianne-500 ring-1 ring-inset ring-marianne-200/70;
+  }
+  .badge-outline {
+    @apply inline-flex items-center rounded-full bg-white px-2.5 py-0.5
+           text-xs font-medium text-ink-700 ring-1 ring-inset ring-paper-300;
+  }
+
+  /* Tricolore stripe (decorative) */
+  .stripe-tricolore {
+    @apply h-1 w-full;
+    background: linear-gradient(90deg, #000091 0 33.33%, #FFFFFF 33.33% 66.66%, #E1000F 66.66% 100%);
+  }
+  .border-tricolore {
+    border-image: linear-gradient(90deg, #000091 0 33.33%, #FFFFFF 33.33% 66.66%, #E1000F 66.66% 100%) 1;
+  }
+
+  /* Eyebrow label */
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-xs font-semibold text-france-700
+           uppercase tracking-[0.18em];
+  }
+  .eyebrow::before {
+    content: "";
+    @apply inline-block w-6 h-px bg-france-700;
+  }
+
+  /* Display text gradient */
+  .text-gradient {
+    background: linear-gradient(120deg, #000091 0%, #1212A8 35%, #E1000F 110%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Decorative numeral */
+  .numeral {
+    @apply font-display text-2xl text-france-700 tabular-nums;
+  }
+
+  /* Prose for fiches */
+  .prose-fr {
+    @apply max-w-prose text-ink-800 leading-[1.75] text-[1.0625rem];
+  }
+  .prose-fr h2 {
+    @apply font-display text-2xl sm:text-[1.75rem] mt-12 mb-4 text-ink-900;
+  }
+  .prose-fr h3 {
+    @apply font-display text-lg sm:text-xl mt-8 mb-2 text-ink-900;
+  }
+  .prose-fr p { @apply my-4; }
+  .prose-fr ul {
+    @apply list-none pl-0 my-5 space-y-2.5;
+  }
+  .prose-fr ul > li {
+    @apply relative pl-6;
+  }
+  .prose-fr ul > li::before {
+    content: "";
+    @apply absolute left-0 top-[0.7em] w-1.5 h-1.5 rounded-full bg-france-700;
+  }
+  .prose-fr ol {
+    @apply list-decimal pl-6 my-5 space-y-2 marker:text-france-700 marker:font-semibold;
+  }
+  .prose-fr strong { @apply text-france-700 font-semibold; }
+  .prose-fr blockquote {
+    @apply my-7 pl-5 border-l-2 border-marianne-400 bg-marianne-50/60 rounded-r-xl
+           py-4 pr-4 text-ink-800;
+  }
+  .prose-fr blockquote p { @apply my-0; }
+  .prose-fr a {
+    @apply text-france-700 underline decoration-france-300 decoration-2 underline-offset-2 hover:decoration-france-700;
+  }
+  .prose-fr code {
+    @apply rounded bg-paper-200 px-1.5 py-0.5 text-[0.9em] font-mono text-ink-900;
+  }
+  .prose-fr hr { @apply my-10; }
+
+  /* Subtle dot grid */
+  .bg-dots {
+    background-image: var(--paper-grid);
+    background-size: 22px 22px;
+  }
+
+  /* Quiz answer pill */
+  .answer-pill {
+    @apply w-full text-left rounded-2xl border border-paper-300 bg-white
+           px-4 py-3.5 transition-all duration-150
+           hover:border-france-400 hover:bg-france-50/40
+           focus-visible:border-france-700;
+  }
+  .answer-pill[data-state="selected"] {
+    @apply border-france-700 bg-france-50;
+  }
+  .answer-pill[data-state="correct"] {
+    @apply border-success-600 bg-success-50;
+  }
+  .answer-pill[data-state="wrong"] {
+    @apply border-marianne-400 bg-marianne-50;
+  }
+}
+
+@layer utilities {
+  .ring-focus {
+    @apply focus-visible:ring-4 focus-visible:ring-france-300/40 focus-visible:ring-offset-2 focus-visible:ring-offset-paper-50;
+  }
+  .text-balance { text-wrap: balance; }
+  .text-pretty { text-wrap: pretty; }
 }
 
 /* Respect des préférences utilisateur */
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
+  html { scroll-behavior: auto; }
 }

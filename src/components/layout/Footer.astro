@@ -1,18 +1,52 @@
 ---
 const year = new Date().getFullYear();
 ---
-<footer class="mt-16 border-t border-ink-100 bg-white">
-  <div class="container-page py-8 text-sm text-ink-500 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-    <p class="max-w-prose">
-      Plateforme d'entraînement indépendante. <strong class="text-ink-700">Ce site n'est pas un service officiel de l'État français.</strong>
-      Contenus pédagogiques originaux à visée éducative.
-    </p>
-    <nav aria-label="Liens légaux">
-      <ul class="flex gap-4">
-        <li><a href="/a-propos">À propos</a></li>
-        <li><a href="/mentions-legales">Mentions légales</a></li>
+<footer class="mt-24 border-t border-paper-300 bg-white">
+  <div class="stripe-tricolore" aria-hidden="true"></div>
+  <div class="container-page pt-12 pb-10 grid gap-10 md:grid-cols-12">
+    <div class="md:col-span-5">
+      <div class="flex items-center gap-3">
+        <span aria-hidden="true" class="relative inline-flex w-10 h-10 items-center justify-center rounded-xl bg-paper-50 border border-paper-300 overflow-hidden">
+          <span class="absolute inset-x-0 top-0 h-1/3 bg-france-700"></span>
+          <span class="absolute inset-x-0 bottom-0 h-1/3 bg-marianne-400"></span>
+          <span class="relative font-display font-bold text-ink-900 text-base">EC</span>
+        </span>
+        <span class="font-display text-lg font-semibold text-ink-900">Examen civique</span>
+      </div>
+      <p class="mt-4 text-sm text-ink-700 max-w-prose">
+        Plateforme d'entraînement indépendante. <strong class="text-ink-900">Ce site n'est pas un service officiel de l'État français.</strong>
+        Contenus pédagogiques originaux à visée éducative.
+      </p>
+    </div>
+
+    <nav class="md:col-span-3" aria-label="Naviguer">
+      <p class="text-xs uppercase tracking-[0.16em] text-ink-500 font-semibold">Naviguer</p>
+      <ul class="mt-4 space-y-2 text-sm">
+        <li><a class="text-ink-800 hover:text-france-700 no-underline hover:underline" href="/themes">Tous les thèmes</a></li>
+        <li><a class="text-ink-800 hover:text-france-700 no-underline hover:underline" href="/examen-blanc">Examen blanc</a></li>
+        <li><a class="text-ink-800 hover:text-france-700 no-underline hover:underline" href="/a-propos">À propos</a></li>
+      </ul>
+    </nav>
+
+    <nav class="md:col-span-4" aria-label="Légal">
+      <p class="text-xs uppercase tracking-[0.16em] text-ink-500 font-semibold">Informations</p>
+      <ul class="mt-4 space-y-2 text-sm">
+        <li><a class="text-ink-800 hover:text-france-700 no-underline hover:underline" href="/mentions-legales">Mentions légales</a></li>
+        <li class="text-ink-600">Aucun compte requis · données conservées sur votre appareil</li>
       </ul>
     </nav>
   </div>
-  <div class="container-page pb-6 text-xs text-ink-500">© {year} Examen civique — Entraînement.</div>
+  <div class="border-t border-paper-200">
+    <div class="container-page py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs text-ink-500">
+      <p>© {year} Examen civique — Plateforme d'entraînement non officielle.</p>
+      <p class="flex items-center gap-2">
+        <span aria-hidden="true" class="inline-flex h-3 w-6 rounded-sm overflow-hidden border border-paper-300">
+          <span class="flex-1 bg-france-700"></span>
+          <span class="flex-1 bg-white"></span>
+          <span class="flex-1 bg-marianne-400"></span>
+        </span>
+        Fait pour la République française
+      </p>
+    </div>
+  </div>
 </footer>

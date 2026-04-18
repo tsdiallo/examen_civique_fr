@@ -7,15 +7,15 @@ interface Props {
 const { value, label, tone = "brand" } = Astro.props;
 const pct = Math.max(0, Math.min(1, value)) * 100;
 const bar = {
-  brand: "bg-brand-600",
+  brand: "bg-france-700",
   success: "bg-success-600",
   warning: "bg-warning-600",
-  danger: "bg-danger-600",
+  danger: "bg-marianne-400",
 }[tone];
 ---
 <div class="w-full">
   {label && <div class="text-xs text-ink-500 mb-1 flex justify-between"><span>{label}</span><span>{Math.round(pct)}%</span></div>}
-  <div class="h-2 rounded-full bg-ink-100 overflow-hidden" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow={Math.round(pct)}>
+  <div class="h-2 rounded-full bg-paper-200 overflow-hidden" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow={Math.round(pct)}>
     <div class={`h-full ${bar} transition-[width] duration-500`} style={`width: ${pct}%`}></div>
   </div>
 </div>

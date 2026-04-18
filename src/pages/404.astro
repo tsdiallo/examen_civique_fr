@@ -2,17 +2,19 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 <BaseLayout title="Page introuvable — Examen civique">
-  <section class="container-page py-20 text-center">
-    <p class="badge">Erreur 404</p>
-    <h1 class="mt-4 text-4xl font-display">Cette page est introuvable</h1>
-    <p class="mt-3 text-ink-700 max-w-prose mx-auto">
+  <section class="container-page py-24 sm:py-32 text-center">
+    <p class="badge-france mx-auto">Erreur 404</p>
+    <h1 class="mt-5 font-display text-display sm:text-display-lg text-balance">
+      Cette page est <span class="text-gradient">introuvable</span>.
+    </h1>
+    <p class="mt-5 text-lg text-ink-700 max-w-prose mx-auto">
       Le lien est peut-être incorrect, ou la page a été déplacée. Pas d'inquiétude : vous pouvez
       reprendre votre parcours de révision juste ici.
     </p>
-    <div class="mt-8 flex flex-wrap gap-3 justify-center">
-      <a href="/" class="btn-primary no-underline">Retour à l'accueil</a>
-      <a href="/themes" class="btn-secondary no-underline">Voir les thèmes</a>
-      <a href="/examen-blanc" class="btn-ghost no-underline">Faire l'examen blanc</a>
+    <div class="mt-10 flex flex-wrap gap-3 justify-center">
+      <a href="/" class="btn-primary btn-lg">Retour à l'accueil</a>
+      <a href="/themes" class="btn-secondary">Voir les thèmes</a>
+      <a href="/examen-blanc" class="btn-ghost">Faire l'examen blanc</a>
     </div>
   </section>
 </BaseLayout>

@@ -15,31 +15,31 @@ const payload = JSON.stringify(quiz);
   data-theme-title={themeTitle}
   aria-live="polite"
 >
-  <div class="card p-6">
+  <div class="card p-6 sm:p-7">
     <div class="flex items-center justify-between text-sm text-ink-500">
-      <span data-qr-progress-label>Question 1 sur {quiz.questions.length}</span>
-      <span class="badge" data-qr-type>QCM</span>
+      <span class="font-semibold text-ink-700 tabular-nums" data-qr-progress-label>Question 1 sur {quiz.questions.length}</span>
+      <span class="badge-france" data-qr-type>QCM</span>
     </div>
-    <div class="mt-2">
-      <div class="h-1.5 rounded-full bg-ink-100 overflow-hidden">
-        <div class="h-full bg-brand-600 transition-[width] duration-300" style="width: 0%" data-qr-bar></div>
+    <div class="mt-3">
+      <div class="h-1.5 rounded-full bg-paper-200 overflow-hidden">
+        <div class="h-full bg-france-700 transition-[width] duration-300" style="width: 0%" data-qr-bar></div>
       </div>
     </div>
 
-    <h2 class="mt-5 text-lg sm:text-xl font-display text-ink-900" data-qr-prompt></h2>
+    <h2 class="mt-6 text-xl sm:text-2xl font-display text-ink-900 text-pretty" data-qr-prompt></h2>
 
-    <fieldset class="mt-5 space-y-2" data-qr-choices>
+    <fieldset class="mt-6 space-y-2.5" data-qr-choices>
       <legend class="sr-only">Choisissez une réponse</legend>
     </fieldset>
 
-    <div class="mt-5 hidden" data-qr-explanation>
-      <div class="rounded-lg border border-ink-100 bg-ink-50 p-4 text-sm">
+    <div class="mt-6 hidden" data-qr-explanation>
+      <div class="rounded-2xl border border-paper-300 bg-paper-50 p-4 sm:p-5 text-sm">
         <p class="font-semibold mb-1" data-qr-verdict></p>
-        <p class="text-ink-700" data-qr-explanation-text></p>
+        <p class="text-ink-700 leading-relaxed" data-qr-explanation-text></p>
       </div>
     </div>
 
-    <div class="mt-6 flex items-center justify-between gap-3">
+    <div class="mt-7 flex items-center justify-between gap-3">
       <button type="button" class="btn-ghost" data-qr-prev>← Précédent</button>
       <div class="flex gap-2">
         <button type="button" class="btn-secondary" data-qr-check>Valider</button>
@@ -48,21 +48,22 @@ const payload = JSON.stringify(quiz);
     </div>
   </div>
 
-  <div class="card p-6 mt-6 hidden" data-qr-result>
-    <h2 class="font-display text-2xl text-ink-900">Résultat</h2>
-    <p class="mt-1 text-ink-700">
-      Vous avez obtenu <strong data-qr-score></strong> sur <strong data-qr-total></strong>.
+  <div class="card-france p-6 sm:p-7 mt-6 hidden" data-qr-result>
+    <p class="eyebrow">Résultat</p>
+    <h2 class="mt-3 font-display text-2xl sm:text-3xl text-ink-900">Bilan du quiz</h2>
+    <p class="mt-2 text-ink-700">
+      Vous avez obtenu <strong class="text-france-700 tabular-nums" data-qr-score></strong> sur <strong class="tabular-nums" data-qr-total></strong>.
     </p>
-    <div class="mt-4">
-      <div class="h-2 rounded-full bg-ink-100 overflow-hidden">
-        <div class="h-full bg-success-600" style="width: 0%" data-qr-score-bar></div>
+    <div class="mt-5">
+      <div class="h-2 rounded-full bg-paper-200 overflow-hidden">
+        <div class="h-full bg-success-600 transition-[width] duration-500" style="width: 0%" data-qr-score-bar></div>
       </div>
     </div>
     <p class="mt-4 text-sm text-ink-700" data-qr-feedback></p>
-    <div class="mt-5 flex flex-wrap gap-3">
+    <div class="mt-6 flex flex-wrap gap-3">
       <button type="button" class="btn-secondary" data-qr-retry>Recommencer</button>
-      <a href="/themes" class="btn-ghost no-underline">Retour aux thèmes</a>
-      <a href="/examen-blanc" class="btn-primary no-underline">Tenter l'examen blanc</a>
+      <a href="/themes" class="btn-ghost">Retour aux thèmes</a>
+      <a href="/examen-blanc" class="btn-marianne">Tenter l'examen blanc</a>
     </div>
   </div>
 </section>
@@ -115,10 +116,10 @@ const payload = JSON.stringify(quiz);
     q.choices.forEach((c) => {
       const id = `q${q.id}-${c.id}`;
       const label = document.createElement("label");
-      label.className = "flex items-start gap-3 p-3 rounded-lg border border-ink-100 hover:bg-ink-50 cursor-pointer has-[:checked]:border-brand-500 has-[:checked]:bg-brand-50";
+      label.className = "flex items-start gap-3 p-4 rounded-2xl border border-paper-300 bg-white transition-all duration-150 hover:border-france-400 hover:bg-france-50/40 cursor-pointer has-[:checked]:border-france-700 has-[:checked]:bg-france-50";
       label.innerHTML = `
-        <input type="radio" id="${id}" name="q-${q.id}" value="${c.id}" class="mt-1 accent-brand-600" ${selected[index] === c.id ? "checked" : ""} ${validated[index] ? "disabled" : ""} />
-        <span class="text-ink-900"><span class="font-semibold mr-1">${c.id.toUpperCase()}.</span>${c.text}</span>
+        <input type="radio" id="${id}" name="q-${q.id}" value="${c.id}" class="mt-1 accent-france-700" ${selected[index] === c.id ? "checked" : ""} ${validated[index] ? "disabled" : ""} />
+        <span class="text-ink-900 leading-relaxed"><span class="font-display font-semibold text-france-700 mr-2">${c.id.toUpperCase()}.</span>${c.text}</span>
       `;
       const input = label.querySelector<HTMLInputElement>("input")!;
       input.addEventListener("change", () => {
@@ -129,9 +130,9 @@ const payload = JSON.stringify(quiz);
 
       if (validated[index]) {
         if (c.id === q.answer) {
-          label.classList.add("border-success-600/40", "bg-success-100");
+          label.classList.add("!border-success-600", "!bg-success-50");
         } else if (c.id === selected[index]) {
-          label.classList.add("border-danger-600/40", "bg-danger-100");
+          label.classList.add("!border-marianne-400", "!bg-marianne-50");
         }
       }
     });
@@ -140,7 +141,7 @@ const payload = JSON.stringify(quiz);
       const ok = selected[index] === q.answer;
       els.explanation.classList.remove("hidden");
       els.verdict.textContent = ok ? "✓ Bonne réponse" : "✗ Réponse incorrecte";
-      els.verdict.className = `font-semibold mb-1 ${ok ? "text-success-600" : "text-danger-600"}`;
+      els.verdict.className = `font-semibold mb-1 ${ok ? "text-success-700" : "text-marianne-500"}`;
       els.explanationText.textContent = q.explanation;
       els.check.classList.add("hidden");
       els.next.classList.remove("hidden");

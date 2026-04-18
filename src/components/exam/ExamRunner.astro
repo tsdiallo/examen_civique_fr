@@ -10,83 +10,100 @@ const payload = JSON.stringify({ exam, themeTitles });
 ---
 <section class="exam-root" data-exam={payload} aria-live="polite">
   <!-- Intro -->
-  <div class="card p-6" data-ex-intro>
-    <h1 class="text-2xl font-display">Examen blanc</h1>
-    <p class="text-ink-700 mt-2 max-w-prose">
-      {exam.total} questions · {Math.round(exam.durationSec / 60)} minutes · seuil indicatif de réussite {exam.passingScore}/{exam.total}.
+  <div class="card-france p-7 sm:p-8" data-ex-intro>
+    <p class="eyebrow">Conditions réelles</p>
+    <h1 class="mt-3 font-display text-3xl sm:text-4xl text-ink-900">Examen blanc</h1>
+    <p class="text-ink-700 mt-3 max-w-prose">
+      <strong>{exam.total} questions</strong> · {Math.round(exam.durationSec / 60)} minutes · seuil indicatif de réussite <strong>{exam.passingScore}/{exam.total}</strong>.
       Une fois l'examen démarré, le chronomètre ne s'arrête pas.
     </p>
-    <ul class="mt-4 text-sm text-ink-700 list-disc pl-5 space-y-1">
-      <li>Répondez à chaque question puis passez à la suivante.</li>
-      <li>Vous pouvez revenir en arrière pour modifier vos réponses.</li>
-      <li>La correction détaillée s'affiche à la fin.</li>
+    <ul class="mt-5 grid sm:grid-cols-3 gap-3">
+      <li class="rounded-2xl bg-white border border-paper-300 p-4 text-sm">
+        <p class="text-xs uppercase tracking-[0.16em] text-ink-500 font-semibold">Étape 1</p>
+        <p class="mt-1 text-ink-800">Répondez à chaque question, passez à la suivante.</p>
+      </li>
+      <li class="rounded-2xl bg-white border border-paper-300 p-4 text-sm">
+        <p class="text-xs uppercase tracking-[0.16em] text-ink-500 font-semibold">Étape 2</p>
+        <p class="mt-1 text-ink-800">Revenez en arrière pour modifier si besoin.</p>
+      </li>
+      <li class="rounded-2xl bg-white border border-paper-300 p-4 text-sm">
+        <p class="text-xs uppercase tracking-[0.16em] text-ink-500 font-semibold">Étape 3</p>
+        <p class="mt-1 text-ink-800">Recevez une correction détaillée par thème.</p>
+      </li>
     </ul>
-    <button type="button" class="btn-primary mt-6" data-ex-start>Commencer l'examen</button>
+    <button type="button" class="btn-primary btn-lg mt-7" data-ex-start>
+      Commencer l'examen
+      <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </button>
   </div>
 
   <!-- En cours -->
-  <div class="card p-6 hidden" data-ex-play>
-    <div class="flex items-center justify-between text-sm">
-      <span class="text-ink-500" data-ex-progress>Question 1 / {exam.total}</span>
-      <span class="font-mono text-ink-900" data-ex-timer>45:00</span>
+  <div class="card p-6 sm:p-7 hidden" data-ex-play>
+    <div class="flex items-center justify-between gap-3 text-sm">
+      <span class="font-semibold text-ink-700 tabular-nums" data-ex-progress>Question 1 / {exam.total}</span>
+      <span class="inline-flex items-center gap-2 rounded-full bg-france-50 ring-1 ring-france-200 px-3 py-1 font-mono font-semibold text-france-700 tabular-nums" data-ex-timer>
+        <svg viewBox="0 0 24 24" class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        45:00
+      </span>
     </div>
-    <div class="mt-2 h-1.5 rounded-full bg-ink-100 overflow-hidden">
-      <div class="h-full bg-brand-600 transition-[width] duration-300" style="width: 0%" data-ex-bar></div>
+    <div class="mt-3 h-1.5 rounded-full bg-paper-200 overflow-hidden">
+      <div class="h-full bg-france-700 transition-[width] duration-300" style="width: 0%" data-ex-bar></div>
     </div>
 
-    <p class="mt-3 text-xs text-ink-500" data-ex-theme></p>
-    <h2 class="mt-1 text-lg sm:text-xl font-display text-ink-900" data-ex-prompt></h2>
+    <p class="mt-5 text-xs uppercase tracking-[0.16em] text-france-700 font-semibold" data-ex-theme></p>
+    <h2 class="mt-1 text-xl sm:text-2xl font-display text-ink-900 text-pretty" data-ex-prompt></h2>
 
-    <fieldset class="mt-5 space-y-2" data-ex-choices>
+    <fieldset class="mt-6 space-y-2.5" data-ex-choices>
       <legend class="sr-only">Choisissez une réponse</legend>
     </fieldset>
 
-    <div class="mt-6 flex items-center justify-between gap-3">
+    <div class="mt-7 flex items-center justify-between gap-3">
       <button type="button" class="btn-ghost" data-ex-prev>← Précédent</button>
       <div class="flex gap-2">
         <button type="button" class="btn-secondary" data-ex-next>Suivant →</button>
-        <button type="button" class="btn-primary hidden" data-ex-finish>Terminer l'examen</button>
+        <button type="button" class="btn-marianne hidden" data-ex-finish>Terminer l'examen</button>
       </div>
     </div>
 
-    <p class="mt-4 text-xs text-ink-500">
-      <span data-ex-answered>0</span> / {exam.total} répondues
-    </p>
+    <p class="mt-4 text-xs text-ink-500"><span class="tabular-nums" data-ex-answered>0</span> / {exam.total} répondues</p>
   </div>
 
   <!-- Résultat -->
-  <div class="card p-6 mt-0 hidden" data-ex-result>
-    <div class="flex items-start justify-between gap-4">
+  <div class="card p-6 sm:p-7 mt-0 hidden" data-ex-result>
+    <div class="flex items-start justify-between gap-4 flex-wrap">
       <div>
-        <p class="badge" data-ex-verdict>Résultat</p>
-        <h2 class="font-display text-2xl mt-2">
-          <span data-ex-score>0</span> / <span>{exam.total}</span>
+        <p data-ex-verdict class="badge">Résultat</p>
+        <h2 class="font-display text-3xl sm:text-4xl mt-3">
+          <span class="text-france-700 tabular-nums" data-ex-score>0</span><span class="text-ink-500">/</span><span class="tabular-nums">{exam.total}</span>
         </h2>
-        <p class="text-ink-700 mt-1" data-ex-feedback></p>
+        <p class="text-ink-700 mt-2 max-w-prose" data-ex-feedback></p>
       </div>
-      <p class="text-sm text-ink-500">Temps utilisé : <span data-ex-time-used>—</span></p>
+      <p class="text-sm text-ink-500">Temps utilisé : <span class="tabular-nums font-medium text-ink-800" data-ex-time-used>—</span></p>
     </div>
 
-    <div class="mt-4">
-      <div class="h-2 rounded-full bg-ink-100 overflow-hidden">
-        <div class="h-full" style="width: 0%" data-ex-score-bar></div>
+    <div class="mt-5">
+      <div class="h-2 rounded-full bg-paper-200 overflow-hidden">
+        <div class="h-full transition-[width] duration-500" style="width: 0%" data-ex-score-bar></div>
       </div>
     </div>
 
-    <h3 class="mt-6 font-display text-lg">Résultats par thème</h3>
-    <ul class="mt-3 space-y-3" data-ex-breakdown></ul>
+    <h3 class="mt-8 font-display text-xl">Résultats par thème</h3>
+    <ul class="mt-4 space-y-3.5" data-ex-breakdown></ul>
 
-    <h3 class="mt-6 font-display text-lg">Recommandations</h3>
-    <ul class="mt-3 list-disc pl-5 space-y-1 text-sm text-ink-700" data-ex-reco></ul>
+    <h3 class="mt-8 font-display text-xl">Recommandations</h3>
+    <ul class="mt-3 list-none pl-0 space-y-2 text-sm text-ink-800" data-ex-reco></ul>
 
-    <details class="mt-6">
-      <summary class="cursor-pointer font-medium text-brand-700">Voir la correction détaillée</summary>
-      <ol class="mt-4 space-y-4" data-ex-corrections></ol>
+    <details class="mt-8 group">
+      <summary class="cursor-pointer font-semibold text-france-700 inline-flex items-center gap-2 select-none">
+        <svg class="w-4 h-4 transition-transform group-open:rotate-90" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        Voir la correction détaillée
+      </summary>
+      <ol class="mt-5 space-y-5" data-ex-corrections></ol>
     </details>
 
-    <div class="mt-6 flex flex-wrap gap-3">
+    <div class="mt-8 flex flex-wrap gap-3">
       <button type="button" class="btn-primary" data-ex-retry>Refaire un examen</button>
-      <a href="/themes" class="btn-secondary no-underline">Réviser mes thèmes faibles</a>
+      <a href="/themes" class="btn-secondary">Réviser mes thèmes faibles</a>
     </div>
   </div>
 </section>
@@ -168,10 +185,10 @@ const payload = JSON.stringify({ exam, themeTitles });
     els.choices.innerHTML = "";
     q.choices.forEach((c) => {
       const label = document.createElement("label");
-      label.className = "flex items-start gap-3 p-3 rounded-lg border border-ink-100 hover:bg-ink-50 cursor-pointer has-[:checked]:border-brand-500 has-[:checked]:bg-brand-50";
+      label.className = "flex items-start gap-3 p-4 rounded-2xl border border-paper-300 bg-white transition-all duration-150 hover:border-france-400 hover:bg-france-50/40 cursor-pointer has-[:checked]:border-france-700 has-[:checked]:bg-france-50";
       label.innerHTML = `
-        <input type="radio" name="q-${q.id}" value="${c.id}" class="mt-1 accent-brand-600" ${selected[index] === c.id ? "checked" : ""} />
-        <span class="text-ink-900"><span class="font-semibold mr-1">${c.id.toUpperCase()}.</span>${c.text}</span>
+        <input type="radio" name="q-${q.id}" value="${c.id}" class="mt-1 accent-france-700" ${selected[index] === c.id ? "checked" : ""} />
+        <span class="text-ink-900 leading-relaxed"><span class="font-display font-semibold text-france-700 mr-2">${c.id.toUpperCase()}.</span>${c.text}</span>
       `;
       const input = label.querySelector<HTMLInputElement>("input")!;
       input.addEventListener("change", () => {
@@ -212,14 +229,14 @@ const payload = JSON.stringify({ exam, themeTitles });
 
     els.score.textContent = String(result.correct);
     els.verdict.textContent = result.passed ? "Réussi" : (timeOut ? "Temps écoulé" : "Non atteint");
-    els.verdict.className = `badge ${result.passed ? "bg-success-100 text-success-600" : "bg-warning-100 text-warning-600"}`;
+    els.verdict.className = `inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] ${result.passed ? "bg-success-50 text-success-700 ring-1 ring-success-100" : "bg-marianne-50 text-marianne-500 ring-1 ring-marianne-200"}`;
     els.feedback.textContent = result.passed
       ? `Bravo, vous avez franchi le seuil indicatif de ${exam.passingScore}/${exam.total}.`
       : `Il manque ${Math.max(0, exam.passingScore - result.correct)} bonne(s) réponse(s) pour atteindre le seuil indicatif.`;
     els.timeUsed.textContent = `${m} min ${s.toString().padStart(2, "0")} s`;
     const pct = (result.correct / exam.total) * 100;
     els.scoreBar.style.width = `${pct}%`;
-    (els.scoreBar as HTMLElement).className = `h-full ${result.passed ? "bg-success-600" : "bg-warning-600"}`;
+    (els.scoreBar as HTMLElement).className = `h-full transition-[width] duration-500 ${result.passed ? "bg-success-600" : "bg-marianne-400"}`;
 
     // Breakdown
     els.breakdown.innerHTML = "";
@@ -227,14 +244,14 @@ const payload = JSON.stringify({ exam, themeTitles });
       .sort(([a], [b]) => (titles[a] || a).localeCompare(titles[b] || b))
       .forEach(([slug, v]) => {
         const pc = v.total ? Math.round((v.correct / v.total) * 100) : 0;
-        const tone = pc >= 70 ? "bg-success-600" : pc >= 50 ? "bg-warning-600" : "bg-danger-600";
+        const tone = pc >= 70 ? "bg-success-600" : pc >= 50 ? "bg-warning-600" : "bg-marianne-400";
         const li = document.createElement("li");
         li.innerHTML = `
           <div class="flex justify-between text-sm">
-            <span class="text-ink-900">${titles[slug] || slug}</span>
-            <span class="text-ink-500">${v.correct}/${v.total}</span>
+            <span class="text-ink-900 font-medium">${titles[slug] || slug}</span>
+            <span class="text-ink-500 tabular-nums">${v.correct}/${v.total}</span>
           </div>
-          <div class="h-1.5 rounded-full bg-ink-100 overflow-hidden mt-1"><div class="h-full ${tone}" style="width:${pc}%"></div></div>
+          <div class="h-1.5 rounded-full bg-paper-200 overflow-hidden mt-1.5"><div class="h-full ${tone}" style="width:${pc}%"></div></div>
         `;
         els.breakdown.appendChild(li);
       });
@@ -243,10 +260,15 @@ const payload = JSON.stringify({ exam, themeTitles });
     els.reco.innerHTML = "";
     const recos = weak.slice(0, 3).map((slug) => {
       const t = titles[slug] || slug;
-      return `Revoir la fiche <a class="text-brand-600 underline" href="/themes/${slug}">${t}</a> puis refaire son quiz.`;
+      return `Revoir la fiche <a class="text-france-700 underline decoration-france-300 underline-offset-2" href="/themes/${slug}">${t}</a> puis refaire son quiz.`;
     });
     if (recos.length === 0) recos.push("Maintenez le rythme : refaites un examen blanc pour consolider.");
-    recos.forEach((r) => { const li = document.createElement("li"); li.innerHTML = r; els.reco.appendChild(li); });
+    recos.forEach((r) => {
+      const li = document.createElement("li");
+      li.className = "relative pl-6 before:absolute before:left-0 before:top-[0.55em] before:w-1.5 before:h-1.5 before:rounded-full before:bg-france-700";
+      li.innerHTML = r;
+      els.reco.appendChild(li);
+    });
 
     // Corrections
     els.corrections.innerHTML = "";
@@ -255,13 +277,14 @@ const payload = JSON.stringify({ exam, themeTitles });
       const correctText = q.choices.find((c) => c.id === q.answer)?.text || "";
       const pickedText = q.choices.find((c) => c.id === selected[i])?.text || "Pas de réponse";
       const li = document.createElement("li");
-      li.className = "border-l-4 pl-4 " + (ok ? "border-success-600" : "border-danger-600");
+      li.className = "rounded-2xl border bg-white p-4 sm:p-5 " + (ok ? "border-success-100" : "border-marianne-200");
       li.innerHTML = `
-        <p class="text-sm text-ink-500">Question ${i + 1} — ${titles[q.themeSlug || ""] || ""}</p>
-        <p class="font-medium text-ink-900">${q.prompt}</p>
-        <p class="text-sm mt-1">Votre réponse : <strong>${pickedText}</strong></p>
-        ${ok ? "" : `<p class="text-sm">Bonne réponse : <strong>${correctText}</strong></p>`}
-        <p class="text-sm text-ink-700 mt-1">${q.explanation}</p>
+        <p class="text-xs uppercase tracking-[0.16em] font-semibold ${ok ? "text-success-700" : "text-marianne-500"}">Question ${i + 1} · ${ok ? "Correct" : "À revoir"}</p>
+        <p class="mt-1 text-xs text-ink-500">${titles[q.themeSlug || ""] || ""}</p>
+        <p class="mt-2 font-medium text-ink-900">${q.prompt}</p>
+        <p class="text-sm mt-2 text-ink-700">Votre réponse : <strong class="text-ink-900">${pickedText}</strong></p>
+        ${ok ? "" : `<p class="text-sm text-ink-700">Bonne réponse : <strong class="text-success-700">${correctText}</strong></p>`}
+        <p class="text-sm text-ink-700 mt-2 leading-relaxed">${q.explanation}</p>
       `;
       els.corrections.appendChild(li);
     });
