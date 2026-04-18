@@ -10,9 +10,9 @@ interface Props {
 const { slug, title, summary, order, durationMin, tags = [] } = Astro.props;
 const num = order.toString().padStart(2, "0");
 ---
-<a href={`/themes/${slug}`} class="card card-hover group relative p-0 overflow-hidden no-underline block">
+<a href={`/themes/${slug}`} class="card card-hover group relative p-0 overflow-hidden no-underline block min-w-0">
   <div class="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-france-700 via-paper-300 to-marianne-400 opacity-70 group-hover:opacity-100 transition-opacity" aria-hidden="true"></div>
-  <div class="p-6">
+  <div class="p-5 sm:p-6">
     <div class="flex items-center justify-between">
       <div class="flex items-center gap-3">
         <span aria-hidden="true" class="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-france-50 ring-1 ring-france-200 font-display text-france-700 text-base tabular-nums">
@@ -26,7 +26,7 @@ const num = order.toString().padStart(2, "0");
       </span>
     </div>
 
-    <h3 class="mt-5 font-display text-xl text-ink-900 group-hover:text-france-700 transition-colors text-pretty">
+    <h3 class="mt-5 font-display text-xl sm:text-2xl text-ink-900 group-hover:text-france-700 transition-colors text-pretty leading-tight">
       {title}
     </h3>
     <p class="mt-2 text-sm text-ink-700 leading-relaxed text-pretty">{summary}</p>

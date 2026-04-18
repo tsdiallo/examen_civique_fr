@@ -19,8 +19,8 @@ const num = order.toString().padStart(2, "0");
       <p class="text-sm text-ink-600 mt-0.5">{durationMin} min de lecture</p>
     </div>
   </div>
-  <h1 class="mt-6 font-display text-display-sm sm:text-display text-balance">{title}</h1>
-  <p class="mt-4 text-lg text-ink-700 max-w-prose text-pretty">{summary}</p>
+  <h1 class="mt-6 font-display text-display-sm sm:text-display leading-[1.08] text-balance">{title}</h1>
+  <p class="mt-4 text-base sm:text-lg text-ink-700 max-w-prose text-pretty">{summary}</p>
   {tags.length > 0 && (
     <ul class="mt-5 flex flex-wrap gap-1.5">
       {tags.map((t) => <li class="badge">{t}</li>)}

@@ -24,16 +24,16 @@ const {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:wght@500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital,wght@0,400;1,400&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
     />
     <title>{title}</title>
   </head>
-  <body class="min-h-screen flex flex-col">
+  <body class="min-h-screen flex flex-col overflow-x-hidden">
     <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:bg-france-700 focus:text-white focus:px-4 focus:py-2 focus:rounded-full focus:shadow-lift">
       Aller au contenu principal
     </a>
     <Header />
-    <main id="main" class="flex-1">
+    <main id="main" class="flex-1 min-w-0">
       <slot />
     </main>
     <Footer />

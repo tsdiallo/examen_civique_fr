@@ -5,74 +5,74 @@ import ProgressSummary from "../components/ui/ProgressSummary.astro";
 <BaseLayout>
   <!-- HERO -->
   <section class="relative overflow-hidden">
-    <div aria-hidden="true" class="absolute inset-0 -z-10 bg-warm-mesh"></div>
-    <div aria-hidden="true" class="absolute inset-0 -z-10 bg-dots opacity-60 [mask-image:radial-gradient(ellipse_at_top,black,transparent_70%)]"></div>
+    <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10 bg-warm-mesh"></div>
+    <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10 bg-dots opacity-60 [mask-image:radial-gradient(ellipse_at_top,black,transparent_70%)]"></div>
 
-    <div class="container-page pt-16 pb-20 sm:pt-24 sm:pb-28 grid gap-12 lg:grid-cols-12 lg:items-center">
-      <div class="lg:col-span-7 animate-fade-up">
-        <p class="eyebrow">Plateforme d'entraînement · Non officielle</p>
-        <h1 class="mt-5 font-display text-display-sm sm:text-display lg:text-display-lg text-balance">
-          Préparez l'<span class="text-gradient">examen civique</span> français,
+    <div class="container-page pt-12 pb-16 sm:pt-20 sm:pb-24 lg:pt-24 lg:pb-28 grid gap-10 lg:grid-cols-12 lg:items-center">
+      <div class="lg:col-span-7 min-w-0 animate-fade-up">
+        <p class="eyebrow text-[0.68rem]">Plateforme d'entraînement · Non officielle</p>
+        <h1 class="mt-5 font-display text-display-sm sm:text-display lg:text-display-lg leading-[1.02] text-balance">
+          Préparez l'<em class="italic-accent">examen civique</em> français,
           sereinement.
         </h1>
-        <p class="mt-6 text-lg text-ink-700 max-w-2xl text-pretty">
+        <p class="mt-5 sm:mt-6 text-base sm:text-lg text-ink-700 max-w-2xl text-pretty">
           Fiches claires, quiz par thème, mises en situation et examen blanc chronométré.
           Un français simple, des explications pas à pas, pour aborder votre démarche avec confiance.
         </p>
-        <div class="mt-8 flex flex-wrap items-center gap-3">
-          <a href="/themes" class="btn-primary btn-lg">
+        <div class="mt-7 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3">
+          <a href="/themes" class="btn-primary btn-lg justify-center">
             Commencer par un thème
             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
           </a>
-          <a href="/examen-blanc" class="btn-secondary btn-lg">Faire l'examen blanc</a>
+          <a href="/examen-blanc" class="btn-secondary btn-lg justify-center">Faire l'examen blanc</a>
         </div>
 
-        <dl class="mt-12 grid grid-cols-3 gap-6 max-w-xl">
-          <div>
-            <dt class="text-xs uppercase tracking-[0.16em] text-ink-500 font-semibold">Thèmes</dt>
-            <dd class="mt-1 font-display text-3xl text-ink-900">10</dd>
+        <dl class="mt-10 sm:mt-12 flex flex-wrap gap-x-8 gap-y-5 max-w-xl">
+          <div class="min-w-0">
+            <dt class="text-[0.68rem] uppercase tracking-[0.16em] text-ink-500 font-semibold">Thèmes</dt>
+            <dd class="mt-1 font-display text-3xl sm:text-4xl text-ink-900">10</dd>
           </div>
-          <div>
-            <dt class="text-xs uppercase tracking-[0.16em] text-ink-500 font-semibold">Questions</dt>
-            <dd class="mt-1 font-display text-3xl text-ink-900">200+</dd>
+          <div class="min-w-0">
+            <dt class="text-[0.68rem] uppercase tracking-[0.16em] text-ink-500 font-semibold">Questions</dt>
+            <dd class="mt-1 font-display text-3xl sm:text-4xl text-ink-900">200<span class="text-ink-500">+</span></dd>
           </div>
-          <div>
-            <dt class="text-xs uppercase tracking-[0.16em] text-ink-500 font-semibold">Examen blanc</dt>
-            <dd class="mt-1 font-display text-3xl text-ink-900">45<span class="text-base text-ink-500 font-sans"> min</span></dd>
+          <div class="min-w-0">
+            <dt class="text-[0.68rem] uppercase tracking-[0.16em] text-ink-500 font-semibold">Examen blanc</dt>
+            <dd class="mt-1 font-display text-3xl sm:text-4xl text-ink-900">45<span class="text-sm text-ink-500 font-sans align-middle"> min</span></dd>
           </div>
         </dl>
       </div>
 
-      <!-- Decorative Marianne / République card -->
-      <div class="lg:col-span-5 animate-fade-up" style="animation-delay: 0.1s;">
+      <!-- Decorative République card -->
+      <div class="lg:col-span-5 min-w-0 animate-fade-up" style="animation-delay: 0.1s;">
         <div class="relative">
-          <div aria-hidden="true" class="absolute -inset-4 rounded-3xl bg-france-700/5 blur-2xl"></div>
+          <div aria-hidden="true" class="pointer-events-none absolute -inset-3 sm:-inset-4 rounded-3xl bg-france-700/5 blur-2xl"></div>
           <div class="relative card-feature p-0 overflow-hidden">
             <div class="stripe-tricolore" aria-hidden="true"></div>
-            <div class="p-7 sm:p-8">
+            <div class="p-5 sm:p-7">
               <div class="flex items-start justify-between gap-3">
-                <div>
-                  <p class="text-xs uppercase tracking-[0.16em] text-france-700 font-semibold">Liberté · Égalité · Fraternité</p>
-                  <p class="font-display text-xl mt-2">République française</p>
+                <div class="min-w-0">
+                  <p class="text-[0.68rem] uppercase tracking-[0.14em] text-france-700 font-semibold break-words">Liberté · Égalité · Fraternité</p>
+                  <p class="font-display text-2xl sm:text-3xl mt-2">République française</p>
                 </div>
-                <span aria-hidden="true" class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-paper-300 bg-paper-50">
+                <span aria-hidden="true" class="shrink-0 inline-flex h-10 w-10 items-center justify-center rounded-full border border-paper-300 bg-paper-50">
                   <svg viewBox="0 0 24 24" class="w-5 h-5 text-france-700" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <path d="M12 2 4 6v6c0 5 3.5 8.5 8 10 4.5-1.5 8-5 8-10V6l-8-4Z"/>
                   </svg>
                 </span>
               </div>
-              <hr class="my-6"/>
+              <hr class="my-5 sm:my-6"/>
               <ul class="space-y-3 text-sm">
                 <li class="flex items-start gap-3">
-                  <span aria-hidden="true" class="mt-1 inline-block w-2 h-2 rounded-full bg-france-700"></span>
+                  <span aria-hidden="true" class="shrink-0 mt-1.5 inline-block w-2 h-2 rounded-full bg-france-700"></span>
                   <span><strong class="text-ink-900">Programme officiel 2026</strong> — entrée en vigueur 1<sup>er</sup> janvier 2026.</span>
                 </li>
                 <li class="flex items-start gap-3">
-                  <span aria-hidden="true" class="mt-1 inline-block w-2 h-2 rounded-full bg-marianne-400"></span>
+                  <span aria-hidden="true" class="shrink-0 mt-1.5 inline-block w-2 h-2 rounded-full bg-marianne-400"></span>
                   <span><strong class="text-ink-900">Niveau A2 / B1</strong> — phrases courtes, vocabulaire accessible.</span>
                 </li>
                 <li class="flex items-start gap-3">
-                  <span aria-hidden="true" class="mt-1 inline-block w-2 h-2 rounded-full bg-ink-700"></span>
+                  <span aria-hidden="true" class="shrink-0 mt-1.5 inline-block w-2 h-2 rounded-full bg-ink-700"></span>
                   <span><strong class="text-ink-900">Sans inscription</strong> — votre progression reste sur votre appareil.</span>
                 </li>
               </ul>
@@ -89,39 +89,41 @@ import ProgressSummary from "../components/ui/ProgressSummary.astro";
   </section>
 
   <!-- 3 piliers -->
-  <section class="container-page pt-16 sm:pt-20">
+  <section class="container-page pt-14 sm:pt-20">
     <div class="max-w-2xl">
       <p class="eyebrow">Comment ça marche</p>
-      <h2 class="mt-4 font-display text-3xl sm:text-4xl text-balance">Trois étapes pour avancer à votre rythme</h2>
+      <h2 class="mt-4 font-display text-3xl sm:text-4xl lg:text-5xl text-balance leading-[1.1]">
+        Trois étapes pour avancer <em class="italic-accent">à votre rythme</em>.
+      </h2>
     </div>
 
-    <div class="mt-10 grid gap-5 sm:grid-cols-3">
-      <article class="card-feature group">
-        <div class="flex items-center gap-3">
+    <div class="mt-8 sm:mt-10 grid gap-4 sm:gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <article class="card-feature group p-5 sm:p-7">
+        <div class="flex items-center gap-3 flex-wrap">
           <span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-france-50 text-france-700 font-display text-lg ring-1 ring-france-200">1</span>
           <span class="badge-france">Apprendre</span>
         </div>
-        <h3 class="mt-5 font-display text-xl">Lisez les fiches</h3>
+        <h3 class="mt-5 font-display text-2xl">Lisez les fiches</h3>
         <p class="mt-2 text-ink-700 text-sm leading-relaxed">
           10 thèmes essentiels — valeurs, laïcité, institutions, histoire, vie quotidienne — rédigés en français simple.
         </p>
       </article>
-      <article class="card-feature group">
-        <div class="flex items-center gap-3">
+      <article class="card-feature group p-5 sm:p-7">
+        <div class="flex items-center gap-3 flex-wrap">
           <span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-france-50 text-france-700 font-display text-lg ring-1 ring-france-200">2</span>
           <span class="badge-france">Vous tester</span>
         </div>
-        <h3 class="mt-5 font-display text-xl">Faites les quiz</h3>
+        <h3 class="mt-5 font-display text-2xl">Faites les quiz</h3>
         <p class="mt-2 text-ink-700 text-sm leading-relaxed">
           QCM et mises en situation, avec correction expliquée après chaque validation. Recommencez ce que vous voulez.
         </p>
       </article>
-      <article class="card-feature group">
-        <div class="flex items-center gap-3">
+      <article class="card-feature group p-5 sm:p-7 sm:col-span-2 lg:col-span-1">
+        <div class="flex items-center gap-3 flex-wrap">
           <span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-marianne-50 text-marianne-500 font-display text-lg ring-1 ring-marianne-200">3</span>
           <span class="badge-marianne">Le jour J</span>
         </div>
-        <h3 class="mt-5 font-display text-xl">L'examen blanc</h3>
+        <h3 class="mt-5 font-display text-2xl">L'examen blanc</h3>
         <p class="mt-2 text-ink-700 text-sm leading-relaxed">
           40 questions, 45 minutes, seuil indicatif 32/40 — comme le jour réel, avec un bilan thème par thème.
         </p>
@@ -130,31 +132,33 @@ import ProgressSummary from "../components/ui/ProgressSummary.astro";
   </section>
 
   <!-- Pourquoi cette plateforme -->
-  <section class="container-page pt-20">
-    <div class="card-france p-8 sm:p-10 grid gap-8 lg:grid-cols-12 lg:items-center">
-      <div class="lg:col-span-7">
+  <section class="container-page pt-16 sm:pt-20">
+    <div class="card-france p-5 sm:p-8 lg:p-10 grid gap-6 lg:gap-10 lg:grid-cols-12 lg:items-center">
+      <div class="lg:col-span-7 min-w-0">
         <p class="eyebrow">Pourquoi ce site</p>
-        <h2 class="mt-4 font-display text-3xl text-balance">Pédagogie claire, sans pression, sans tracking.</h2>
+        <h2 class="mt-4 font-display text-3xl sm:text-4xl lg:text-5xl text-balance leading-[1.1]">
+          Pédagogie claire, <em class="italic-accent">sans pression</em>, sans tracking.
+        </h2>
         <p class="mt-4 text-ink-700 text-pretty">
           Cette plateforme est conçue pour les personnes qui préparent leur naturalisation ou un titre de séjour.
           Tout est gratuit, sans publicité, sans inscription. Vos réponses ne quittent jamais votre appareil.
         </p>
         <ul class="mt-6 grid gap-3 sm:grid-cols-2">
           <li class="flex items-start gap-2 text-sm text-ink-800"><span aria-hidden="true" class="text-france-700 mt-0.5">✔</span> Contenus originaux non officiels</li>
-          <li class="flex items-start gap-2 text-sm text-ink-800"><span aria-hidden="true" class="text-france-700 mt-0.5">✔</span> Accessible (clavier, contrastes, lecteurs d'écran)</li>
+          <li class="flex items-start gap-2 text-sm text-ink-800"><span aria-hidden="true" class="text-france-700 mt-0.5">✔</span> Accessible (clavier, lecteurs d'écran)</li>
           <li class="flex items-start gap-2 text-sm text-ink-800"><span aria-hidden="true" class="text-france-700 mt-0.5">✔</span> Aucun compte requis</li>
-          <li class="flex items-start gap-2 text-sm text-ink-800"><span aria-hidden="true" class="text-france-700 mt-0.5">✔</span> Mobile et hors-ligne friendly</li>
+          <li class="flex items-start gap-2 text-sm text-ink-800"><span aria-hidden="true" class="text-france-700 mt-0.5">✔</span> Mobile-friendly</li>
         </ul>
       </div>
-      <aside class="lg:col-span-5">
-        <div class="rounded-2xl bg-white border border-paper-300 p-6 shadow-soft">
-          <p class="text-xs uppercase tracking-[0.16em] text-ink-500 font-semibold">Méthode recommandée</p>
+      <aside class="lg:col-span-5 min-w-0">
+        <div class="rounded-2xl bg-white border border-paper-300 p-5 sm:p-6 shadow-soft">
+          <p class="text-[0.68rem] uppercase tracking-[0.16em] text-ink-500 font-semibold">Méthode recommandée</p>
           <ol class="mt-4 space-y-3 text-sm text-ink-800">
-            <li class="flex gap-3"><span class="numeral text-base">01</span> Lire la fiche d'un thème.</li>
-            <li class="flex gap-3"><span class="numeral text-base">02</span> Faire le quiz, valider question par question.</li>
-            <li class="flex gap-3"><span class="numeral text-base">03</span> Refaire les quiz les moins maîtrisés.</li>
-            <li class="flex gap-3"><span class="numeral text-base">04</span> Quand vous êtes prêt·e, lancer l'examen blanc.</li>
-            <li class="flex gap-3"><span class="numeral text-base">05</span> Relire les thèmes faibles, recommencer.</li>
+            <li class="flex gap-3"><span class="numeral text-base shrink-0">01</span> <span>Lire la fiche d'un thème.</span></li>
+            <li class="flex gap-3"><span class="numeral text-base shrink-0">02</span> <span>Faire le quiz, valider question par question.</span></li>
+            <li class="flex gap-3"><span class="numeral text-base shrink-0">03</span> <span>Refaire les quiz les moins maîtrisés.</span></li>
+            <li class="flex gap-3"><span class="numeral text-base shrink-0">04</span> <span>Lancer l'examen blanc quand vous êtes prêt·e.</span></li>
+            <li class="flex gap-3"><span class="numeral text-base shrink-0">05</span> <span>Relire les thèmes faibles, recommencer.</span></li>
           </ol>
         </div>
       </aside>
@@ -162,18 +166,20 @@ import ProgressSummary from "../components/ui/ProgressSummary.astro";
   </section>
 
   <!-- CTA final -->
-  <section class="container-page pt-16 pb-20">
+  <section class="container-page pt-14 sm:pt-16 pb-16 sm:pb-20">
     <div class="relative overflow-hidden rounded-3xl border border-paper-300 bg-white shadow-soft">
-      <div aria-hidden="true" class="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-france-700/10 blur-3xl"></div>
-      <div aria-hidden="true" class="absolute -bottom-24 -left-24 w-72 h-72 rounded-full bg-marianne-400/10 blur-3xl"></div>
-      <div class="relative p-8 sm:p-12 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+      <div aria-hidden="true" class="pointer-events-none absolute -top-24 -right-24 w-72 h-72 rounded-full bg-france-700/10 blur-3xl"></div>
+      <div aria-hidden="true" class="pointer-events-none absolute -bottom-24 -left-24 w-72 h-72 rounded-full bg-marianne-400/10 blur-3xl"></div>
+      <div class="relative p-6 sm:p-10 lg:p-12 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
         <div class="max-w-2xl">
           <p class="eyebrow">Prêt·e à commencer ?</p>
-          <h2 class="mt-3 font-display text-3xl sm:text-4xl text-balance">Choisissez un thème et démarrez en 30 secondes.</h2>
+          <h2 class="mt-3 font-display text-3xl sm:text-4xl lg:text-5xl text-balance leading-[1.1]">
+            Choisissez un thème et démarrez en <em class="italic-accent">30 secondes</em>.
+          </h2>
         </div>
-        <div class="flex flex-wrap gap-3">
-          <a href="/themes" class="btn-primary btn-lg">Voir les thèmes</a>
-          <a href="/examen-blanc" class="btn-marianne btn-lg">Examen blanc</a>
+        <div class="flex flex-col sm:flex-row flex-wrap gap-3">
+          <a href="/themes" class="btn-primary btn-lg justify-center">Voir les thèmes</a>
+          <a href="/examen-blanc" class="btn-marianne btn-lg justify-center">Examen blanc</a>
         </div>
       </div>
       <div class="stripe-tricolore" aria-hidden="true"></div>

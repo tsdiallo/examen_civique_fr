@@ -69,15 +69,17 @@ export default {
         },
       },
       fontFamily: {
-        sans: ["'Inter'", "system-ui", "sans-serif"],
-        display: ["'Fraunces'", "'Marianne'", "Georgia", "serif"],
-        serif: ["'Fraunces'", "Georgia", "serif"],
+        sans: ["'Plus Jakarta Sans'", "'Inter'", "system-ui", "sans-serif"],
+        display: ["'Instrument Serif'", "'Cormorant Garamond'", "Georgia", "serif"],
+        serif: ["'Instrument Serif'", "Georgia", "serif"],
+        mono: ["ui-monospace", "SFMono-Regular", "Menlo", "monospace"],
       },
       fontSize: {
-        "display-sm": ["2.25rem", { lineHeight: "1.1",  letterSpacing: "-0.02em" }],
-        "display":    ["3rem",    { lineHeight: "1.05", letterSpacing: "-0.025em" }],
-        "display-lg": ["3.75rem", { lineHeight: "1.02", letterSpacing: "-0.03em" }],
-        "display-xl": ["4.5rem",  { lineHeight: "1.0",  letterSpacing: "-0.035em" }],
+        // Fluid display sizes — fit mobile without overflow
+        "display-sm": ["clamp(1.875rem, 6vw, 2.5rem)",  { lineHeight: "1.1",  letterSpacing: "-0.015em" }],
+        "display":    ["clamp(2.25rem,  7vw, 3.25rem)", { lineHeight: "1.05", letterSpacing: "-0.02em" }],
+        "display-lg": ["clamp(2.75rem,  9vw, 4.5rem)",  { lineHeight: "1.02", letterSpacing: "-0.025em" }],
+        "display-xl": ["clamp(3.25rem, 11vw, 5.5rem)",  { lineHeight: "1.0",  letterSpacing: "-0.03em" }],
       },
       maxWidth: { prose: "68ch" },
       borderRadius: {
