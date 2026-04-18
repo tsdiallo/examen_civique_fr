@@ -5,6 +5,7 @@ const nav = [
   { href: "/examen-blanc", label: "Examen blanc" },
   { href: "/a-propos", label: "À propos" },
 ];
+const DONATION_URL = "https://buy.stripe.com/fZu4gy2ZodYJ8pEbxj7g400";
 const current = Astro.url.pathname;
 const isActive = (href: string) =>
   href === "/" ? current === "/" : current === href || current.startsWith(href + "/");
@@ -26,7 +27,7 @@ const isActive = (href: string) =>
       </a>
 
       <!-- Desktop nav -->
-      <nav class="hidden md:block" aria-label="Navigation principale">
+      <nav class="hidden md:flex items-center gap-4" aria-label="Navigation principale">
         <ul class="flex items-center gap-1 text-sm">
           {nav.map((item) => {
             const active = isActive(item.href);
@@ -49,6 +50,18 @@ const isActive = (href: string) =>
             );
           })}
         </ul>
+        <a
+          href={DONATION_URL}
+          rel="nofollow noopener"
+          target="_blank"
+          class="group inline-flex items-center gap-2 rounded-full bg-marianne-500 hover:bg-marianne-600 text-white text-sm font-semibold px-4 py-2 no-underline shadow-soft transition-colors"
+          aria-label="Soutenir le site — paiement sécurisé par Stripe (ouvre un nouvel onglet)"
+        >
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+          </svg>
+          <span>Soutenir</span>
+        </a>
       </nav>
 
       <!-- Mobile toggle -->
@@ -91,6 +104,19 @@ const isActive = (href: string) =>
             </li>
           );
         })}
+        <li class="mt-2 px-3">
+          <a
+            href={DONATION_URL}
+            rel="nofollow noopener"
+            target="_blank"
+            class="flex items-center justify-center gap-2 rounded-full bg-marianne-500 hover:bg-marianne-600 text-white font-semibold px-4 py-3 no-underline shadow-soft"
+          >
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+            <span>Soutenir le site</span>
+          </a>
+        </li>
       </ul>
     </nav>
   </div>
