@@ -4,8 +4,7 @@ interface Props {
 }
 const { variant = "compact" } = Astro.props;
 
-// TODO: remplacer par le vrai lien Ko-fi / Buy Me a Coffee / Liberapay
-const DONATION_URL = "https://ko-fi.com/examencivique";
+const DONATION_URL = "https://buy.stripe.com/fZu4gy2ZodYJ8pEbxj7g400";
 ---
 {variant === "card" ? (
   <aside class="card-france p-5 sm:p-6">
@@ -27,7 +26,7 @@ const DONATION_URL = "https://ko-fi.com/examencivique";
     rel="nofollow noopener"
     target="_blank"
     class="inline-flex items-center gap-2 text-sm text-ink-700 hover:text-france-700 no-underline hover:underline"
-    aria-label="Soutenir le site sur Ko-fi (ouvre un nouvel onglet)"
+    aria-label="Soutenir le site via Stripe (ouvre un nouvel onglet)"
   >
     <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
       <path d="M17 8h1a4 4 0 1 1 0 8h-1M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V8zM6 2v3M10 2v3M14 2v3"/>
