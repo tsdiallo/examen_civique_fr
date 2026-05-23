@@ -2,6 +2,8 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import ThemeCard from "../../components/ui/ThemeCard.astro";
 import Alert from "../../components/ui/Alert.astro";
+import AdSlot from "../../components/ads/AdSlot.astro";
+import { AD_SLOTS } from "../../lib/ads";
 import { getCollection } from "astro:content";
 
 const themes = (await getCollection("themes")).sort(
@@ -72,5 +74,6 @@ const keywords = [
         ))}
       </div>
     )}
+    {themes.length > 0 && <AdSlot slot={AD_SLOTS.themesList} />}
   </section>
 </BaseLayout>

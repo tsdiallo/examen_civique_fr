@@ -1,0 +1,72 @@
+---
+import { ADSENSE_CLIENT, ADS_CONSENT_KEY } from "../../lib/ads";
+---
+<div
+  id="ec-consent"
+  hidden
+  role="dialog"
+  aria-modal="false"
+  aria-labelledby="ec-consent-title"
+  class="fixed inset-x-0 bottom-0 z-50 px-4 pb-4 pt-3 sm:px-6 sm:pb-6"
+>
+  <div class="mx-auto max-w-3xl rounded-2xl border border-paper-300 bg-white shadow-lift p-5 sm:p-6">
+    <p id="ec-consent-title" class="font-display text-lg text-ink-900">
+      Cookies publicitaires
+    </p>
+    <p class="mt-2 text-sm text-ink-700 leading-relaxed">
+      Ce site finance ses frais avec des annonces Google AdSense. Avec votre accord, des cookies
+      peuvent être déposés pour afficher des publicités. Vous pouvez refuser : le site reste
+      entièrement gratuit et fonctionnel.
+      <a href="/mentions-legales" class="text-france-700 underline hover:no-underline">En savoir plus</a>.
+    </p>
+    <div class="mt-4 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
+      <button
+        type="button"
+        data-decline
+        class="rounded-full border border-paper-300 px-5 py-2.5 text-sm font-semibold text-ink-800 hover:bg-paper-50 transition"
+      >
+        Refuser
+      </button>
+      <button
+        type="button"
+        data-accept
+        class="rounded-full bg-france-700 px-5 py-2.5 text-sm font-semibold text-white hover:bg-france-800 transition"
+      >
+        Accepter
+      </button>
+    </div>
+  </div>
+</div>
+
+<script is:inline define:vars={{ client: ADSENSE_CLIENT, key: ADS_CONSENT_KEY }}>
+  (function () {
+    var el = document.getElementById("ec-consent");
+    if (!el) return;
+
+    var stored = null;
+    try { stored = localStorage.getItem(key); } catch (e) {}
+    if (!stored) el.hidden = false;
+
+    function loadAds() {
+      if (document.querySelector("script[data-adsense]")) return;
+      var s = document.createElement("script");
+      s.async = true;
+      s.dataset.adsense = "1";
+      s.crossOrigin = "anonymous";
+      s.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=" + client;
+      document.head.appendChild(s);
+    }
+
+    el.querySelector("[data-accept]").addEventListener("click", function () {
+      try { localStorage.setItem(key, "granted"); } catch (e) {}
+      document.documentElement.classList.add("ads-on");
+      loadAds();
+      el.hidden = true;
+    });
+
+    el.querySelector("[data-decline]").addEventListener("click", function () {
+      try { localStorage.setItem(key, "denied"); } catch (e) {}
+      el.hidden = true;
+    });
+  })();
+</script>

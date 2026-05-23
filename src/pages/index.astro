@@ -2,6 +2,8 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ProgressSummary from "../components/ui/ProgressSummary.astro";
 import AffiliateBlock from "../components/ui/AffiliateBlock.astro";
+import AdSlot from "../components/ads/AdSlot.astro";
+import { AD_SLOTS } from "../lib/ads";
 
 const siteUrl = Astro.site?.toString() ?? "https://examen-civique-fr.netlify.app/";
 
@@ -250,6 +252,7 @@ const keywords = [
       </h2>
     </div>
     <AffiliateBlock title="Notre sélection" />
+    <AdSlot slot={AD_SLOTS.home} />
   </section>
 
   <!-- Soutien -->
@@ -260,7 +263,7 @@ const keywords = [
         <div class="lg:col-span-8 min-w-0">
           <p class="eyebrow text-marianne-600">Soutenir le site</p>
           <h2 class="mt-3 font-display text-3xl sm:text-4xl text-balance leading-[1.1]">
-            Ce site est <em class="italic-accent">100 % gratuit</em>, sans publicité.
+            Ce site est <em class="italic-accent">100 % gratuit</em>, sans abonnement.
           </h2>
           <p class="mt-4 text-ink-700 max-w-2xl text-pretty">
             Si les fiches et les quiz vous aident à préparer votre examen, vous pouvez offrir un café
