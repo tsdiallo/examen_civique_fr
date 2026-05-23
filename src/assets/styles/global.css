@@ -230,6 +230,12 @@
   .answer-pill[data-state="wrong"] {
     @apply border-marianne-400 bg-marianne-50;
   }
+
+  /* Blocs publicitaires */
+  .ec-ad { @apply my-10; }
+  .ec-ad__label {
+    @apply text-[0.68rem] uppercase tracking-[0.14em] text-ink-400 font-semibold mb-2;
+  }
 }
 
 @layer utilities {

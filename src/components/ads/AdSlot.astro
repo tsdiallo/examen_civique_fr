@@ -1,0 +1,30 @@
+---
+import { ADSENSE_CLIENT } from "../../lib/ads";
+
+interface Props {
+  /** Identifiant d'emplacement AdSense (data-ad-slot). */
+  slot: string;
+  /** "auto" = bloc display responsive ; "in-article" = bloc fluide intégré au texte. */
+  variant?: "auto" | "in-article";
+  label?: string;
+  class?: string;
+}
+
+const { slot, variant = "auto", label = "Publicité", class: className = "" } = Astro.props;
+const isInArticle = variant === "in-article";
+---
+<aside class:list={["ec-ad", className]} aria-label={label}>
+  <p class="ec-ad__label">{label}</p>
+  <ins
+    class="adsbygoogle"
+    style="display:block"
+    data-ad-client={ADSENSE_CLIENT}
+    data-ad-slot={slot}
+    data-ad-format={isInArticle ? "fluid" : "auto"}
+    data-ad-layout={isInArticle ? "in-article" : undefined}
+    data-full-width-responsive="true"
+  ></ins>
+  <script is:inline>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</aside>

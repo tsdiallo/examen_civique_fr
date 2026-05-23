@@ -3,6 +3,8 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import FicheHeader from "../../components/fiche/FicheHeader.astro";
 import CTAQuiz from "../../components/fiche/CTAQuiz.astro";
 import AffiliateBlock from "../../components/ui/AffiliateBlock.astro";
+import AdSlot from "../../components/ads/AdSlot.astro";
+import { AD_SLOTS } from "../../lib/ads";
 import { getCollection } from "astro:content";
 import { getQuizBySlug } from "../../lib/quiz-loader";
 
@@ -76,6 +78,7 @@ const courseLd = {
     <article class="prose-fr">
       <Content />
     </article>
+    <AdSlot slot={AD_SLOTS.ficheContent} variant="in-article" />
     {quiz && <CTAQuiz slug={entry.slug} questionsCount={quiz.questions.length} />}
     <AffiliateBlock />
   </section>
