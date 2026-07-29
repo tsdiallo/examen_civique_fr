@@ -1,114 +1,141 @@
 # Activation de la préproduction
 
-Ce document décrit l’activation de l’authentification, de la synchronisation et du dashboard administrateur sur le Deploy Preview Netlify. Aucun secret ne doit être ajouté au dépôt Git.
+Ce document décrit l’activation de l’authentification, de la synchronisation et du dashboard administrateur sur Netlify. Aucun secret ne doit être ajouté au dépôt Git.
 
 ## 1. État actuel
 
 - Branche : `feat/preprod-auth-admin-learning-platform`
 - Pull request : draft, sans fusion automatique
-- Environnement Netlify : Deploy Preview du PR
+- Site Netlify : `https://preprodexam.netlify.app`
+- Projet Supabase : `examencivique-preprod`
+- Référence Supabase : `rjiubwkmiklnmcfozhii`
+- Région : `eu-west-3` (Paris)
+- API Supabase : `https://rjiubwkmiklnmcfozhii.supabase.co`
 - Pages privées : `noindex`
-- Base de données : migration prête, mais projet Supabase à créer ou à connecter
+- Coût du projet Supabase : `0 € / mois` au moment de sa création
 
-Le connecteur Supabase n’a pas été autorisé à créer le projet de préproduction pendant l’implémentation. Le code est compilé et testé avec une configuration factice, mais les scénarios réels d’inscription, de confirmation d’email, de RLS et d’administration doivent être exécutés après la création du projet.
-
-## 2. Créer le projet Supabase de préproduction
-
-Créer un projet distinct de toute future production, de préférence dans la région `eu-west-3`.
-
-Nom recommandé :
-
-```text
-examencivique-preprod
-```
-
-Ne pas réutiliser une base de production et ne pas importer de données personnelles réelles.
-
-## 3. Appliquer le schéma
-
-Appliquer le fichier suivant avec Supabase CLI ou l’éditeur SQL du projet :
+Le projet Supabase est actif. Les migrations suivantes ont été appliquées :
 
 ```text
 supabase/migrations/202607290001_auth_learning_admin.sql
+supabase/migrations/202607290002_content_reports_user_index.sql
 ```
 
-Le schéma crée :
+Les quatre tables exposées ont la RLS activée. Les Security Advisors Supabase ne remontent aucune alerte de sécurité.
+
+## 2. Schéma actif
+
+Le schéma contient :
 
 - `profiles` ;
 - `learning_progress` ;
 - `exam_attempts` ;
 - `content_reports` ;
-- les politiques RLS associées.
+- les politiques RLS associées ;
+- le déclencheur de création automatique du profil ;
+- les index de lecture et de propriété.
 
-Après application, exécuter les Security Advisors Supabase et corriger toute alerte bloquante avant les tests utilisateurs.
+Les utilisateurs authentifiés ne peuvent lire ou modifier que leurs propres données. Les opérations administrateur restent exclusivement côté serveur.
 
-## 4. Configurer Supabase Auth
+## 3. Configurer Supabase Auth
 
-Dans Authentication → Providers → Email :
+Cette étape doit être terminée dans le tableau de bord Supabase.
 
-- activer Email + Password ;
-- exiger la confirmation de l’adresse email ;
-- désactiver les inscriptions anonymes ;
-- conserver la protection contre les mots de passe compromis si elle est disponible sur le plan utilisé.
+### Authentication → URL Configuration
 
-Ajouter les URL autorisées :
+Configurer :
 
 ```text
-https://deploy-preview-4--examenciviquefrsa.netlify.app/connexion
-https://deploy-preview-4--examenciviquefrsa.netlify.app/mon-espace
-https://deploy-preview-4--examenciviquefrsa.netlify.app/admin
+Site URL
+https://preprodexam.netlify.app
 ```
 
-La future URL de production ne doit être ajoutée qu’au moment de la mise en production.
+Ajouter les Redirect URLs suivantes :
 
-## 5. Variables Netlify
+```text
+https://preprodexam.netlify.app/**
+https://**--preprodexam.netlify.app/**
+http://localhost:4321/**
+```
 
-Ajouter les variables dans le contexte **Deploy Previews**, jamais dans Git.
+Le motif Netlify autorise les Deploy Previews et les Branch Deploys. Pour une future production, préférer des URL exactes plutôt qu’un wildcard.
 
-### Variables publiques
+### Authentication → Providers → Email
+
+Vérifier les réglages suivants :
+
+- Email + Password activé ;
+- confirmation de l’adresse email activée ;
+- inscriptions anonymes désactivées ;
+- longueur minimale du mot de passe cohérente avec l’interface : 10 caractères ou plus ;
+- protection contre les mots de passe compromis activée lorsqu’elle est disponible.
+
+## 4. Variables Netlify
+
+Les variables suivantes sont déjà configurées sur le projet Netlify `preprodexam` :
 
 ```text
 PUBLIC_APP_ENV=preprod
-PUBLIC_SITE_URL=https://deploy-preview-4--examenciviquefrsa.netlify.app
-PUBLIC_SUPABASE_URL=https://<project-ref>.supabase.co
-PUBLIC_SUPABASE_PUBLISHABLE_KEY=<publishable-key>
+PUBLIC_SITE_URL=https://preprodexam.netlify.app
+PUBLIC_SUPABASE_URL=https://rjiubwkmiklnmcfozhii.supabase.co
+PUBLIC_SUPABASE_PUBLISHABLE_KEY=<clé publique configurée>
+SUPABASE_URL=https://rjiubwkmiklnmcfozhii.supabase.co
+SUPABASE_PUBLISHABLE_KEY=<clé publique configurée>
 ```
 
-### Variables serveur uniquement
+Deux variables secrètes restent à ajouter manuellement dans Netlify :
 
 ```text
-SUPABASE_URL=https://<project-ref>.supabase.co
-SUPABASE_PUBLISHABLE_KEY=<publishable-key>
-SUPABASE_SERVICE_ROLE_KEY=<secret-service-role-key>
-ADMIN_EMAILS=<adresse-email-du-proprietaire>
+SUPABASE_SERVICE_ROLE_KEY=<clé secrète service_role du projet>
+ADMIN_EMAILS=<adresse email exacte de l’administrateur>
 ```
+
+### Où récupérer la clé service_role
+
+Dans Supabase :
+
+1. ouvrir le projet `examencivique-preprod` ;
+2. ouvrir **Project Settings → API Keys** ;
+3. afficher la clé secrète ou `service_role` ;
+4. la copier sans la partager dans un message ou un fichier Git.
+
+Dans Netlify :
+
+1. ouvrir le projet `preprodexam` ;
+2. ouvrir **Project configuration → Environment variables** ;
+3. créer `SUPABASE_SERVICE_ROLE_KEY` ;
+4. choisir les scopes **Functions** et **Runtime** ;
+5. marquer la valeur comme secrète ;
+6. créer `ADMIN_EMAILS` avec l’adresse exacte du compte administrateur ;
+7. relancer un déploiement.
 
 Règles obligatoires :
 
 - `SUPABASE_SERVICE_ROLE_KEY` ne doit jamais commencer par `PUBLIC_` ;
-- ne jamais copier cette clé dans une page Astro ou un script navigateur ;
+- ne jamais copier cette clé dans une page Astro, un script navigateur ou GitHub ;
 - `ADMIN_EMAILS` contient une liste séparée par des virgules ;
 - pour un seul administrateur, renseigner une seule adresse exacte et confirmée.
 
-## 6. Créer le compte administrateur
+## 5. Créer le compte administrateur
 
-1. Ouvrir `/connexion` sur le Deploy Preview.
-2. Créer le compte avec l’adresse présente dans `ADMIN_EMAILS`.
-3. Confirmer l’adresse depuis l’email reçu.
-4. Se connecter.
-5. Ouvrir `/admin`.
+1. Ouvrir `https://preprodexam.netlify.app/connexion`.
+2. Choisir **Créer un compte**.
+3. Utiliser l’adresse présente dans `ADMIN_EMAILS`.
+4. Confirmer l’adresse depuis l’email reçu.
+5. Se connecter.
+6. Ouvrir `/admin`.
 
 Une adresse absente de l’allowlist reçoit une réponse HTTP `403`, même si elle possède un compte valide.
 
-## 7. Recette P0
+## 6. Recette fonctionnelle
 
 ### Comptes
 
 - inscription avec email valide ;
 - refus d’un mot de passe trop court ;
-- confirmation d’email ;
+- réception et ouverture de l’email de confirmation ;
 - connexion et déconnexion ;
-- récupération du mot de passe ;
+- récupération et modification du mot de passe ;
 - redirection uniquement vers une route locale.
 
 ### Données utilisateur
@@ -137,14 +164,13 @@ Une adresse absente de l’allowlist reçoit une réponse HTTP `403`, même si e
 - synchronisation avec un compte ;
 - dashboard utilisateur mis à jour après un quiz et un examen.
 
-## 8. Conditions avant fusion
+## 7. Conditions avant fusion
 
 La pull request reste en draft tant que les éléments suivants ne sont pas validés :
 
 - CI GitHub verte ;
-- Deploy Preview Netlify vert ;
-- projet Supabase de préproduction actif ;
-- tests d’inscription et de connexion réussis ;
+- déploiement Netlify vert ;
+- inscription et connexion réussies sur `preprodexam.netlify.app` ;
 - contrôle RLS réussi avec deux comptes distincts ;
 - accès admin testé avec un compte autorisé et un compte refusé ;
 - aucune donnée de test sensible conservée.
