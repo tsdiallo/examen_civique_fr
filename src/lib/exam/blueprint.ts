@@ -35,6 +35,7 @@ const ALL_OFFICIAL_THEMES: OfficialTheme[] = [
   "histoire-geographie",
   "vie-societe",
 ];
+const DEFAULT_VERIFIED_AT = "2026-07-29";
 
 export type RandomFn = () => number;
 
@@ -46,16 +47,34 @@ export function inferOfficialTheme(question: Question): OfficialTheme {
   if (question.officialTheme) return question.officialTheme;
 
   const slug = question.themeSlug ?? "";
-  if (/institution|union-europeenne|europe/.test(slug)) return "institutions";
+  if (/institution|ue-international|union-europeenne|europe/.test(slug)) return "institutions";
   if (/droit|devoir|egalite-femmes|egalite/.test(slug)) return "droits-devoirs";
   if (/histoire|geographie|culture/.test(slug)) return "histoire-geographie";
   if (/vivre|societe|quotidien/.test(slug)) return "vie-societe";
   return "principes-valeurs";
 }
 
+export function normalizeQuestion(question: Question): Question {
+  const questionType = inferQuestionType(question);
+  return {
+    ...question,
+    questionType,
+    officialTheme: inferOfficialTheme(question),
+    examMentions: question.examMentions?.length ? question.examMentions : [...ALL_MENTIONS],
+    source: question.source ?? {
+      title: questionType === "knowledge"
+        ? "Questions de connaissance pour l’examen civique — ministère de l’Intérieur"
+        : "Livret du citoyen — ministère de l’Intérieur",
+      url: questionType === "knowledge"
+        ? "https://www.immigration.interieur.gouv.fr/documentation/guides-textes-et-brochures/questions-de-connaissance-pour-lexamen-civique-nationalite-francaise.html"
+        : "https://www.immigration.interieur.gouv.fr/documentation/guides-textes-et-brochures/livret-du-citoyen.html",
+      verifiedAt: DEFAULT_VERIFIED_AT,
+    },
+  };
+}
+
 function appliesToMention(question: Question, mention: ExamMention): boolean {
-  const mentions = question.examMentions?.length ? question.examMentions : ALL_MENTIONS;
-  return mentions.includes(mention);
+  return question.examMentions?.includes(mention) ?? false;
 }
 
 function shuffle<T>(items: T[], random: RandomFn): T[] {
@@ -81,7 +100,7 @@ function pickBalanced(
   );
 
   for (const question of questions) {
-    groups.get(inferOfficialTheme(question))?.push(question);
+    groups.get(question.officialTheme ?? inferOfficialTheme(question))?.push(question);
   }
 
   const queues = ALL_OFFICIAL_THEMES.map((theme) =>
@@ -113,26 +132,22 @@ export function buildExam(
   mention: ExamMention,
   random: RandomFn = Math.random,
 ): Question[] {
-  const eligible = questions.filter((question) => appliesToMention(question, mention));
-  const knowledge = eligible.filter((question) => inferQuestionType(question) === "knowledge");
-  const situations = eligible.filter((question) => inferQuestionType(question) === "situation");
+  const normalized = questions.map(normalizeQuestion);
+  const eligible = normalized.filter((question) => appliesToMention(question, mention));
+  const knowledge = eligible.filter((question) => question.questionType === "knowledge");
+  const situations = eligible.filter((question) => question.questionType === "situation");
 
   const selected = [
     ...pickBalanced(knowledge, OFFICIAL_EXAM_BLUEPRINT.knowledge, random),
     ...pickBalanced(situations, OFFICIAL_EXAM_BLUEPRINT.situations, random),
   ];
 
-  const representedThemes = new Set(selected.map(inferOfficialTheme));
+  const representedThemes = new Set(selected.map((question) => question.officialTheme));
   if (representedThemes.size !== ALL_OFFICIAL_THEMES.length) {
     throw new Error("Banque de questions insuffisante pour couvrir les cinq thèmes officiels.");
   }
 
-  return shuffle(selected, random).map((question) => ({
-    ...question,
-    questionType: inferQuestionType(question),
-    officialTheme: inferOfficialTheme(question),
-    examMentions: question.examMentions?.length ? question.examMentions : ALL_MENTIONS,
-  }));
+  return shuffle(selected, random);
 }
 
 export function validateQuestion(question: Question): ValidationIssue[] {
