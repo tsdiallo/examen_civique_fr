@@ -1,0 +1,65 @@
+---
+import type { ThemeSource } from "../../data/theme-metadata";
+
+interface Props {
+  officialTheme: string;
+  sources: ThemeSource[];
+  durationMin: number;
+}
+const { officialTheme, sources, durationMin } = Astro.props;
+const latestReview = sources
+  .map((source) => source.verifiedAt)
+  .sort()
+  .at(-1);
+const formattedReview = latestReview
+  ? new Intl.DateTimeFormat("fr-FR", { dateStyle: "long" }).format(new Date(`${latestReview}T12:00:00Z`))
+  : "Non renseignée";
+---
+<aside class="space-y-5 lg:sticky lg:top-28 lg:self-start" aria-label="Informations sur la fiche">
+  <section class="card-france p-5">
+    <p class="eyebrow">Repères</p>
+    <dl class="mt-4 space-y-4 text-sm">
+      <div>
+        <dt class="font-semibold text-ink-900">Domaine officiel</dt>
+        <dd class="mt-1 text-ink-700">{officialTheme}</dd>
+      </div>
+      <div>
+        <dt class="font-semibold text-ink-900">Temps estimé</dt>
+        <dd class="mt-1 text-ink-700">{durationMin} minutes de lecture</dd>
+      </div>
+      <div>
+        <dt class="font-semibold text-ink-900">Dernière vérification</dt>
+        <dd class="mt-1 text-ink-700">{formattedReview}</dd>
+      </div>
+    </dl>
+  </section>
+
+  <nav class="card p-5" aria-label="Sommaire de la fiche">
+    <p class="text-xs font-semibold uppercase tracking-[0.14em] text-ink-500">Dans cette fiche</p>
+    <ul class="mt-4 space-y-2 text-sm">
+      <li><a href="#a-retenir" class="no-underline hover:underline">À retenir en 30 secondes</a></li>
+      <li><a href="#diagnostic" class="no-underline hover:underline">Diagnostic rapide</a></li>
+      <li><a href="#notions-clés" class="no-underline hover:underline">Notions clés</a></li>
+      <li><a href="#pièges-fréquents" class="no-underline hover:underline">Pièges fréquents</a></li>
+      <li><a href="#flashcards-title" class="no-underline hover:underline">Flashcards</a></li>
+      <li><a href="#sources-officielles" class="no-underline hover:underline">Sources officielles</a></li>
+    </ul>
+  </nav>
+
+  <section id="sources-officielles" class="card p-5 scroll-mt-28">
+    <p class="text-xs font-semibold uppercase tracking-[0.14em] text-ink-500">Sources officielles</p>
+    <ul class="mt-4 space-y-4">
+      {sources.map((source) => (
+        <li>
+          <a href={source.url} target="_blank" rel="noopener" class="text-sm font-semibold leading-snug">
+            {source.title}
+          </a>
+          <p class="mt-1 text-xs text-ink-500">Vérifiée le {new Intl.DateTimeFormat("fr-FR").format(new Date(`${source.verifiedAt}T12:00:00Z`))}</p>
+        </li>
+      ))}
+    </ul>
+    <p class="mt-4 text-xs leading-relaxed text-ink-500">
+      Cette plateforme reformule les notions à des fins pédagogiques et reste indépendante de l’administration.
+    </p>
+  </section>
+</aside>
