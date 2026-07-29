@@ -1,0 +1,35 @@
+name: Preproduction CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches:
+      - feat/preprod-auth-admin-learning-platform
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Unit tests
+        run: npm run test:run
+      - name: Build
+        env:
+          PUBLIC_APP_ENV: preprod
+          PUBLIC_SITE_URL: https://preprod.example.invalid
+          PUBLIC_SUPABASE_URL: https://example.supabase.co
+          PUBLIC_SUPABASE_PUBLISHABLE_KEY: sb_publishable_test
+        run: npm run build
