@@ -1,28 +1,28 @@
 ---
 title: "Laïcité"
 order: 3
-summary: "La laïcité garantit la liberté de croire ou de ne pas croire, et la neutralité de l'État face aux religions. Elle permet à chacun·e de vivre ses convictions dans le respect des autres."
+summary: "La laïcité garantit la liberté de croire ou de ne pas croire, ainsi que la neutralité de l'État face aux religions. Chaque personne peut vivre ses convictions dans le respect des autres et de la loi."
 durationMin: 8
 tags: ["laïcité", "liberté de conscience", "1905"]
 ---
 
 ## Notions clés
 
-- **Deux idées au cœur de la laïcité** : la **liberté de conscience** (chacun·e peut croire, ne pas croire, ou changer de croyance) et la **neutralité de l'État** (l'État ne favorise ni ne désavantage aucune religion).
+- **Deux idées au cœur de la laïcité** : la **liberté de conscience** (chacun peut croire, ne pas croire ou changer de croyance) et la **neutralité de l'État** (l'État ne favorise ni ne défavorise aucune religion).
 - **Loi de 1905** : loi de séparation des Églises et de l'État. Elle garantit le libre exercice des cultes tout en affirmant la neutralité de la République.
-- **Égalité** : la loi est la même pour toutes et tous, quelle que soit la religion.
-- **Services publics** : les agent·e·s publics (enseignants, fonctionnaires) doivent être **neutres** pendant leurs missions. Ils ne peuvent pas afficher leurs convictions religieuses.
-- **Usagers des services publics** : les personnes qui utilisent un service public (à la mairie, au guichet) peuvent porter des signes religieux, sauf cas prévus par la loi (par exemple dans les écoles publiques pour les élèves).
-- **École publique** : depuis 2004, les signes religieux **ostensibles** sont interdits aux élèves dans les écoles, collèges et lycées publics. Les enseignants, eux, doivent être neutres.
-- **Espace public** (rue, parc…) : la liberté de porter des signes religieux existe, dans le respect de l'ordre public et de la loi (par exemple, le visage doit rester visible dans les espaces publics, loi de 2010).
+- **Égalité** : la loi est la même pour toutes les personnes, quelle que soit leur religion.
+- **Services publics** : les agents publics doivent rester **neutres** pendant leurs missions. Ils ne peuvent pas afficher leurs convictions religieuses dans l'exercice de leurs fonctions.
+- **Usagers des services publics** : une personne qui utilise un service public peut porter un signe religieux, sauf dans les cas prévus par la loi.
+- **École publique** : depuis 2004, les signes religieux **ostensibles** sont interdits aux élèves dans les écoles, collèges et lycées publics. Les personnels doivent respecter la neutralité.
+- **Espace public** : une personne peut porter un signe religieux dans la rue ou dans un parc, dans le respect de l'ordre public et de la loi.
 
 ## Pièges fréquents
 
-- Laïcité ≠ interdiction des religions. Elle **protège** la liberté religieuse.
-- La neutralité concerne l'État et ses agents, **pas tous les citoyens** en toute situation.
-- Dans l'école publique, l'interdiction des signes ostensibles vise **les élèves**, pas leurs familles en dehors de l'enceinte.
-- La laïcité n'empêche pas les jours fériés d'origine religieuse : ils font partie du calendrier, mais chacun·e est libre de les vivre comme il l'entend.
+- La laïcité **n'interdit pas les religions**. Elle protège la liberté de conscience.
+- La neutralité concerne l'État et ses agents. Elle ne s'applique pas de la même manière à tous les citoyens dans toutes les situations.
+- À l'école publique, l'interdiction des signes religieux ostensibles concerne les élèves.
+- La laïcité n'empêche pas l'existence de jours fériés d'origine religieuse. Chacun reste libre de leur donner ou non un sens religieux.
 
 ## Mini récap
 
-> **Laïcité = liberté de conscience + neutralité de l'État.** Loi fondatrice : **1905**. Écoles publiques : signes ostensibles interdits aux **élèves** depuis **2004**.
+> **Laïcité = liberté de conscience + neutralité de l'État.** Loi fondatrice : **1905**. Écoles publiques : signes religieux ostensibles interdits aux **élèves** depuis **2004**.
