@@ -22,6 +22,8 @@ describe("mobile flashcards", () => {
   });
 
   it("makes the reveal-all action full width on mobile", () => {
-    expect(source).toContain("w-full sm:w-auto");
+    expect(source).toContain("w-full");
+    expect(source).toContain("sm:w-auto");
+    expect(source).toContain("whitespace-normal");
   });
 });
