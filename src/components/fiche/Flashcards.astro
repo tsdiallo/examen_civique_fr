@@ -1,0 +1,61 @@
+---
+import type { Flashcard } from "../../data/theme-metadata";
+
+interface Props {
+  cards: Flashcard[];
+}
+const { cards } = Astro.props;
+---
+<section class="mt-12" aria-labelledby="flashcards-title">
+  <p class="eyebrow">Mémoriser</p>
+  <div class="mt-3 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+    <div>
+      <h2 id="flashcards-title" class="font-display text-2xl sm:text-3xl">Flashcards de révision</h2>
+      <p class="mt-2 text-sm text-ink-700">Répondez mentalement, puis affichez la solution.</p>
+    </div>
+    <button type="button" class="btn-secondary self-start" data-reveal-all>Afficher toutes les réponses</button>
+  </div>
+
+  <ul class="mt-6 grid gap-4 md:grid-cols-2">
+    {cards.map((card, index) => (
+      <li class="flashcard min-w-0">
+        <button
+          type="button"
+          class="group w-full rounded-2xl border border-paper-300 bg-white p-5 text-left shadow-soft transition hover:border-france-300 hover:shadow-lift"
+          aria-expanded="false"
+          data-flashcard
+        >
+          <span class="text-xs font-semibold uppercase tracking-[0.14em] text-france-700">Carte {index + 1}</span>
+          <span class="mt-3 block font-display text-xl text-ink-900">{card.front}</span>
+          <span class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-france-700" data-flashcard-action>
+            Voir la réponse
+            <svg class="h-4 w-4 transition-transform group-aria-expanded:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </span>
+          <span class="mt-4 hidden rounded-xl bg-france-50 p-4 text-sm leading-relaxed text-ink-800" data-flashcard-answer>{card.back}</span>
+        </button>
+      </li>
+    ))}
+  </ul>
+</section>
+
+<script>
+  const cards = Array.from(document.querySelectorAll<HTMLButtonElement>("[data-flashcard]"));
+  const revealAll = document.querySelector<HTMLButtonElement>("[data-reveal-all]");
+
+  function setExpanded(card: HTMLButtonElement, expanded: boolean) {
+    card.setAttribute("aria-expanded", String(expanded));
+    card.querySelector<HTMLElement>("[data-flashcard-answer]")?.classList.toggle("hidden", !expanded);
+    const action = card.querySelector<HTMLElement>("[data-flashcard-action]");
+    if (action) action.childNodes[0].textContent = expanded ? "Masquer la réponse " : "Voir la réponse ";
+  }
+
+  cards.forEach((card) => {
+    card.addEventListener("click", () => setExpanded(card, card.getAttribute("aria-expanded") !== "true"));
+  });
+
+  revealAll?.addEventListener("click", () => {
+    const shouldReveal = cards.some((card) => card.getAttribute("aria-expanded") !== "true");
+    cards.forEach((card) => setExpanded(card, shouldReveal));
+    revealAll.textContent = shouldReveal ? "Masquer toutes les réponses" : "Afficher toutes les réponses";
+  });
+</script>
