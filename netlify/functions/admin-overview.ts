@@ -1,5 +1,5 @@
 import type { Config, Context } from "@netlify/functions";
-import { isAdminEmail } from "./_shared/admin-policy";
+import { isAdminEmail, parseAdminEmails } from "./_shared/admin-policy";
 import { extractBearerToken, verifySupabaseUser } from "./_shared/supabase-auth";
 
 interface CountResult {
@@ -54,7 +54,7 @@ export default async function handler(request: Request, _context: Context): Prom
   const supabaseUrl = Netlify.env.get("SUPABASE_URL") ?? Netlify.env.get("PUBLIC_SUPABASE_URL") ?? "";
   const publishableKey = Netlify.env.get("SUPABASE_PUBLISHABLE_KEY") ?? Netlify.env.get("PUBLIC_SUPABASE_PUBLISHABLE_KEY") ?? "";
   const serviceRoleKey = Netlify.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
-  const adminEmails = Netlify.env.get("ADMIN_EMAILS") ?? "";
+  const adminEmails = parseAdminEmails(Netlify.env.get("ADMIN_EMAILS"));
   const token = extractBearerToken(request.headers.get("authorization"));
 
   if (!token || !supabaseUrl || !publishableKey) {
