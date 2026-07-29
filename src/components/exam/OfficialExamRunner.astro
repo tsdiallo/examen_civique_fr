@@ -1,0 +1,330 @@
+---
+import type { ExamPayload } from "../../lib/types";
+import { EXAM_PATHS } from "../../lib/learning/paths";
+
+interface Props {
+  examBank: ExamPayload;
+  themeTitles: Record<string, string>;
+}
+
+const { examBank, themeTitles } = Astro.props;
+const payload = JSON.stringify({ examBank, themeTitles });
+---
+<section class="official-exam-root" data-official-exam={payload} aria-live="polite">
+  <div class="card p-5 sm:p-8" data-stage-intro>
+    <p class="eyebrow">Simulation personnalisée</p>
+    <h2 class="mt-3 font-display text-3xl">Choisissez votre parcours</h2>
+    <p class="mt-3 max-w-2xl text-sm text-ink-700">
+      Chaque simulation contient 40 questions : <strong>28 questions de connaissance</strong> et <strong>12 mises en situation</strong>. Le seuil indicatif est fixé à 32/40.
+    </p>
+
+    <fieldset class="mt-7 grid gap-3 md:grid-cols-3" data-paths>
+      <legend class="sr-only">Parcours de l'examen blanc</legend>
+      {EXAM_PATHS.map((path) => (
+        <label class="cursor-pointer rounded-2xl border border-paper-300 bg-white p-4 transition hover:border-france-300 has-[:checked]:border-france-700 has-[:checked]:bg-france-50">
+          <input type="radio" name="exam-path" value={path.slug} class="sr-only" />
+          <span class="block font-semibold text-ink-900">{path.shortTitle}</span>
+          <span class="mt-1 block text-xs leading-relaxed text-ink-600">{path.description}</span>
+        </label>
+      ))}
+    </fieldset>
+
+    <div class="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
+      <button type="button" class="btn-primary btn-lg justify-center" data-start>Commencer l'examen</button>
+      <span class="text-sm text-ink-600">45 minutes · correction détaillée · compte facultatif</span>
+    </div>
+    <p class="mt-4 hidden text-sm text-marianne-600" role="alert" data-intro-error></p>
+  </div>
+
+  <div class="card p-5 sm:p-8 hidden" data-stage-play>
+    <div class="flex flex-wrap items-center justify-between gap-3 text-sm">
+      <span class="text-ink-600" data-progress>Question 1 / 40</span>
+      <span class="rounded-full bg-ink-900 px-3 py-1.5 font-mono text-white" data-timer>45:00</span>
+    </div>
+    <div class="mt-3 h-2 overflow-hidden rounded-full bg-paper-200">
+      <div class="h-full bg-france-700 transition-[width] duration-300" style="width:0%" data-progress-bar></div>
+    </div>
+
+    <div class="mt-6 flex flex-wrap gap-2">
+      <span class="badge-france" data-theme></span>
+      <span class="badge-outline" data-question-type></span>
+    </div>
+    <h2 class="mt-4 font-display text-2xl sm:text-3xl text-balance" data-prompt></h2>
+    <fieldset class="mt-7 space-y-3" data-choices>
+      <legend class="sr-only">Choisissez une réponse</legend>
+    </fieldset>
+
+    <div class="mt-8 flex flex-wrap items-center justify-between gap-3">
+      <button type="button" class="btn-ghost" data-prev>← Précédent</button>
+      <div class="flex gap-2">
+        <button type="button" class="btn-secondary" data-next>Suivant →</button>
+        <button type="button" class="btn-primary hidden" data-finish>Terminer</button>
+      </div>
+    </div>
+    <p class="mt-4 text-xs text-ink-500"><span data-answered>0</span> / 40 réponses enregistrées</p>
+  </div>
+
+  <div class="card p-5 sm:p-8 hidden" data-stage-result>
+    <div class="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
+      <div>
+        <p class="badge" data-verdict>Résultat</p>
+        <h2 class="mt-3 font-display text-5xl"><span data-score>0</span><span class="text-2xl text-ink-500">/40</span></h2>
+        <p class="mt-3 text-ink-700" data-feedback></p>
+      </div>
+      <div class="text-sm text-ink-600">
+        <p>Parcours : <strong data-result-path></strong></p>
+        <p class="mt-1">Temps utilisé : <strong data-time-used></strong></p>
+      </div>
+    </div>
+
+    <div class="mt-7 grid gap-4 sm:grid-cols-2">
+      <article class="card-paper p-5">
+        <p class="text-xs uppercase tracking-[0.14em] text-ink-500 font-semibold">Connaissances</p>
+        <p class="mt-2 font-display text-3xl"><span data-knowledge-score>0</span><span class="text-lg text-ink-500">/28</span></p>
+      </article>
+      <article class="card-paper p-5">
+        <p class="text-xs uppercase tracking-[0.14em] text-ink-500 font-semibold">Mises en situation</p>
+        <p class="mt-2 font-display text-3xl"><span data-situation-score>0</span><span class="text-lg text-ink-500">/12</span></p>
+      </article>
+    </div>
+
+    <h3 class="mt-8 font-display text-2xl">Résultats par thème</h3>
+    <ul class="mt-4 space-y-4" data-breakdown></ul>
+
+    <h3 class="mt-8 font-display text-2xl">Recommandations</h3>
+    <ul class="mt-4 list-disc space-y-2 pl-5 text-sm text-ink-700" data-recommendations></ul>
+
+    <details class="mt-8 rounded-2xl border border-paper-300 bg-paper-50 p-5">
+      <summary class="cursor-pointer font-semibold text-france-700">Voir la correction détaillée</summary>
+      <ol class="mt-5 space-y-5" data-corrections></ol>
+    </details>
+
+    <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+      <button type="button" class="btn-primary justify-center" data-retry>Refaire une simulation</button>
+      <a href="/mon-espace" class="btn-secondary justify-center">Voir mon espace</a>
+    </div>
+  </div>
+</section>
+
+<script>
+  import type { ChoiceId, ExamMention, ExamPayload, Question } from "../../lib/types";
+  import { buildExam, inferOfficialTheme, inferQuestionType } from "../../lib/exam/blueprint";
+  import { computeScore, weakThemes, type Answer } from "../../lib/scoring";
+  import { saveExamAttempt } from "../../lib/progress";
+  import { parseExamPath, getExamPath } from "../../lib/learning/paths";
+  import { getCurrentSession } from "../../lib/supabase/session";
+  import { getSupabaseBrowserClient, isSupabaseConfigured } from "../../lib/supabase/client";
+
+  const root = document.querySelector<HTMLElement>(".official-exam-root")!;
+  const data = JSON.parse(root.dataset.officialExam || "{}") as {
+    examBank: ExamPayload;
+    themeTitles: Record<string, string>;
+  };
+
+  const $ = <T extends HTMLElement = HTMLElement>(name: string) => root.querySelector<T>(`[data-${name}]`)!;
+  const els = {
+    intro: $("stage-intro"), play: $("stage-play"), result: $("stage-result"),
+    start: $("start") as HTMLButtonElement, introError: $("intro-error"),
+    progress: $("progress"), timer: $("timer"), progressBar: $("progress-bar"),
+    theme: $("theme"), questionType: $("question-type"), prompt: $("prompt"),
+    choices: $("choices") as HTMLFieldSetElement, prev: $("prev") as HTMLButtonElement,
+    next: $("next") as HTMLButtonElement, finish: $("finish") as HTMLButtonElement,
+    answered: $("answered"), verdict: $("verdict"), score: $("score"), feedback: $("feedback"),
+    resultPath: $("result-path"), timeUsed: $("time-used"),
+    knowledgeScore: $("knowledge-score"), situationScore: $("situation-score"),
+    breakdown: $("breakdown") as HTMLUListElement,
+    recommendations: $("recommendations") as HTMLUListElement,
+    corrections: $("corrections") as HTMLOListElement,
+    retry: $("retry") as HTMLButtonElement,
+  };
+
+  let mention: ExamMention = "naturalisation";
+  let questions: Question[] = [];
+  let selected: Array<ChoiceId | null> = [];
+  let index = 0;
+  let startedAt = 0;
+  let endAt = 0;
+  let timerId: number | null = null;
+  let finished = false;
+
+  function initializePath() {
+    const query = new URLSearchParams(window.location.search).get("parcours");
+    mention = parseExamPath(query ?? window.localStorage.getItem("ecfr.selectedPath"));
+    const radio = root.querySelector<HTMLInputElement>(`input[name="exam-path"][value="${mention}"]`);
+    if (radio) radio.checked = true;
+  }
+
+  function startExam() {
+    const checked = root.querySelector<HTMLInputElement>('input[name="exam-path"]:checked');
+    mention = parseExamPath(checked?.value);
+    window.localStorage.setItem("ecfr.selectedPath", mention);
+
+    try {
+      questions = buildExam(data.examBank.questions, mention);
+    } catch (error) {
+      els.introError.textContent = error instanceof Error ? error.message : "La banque de questions est incomplète.";
+      els.introError.classList.remove("hidden");
+      return;
+    }
+
+    selected = questions.map(() => null);
+    index = 0;
+    finished = false;
+    startedAt = Date.now();
+    endAt = startedAt + 2700 * 1000;
+    els.intro.classList.add("hidden");
+    els.result.classList.add("hidden");
+    els.play.classList.remove("hidden");
+    render();
+    tickTimer();
+    timerId = window.setInterval(tickTimer, 1000);
+    window.scrollTo({ top: root.offsetTop - 90, behavior: "smooth" });
+  }
+
+  function tickTimer() {
+    const remaining = Math.max(0, endAt - Date.now());
+    const minutes = Math.floor(remaining / 60000);
+    const seconds = Math.floor((remaining % 60000) / 1000);
+    els.timer.textContent = `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+    if (remaining <= 0 && !finished) finishExam(true);
+  }
+
+  function render() {
+    const question = questions[index];
+    els.progress.textContent = `Question ${index + 1} / 40`;
+    els.progressBar.style.width = `${((index + 1) / 40) * 100}%`;
+    els.theme.textContent = data.themeTitles[question.themeSlug ?? ""] ?? inferOfficialTheme(question).replaceAll("-", " ");
+    els.questionType.textContent = inferQuestionType(question) === "situation" ? "Mise en situation" : "Connaissance";
+    els.prompt.textContent = question.prompt;
+    els.answered.textContent = String(selected.filter(Boolean).length);
+    els.choices.innerHTML = "";
+
+    question.choices.forEach((choice) => {
+      const label = document.createElement("label");
+      label.className = "answer-pill flex cursor-pointer items-start gap-3";
+      const input = document.createElement("input");
+      input.type = "radio";
+      input.name = `question-${question.id}`;
+      input.value = choice.id;
+      input.className = "mt-1 accent-france-700";
+      input.checked = selected[index] === choice.id;
+      const text = document.createElement("span");
+      text.className = "text-ink-900";
+      text.textContent = `${choice.id.toUpperCase()}. ${choice.text}`;
+      input.addEventListener("change", () => {
+        selected[index] = choice.id;
+        els.answered.textContent = String(selected.filter(Boolean).length);
+      });
+      label.append(input, text);
+      els.choices.appendChild(label);
+    });
+
+    els.prev.disabled = index === 0;
+    const last = index === 39;
+    els.next.classList.toggle("hidden", last);
+    els.finish.classList.toggle("hidden", !last);
+  }
+
+  async function syncAttempt(score: number, durationSeconds: number, breakdown: unknown) {
+    if (!isSupabaseConfigured()) return;
+    try {
+      const session = await getCurrentSession();
+      if (!session) return;
+      const { error } = await getSupabaseBrowserClient().from("exam_attempts").insert({
+        user_id: session.user.id,
+        path_slug: mention,
+        score,
+        total: 40,
+        duration_seconds: durationSeconds,
+        breakdown,
+      });
+      if (error) console.warn("Exam sync skipped", error.message);
+    } catch (error) {
+      console.warn("Exam sync skipped", error);
+    }
+  }
+
+  function finishExam(timeOut: boolean) {
+    if (finished) return;
+    finished = true;
+    if (timerId) window.clearInterval(timerId);
+    timerId = null;
+
+    const answers: Answer[] = questions.map((question, questionIndex) => ({
+      questionId: question.id,
+      selected: selected[questionIndex],
+    }));
+    const result = computeScore(questions, answers, 32);
+    const weak = weakThemes(result);
+    saveExamAttempt(result.correct, weak);
+
+    const durationSeconds = Math.min(2700, Math.floor((Date.now() - startedAt) / 1000));
+    const knowledgeCorrect = questions.reduce((total, question, questionIndex) =>
+      total + (inferQuestionType(question) === "knowledge" && selected[questionIndex] === question.answer ? 1 : 0), 0);
+    const situationCorrect = result.correct - knowledgeCorrect;
+
+    els.score.textContent = String(result.correct);
+    els.verdict.textContent = result.passed ? "Réussi" : timeOut ? "Temps écoulé" : "À renforcer";
+    els.verdict.className = `badge ${result.passed ? "bg-success-100 text-success-700" : "bg-marianne-50 text-marianne-600"}`;
+    els.feedback.textContent = result.passed
+      ? "Bravo, vous avez atteint le seuil indicatif de 32 bonnes réponses."
+      : `Il manque ${Math.max(0, 32 - result.correct)} bonne(s) réponse(s) pour atteindre le seuil indicatif.`;
+    els.resultPath.textContent = getExamPath(mention).title;
+    els.timeUsed.textContent = `${Math.floor(durationSeconds / 60)} min ${String(durationSeconds % 60).padStart(2, "0")} s`;
+    els.knowledgeScore.textContent = String(knowledgeCorrect);
+    els.situationScore.textContent = String(situationCorrect);
+
+    els.breakdown.innerHTML = "";
+    Object.entries(result.byTheme).forEach(([slug, value]) => {
+      const percentage = value.total ? Math.round((value.correct / value.total) * 100) : 0;
+      const item = document.createElement("li");
+      item.innerHTML = `
+        <div class="flex items-center justify-between gap-4 text-sm"><span class="font-medium text-ink-900">${data.themeTitles[slug] ?? slug.replaceAll("-", " ")}</span><span>${value.correct}/${value.total}</span></div>
+        <div class="mt-2 h-2 overflow-hidden rounded-full bg-paper-200"><div class="h-full ${percentage >= 70 ? "bg-success-600" : "bg-marianne-400"}" style="width:${percentage}%"></div></div>
+      `;
+      els.breakdown.appendChild(item);
+    });
+
+    els.recommendations.innerHTML = "";
+    const recommendations = weak.slice(0, 3).map((slug) => `Revoir la fiche « ${data.themeTitles[slug] ?? slug.replaceAll("-", " ")} » puis refaire son quiz.`);
+    if (!recommendations.length) recommendations.push("Consolidez ce résultat avec une nouvelle simulation dans quelques jours.");
+    recommendations.forEach((recommendation) => {
+      const item = document.createElement("li");
+      item.textContent = recommendation;
+      els.recommendations.appendChild(item);
+    });
+
+    els.corrections.innerHTML = "";
+    questions.forEach((question, questionIndex) => {
+      const correct = selected[questionIndex] === question.answer;
+      const picked = question.choices.find((choice) => choice.id === selected[questionIndex])?.text ?? "Pas de réponse";
+      const expected = question.choices.find((choice) => choice.id === question.answer)?.text ?? "";
+      const item = document.createElement("li");
+      item.className = `border-l-4 pl-4 ${correct ? "border-success-600" : "border-marianne-400"}`;
+      item.innerHTML = `
+        <p class="font-semibold text-ink-900">${questionIndex + 1}. ${question.prompt}</p>
+        <p class="mt-2 text-sm ${correct ? "text-success-700" : "text-marianne-600"}">${correct ? "Bonne réponse" : `Votre réponse : ${picked}`}</p>
+        ${correct ? "" : `<p class="mt-1 text-sm text-ink-700">Réponse attendue : ${expected}</p>`}
+        <p class="mt-2 text-sm text-ink-700">${question.explanation}</p>
+      `;
+      els.corrections.appendChild(item);
+    });
+
+    void syncAttempt(result.correct, durationSeconds, result.byTheme);
+    els.play.classList.add("hidden");
+    els.result.classList.remove("hidden");
+    window.scrollTo({ top: root.offsetTop - 90, behavior: "smooth" });
+  }
+
+  els.start.addEventListener("click", startExam);
+  els.prev.addEventListener("click", () => { if (index > 0) { index -= 1; render(); } });
+  els.next.addEventListener("click", () => { if (index < 39) { index += 1; render(); } });
+  els.finish.addEventListener("click", () => finishExam(false));
+  els.retry.addEventListener("click", () => {
+    els.result.classList.add("hidden");
+    els.intro.classList.remove("hidden");
+    initializePath();
+  });
+
+  initializePath();
+</script>
