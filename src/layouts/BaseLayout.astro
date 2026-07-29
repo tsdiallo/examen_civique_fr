@@ -1,5 +1,6 @@
 ---
 import "../assets/styles/global.css";
+import "../assets/styles/performance.css";
 import Header from "../components/layout/Header.astro";
 import Footer from "../components/layout/Footer.astro";
 
@@ -10,13 +11,12 @@ interface Props {
   ogType?: "website" | "article";
   noindex?: boolean;
   keywords?: string[];
-  /** Extra JSON-LD objects to inject in head */
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 const {
   title = "Examen civique français — Préparation en ligne",
-  description = "Préparez l'examen civique français (naturalisation, titre de séjour) avec 10 fiches, plus de 200 QCM et un examen blanc chronométré. Gratuit, sans compte, non officiel.",
+  description = "Préparez l'examen civique français avec des parcours adaptés, des fiches, des quiz expliqués et un examen blanc chronométré. Gratuit, compte facultatif, plateforme indépendante.",
   ogImage = "/og-default.svg",
   ogType = "website",
   noindex = false,
@@ -24,17 +24,20 @@ const {
     "examen civique",
     "naturalisation française",
     "QCM civique",
-    "test citoyenneté France",
-    "préparation naturalisation",
+    "carte de résident",
+    "carte de séjour pluriannuelle",
     "valeurs République",
   ],
   jsonLd,
 } = Astro.props;
 
+const appEnvironment = import.meta.env.PUBLIC_APP_ENV ?? "production";
+const isPreproduction = appEnvironment === "preprod";
+const shouldNoindex = noindex || isPreproduction;
 const canonical = new URL(Astro.url.pathname, Astro.site ?? "https://examen-civique-fr.netlify.app").toString();
 const ogImageAbs = new URL(ogImage, Astro.site ?? "https://examen-civique-fr.netlify.app").toString();
-const siteName = "Examen civique";
-const fullTitle = title.includes("Examen civique") ? title : `${title} — Examen civique`;
+const siteName = "PrepaexamCivique";
+const fullTitle = title.includes(siteName) ? title : `${title} — ${siteName}`;
 
 const websiteLd = {
   "@context": "https://schema.org",
@@ -56,7 +59,7 @@ const jsonLdArray = [
 ];
 ---
 <!doctype html>
-<html lang="fr">
+<html lang="fr" data-app-env={appEnvironment}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -65,18 +68,17 @@ const jsonLdArray = [
     {keywords.length > 0 && <meta name="keywords" content={keywords.join(", ")} />}
     <meta name="theme-color" content="#000091" />
     <meta name="author" content={siteName} />
-    {noindex
-      ? <meta name="robots" content="noindex, nofollow" />
+    {shouldNoindex
+      ? <meta name="robots" content="noindex, nofollow, noarchive" />
       : <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
     }
     <link rel="canonical" href={canonical} />
     <link rel="alternate" hreflang="fr" href={canonical} />
     <link rel="alternate" hreflang="x-default" href={canonical} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="apple-touch-icon" href="/favicon.svg" />
-    <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
+    <link rel="icon" type="image/svg+xml" href="/branding/prepaexam-civique-mark.svg" />
+    <link rel="apple-touch-icon" href="/branding/prepaexam-civique-mark.svg" />
+    {!isPreproduction && <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />}
 
-    <!-- Open Graph -->
     <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content={siteName} />
     <meta property="og:title" content={fullTitle} />
@@ -88,21 +90,11 @@ const jsonLdArray = [
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content={`${siteName} — ${description}`} />
 
-    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageAbs} />
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital,wght@0,400;1,400&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
-    />
-
-    <!-- Structured data -->
     {jsonLdArray.map((obj) => (
       <script type="application/ld+json" set:html={JSON.stringify(obj)} />
     ))}
@@ -111,6 +103,11 @@ const jsonLdArray = [
     <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:bg-france-700 focus:text-white focus:px-4 focus:py-2 focus:rounded-full focus:shadow-lift">
       Aller au contenu principal
     </a>
+    {isPreproduction && (
+      <div class="bg-ink-900 px-4 py-2 text-center text-xs font-semibold uppercase tracking-[0.14em] text-white">
+        Préproduction — données et parcours en cours de validation
+      </div>
+    )}
     <Header />
     <main id="main" class="flex-1 min-w-0">
       <slot />

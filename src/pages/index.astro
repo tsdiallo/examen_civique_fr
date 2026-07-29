@@ -2,7 +2,17 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ProgressSummary from "../components/ui/ProgressSummary.astro";
 import AffiliateBlock from "../components/ui/AffiliateBlock.astro";
+import { EXAM_PATHS, pathHome } from "../lib/learning/paths";
+import type { Quiz } from "../lib/types";
 
+const quizModules = import.meta.glob<Quiz>("../data/quizzes/*.json", {
+  eager: true,
+  import: "default",
+});
+const trainingQuestionCount = Object.values(quizModules).reduce(
+  (total, quiz) => total + quiz.questions.length,
+  0,
+);
 const siteUrl = Astro.site?.toString() ?? "https://examen-civique-fr.netlify.app/";
 
 const orgLd = {
@@ -11,10 +21,9 @@ const orgLd = {
   name: "Examen civique",
   url: siteUrl,
   logo: new URL("/favicon.svg", siteUrl).toString(),
-  description: "Plateforme gratuite et indépendante pour préparer l'examen civique français (naturalisation, titre de séjour).",
+  description: "Plateforme gratuite et indépendante pour préparer l'examen civique français selon sa démarche.",
   inLanguage: "fr-FR",
   areaServed: "FR",
-  educationalCredentialAwarded: "Préparation à l'examen civique français",
 };
 
 const faqLd = {
@@ -23,18 +32,10 @@ const faqLd = {
   mainEntity: [
     {
       "@type": "Question",
-      name: "Qu'est-ce que l'examen civique français ?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "L'examen civique est un test introduit le 1er janvier 2026 dans le cadre de la naturalisation française et de certaines demandes de titre de séjour. Il porte sur les valeurs de la République, la laïcité, les institutions, l'histoire et la vie quotidienne en France.",
-      },
-    },
-    {
-      "@type": "Question",
       name: "Ce site est-il officiel ?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Non. Examen civique est une plateforme indépendante d'entraînement, à but pédagogique. Elle ne reproduit pas les supports ou banques de questions officiels et n'est affiliée à aucune administration.",
+        text: "Non. Il s'agit d'une plateforme indépendante d'entraînement. Les sources officielles et dates de vérification sont indiquées lorsque nécessaire.",
       },
     },
     {
@@ -42,23 +43,15 @@ const faqLd = {
       name: "Faut-il créer un compte ?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Non. L'accès est libre, gratuit et sans inscription. Votre progression est enregistrée localement dans votre navigateur (localStorage), elle n'est jamais envoyée à un serveur.",
+        text: "Non. Le compte est facultatif. Sans compte, la progression reste enregistrée localement. Avec un compte, elle peut être synchronisée entre plusieurs appareils.",
       },
     },
     {
       "@type": "Question",
-      name: "Combien de questions contient l'examen blanc ?",
+      name: "Comment est composé l'examen blanc ?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "L'examen blanc propose 40 questions à répondre en 45 minutes, avec un seuil indicatif de 32 bonnes réponses, proche des conditions réelles.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Quel niveau de français est requis ?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Les contenus sont rédigés pour un niveau A2 à B1 : phrases courtes, vocabulaire accessible, explications pas à pas après chaque question.",
+        text: "La simulation contient 40 questions en 45 minutes : 28 questions de connaissance et 12 mises en situation, avec un seuil indicatif de 32 bonnes réponses.",
       },
     },
   ],
@@ -67,239 +60,151 @@ const faqLd = {
 const keywords = [
   "examen civique français",
   "naturalisation française",
-  "préparation naturalisation",
+  "carte de résident",
+  "carte de séjour pluriannuelle",
   "QCM examen civique",
-  "test citoyenneté France",
-  "examen blanc naturalisation",
-  "valeurs République française",
-  "fiches révision civique",
+  "examen blanc civique",
 ];
 ---
-<BaseLayout
-  keywords={keywords}
-  jsonLd={[orgLd, faqLd]}
->
-  <!-- HERO -->
+<BaseLayout keywords={keywords} jsonLd={[orgLd, faqLd]}>
   <section class="relative overflow-hidden">
     <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10 bg-warm-mesh"></div>
     <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10 bg-dots opacity-60 [mask-image:radial-gradient(ellipse_at_top,black,transparent_70%)]"></div>
 
-    <div class="container-page pt-12 pb-16 sm:pt-20 sm:pb-24 lg:pt-24 lg:pb-28 grid gap-10 lg:grid-cols-12 lg:items-center">
-      <div class="lg:col-span-7 min-w-0 animate-fade-up">
-        <p class="eyebrow text-[0.68rem]">Plateforme d'entraînement · Non officielle</p>
+    <div class="container-page grid gap-10 pt-12 pb-16 sm:pt-20 sm:pb-24 lg:grid-cols-12 lg:items-center lg:pt-24 lg:pb-28">
+      <div class="min-w-0 lg:col-span-7 animate-fade-up">
+        <p class="eyebrow text-[0.68rem]">Plateforme indépendante · Compte facultatif</p>
         <h1 class="mt-5 font-display text-display-sm sm:text-display lg:text-display-lg leading-[1.02] text-balance">
-          Préparez l'<em class="italic-accent">examen civique</em> français,
-          sereinement.
+          Préparez votre <em class="italic-accent">examen civique</em> avec le bon parcours.
         </h1>
-        <p class="mt-5 sm:mt-6 text-base sm:text-lg text-ink-700 max-w-2xl text-pretty">
-          Fiches claires, quiz par thème, mises en situation et examen blanc chronométré.
-          Un français simple, des explications pas à pas, pour aborder votre démarche avec confiance.
+        <p class="mt-5 max-w-2xl text-base text-ink-700 text-pretty sm:mt-6 sm:text-lg">
+          Carte de séjour pluriannuelle, carte de résident ou naturalisation : choisissez votre démarche, révisez les notions, entraînez-vous et mesurez vos progrès.
         </p>
-        <div class="mt-7 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3">
-          <a href="/themes" class="btn-primary btn-lg justify-center">
-            Commencer par un thème
-            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        <div class="mt-7 flex flex-col flex-wrap items-stretch gap-3 sm:flex-row sm:items-center">
+          <a href="/parcours" class="btn-primary btn-lg justify-center">
+            Choisir mon parcours
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
           </a>
           <a href="/examen-blanc" class="btn-secondary btn-lg justify-center">Faire l'examen blanc</a>
         </div>
 
-        <dl class="mt-10 sm:mt-12 flex flex-wrap gap-x-8 gap-y-5 max-w-xl">
-          <div class="min-w-0">
-            <dt class="text-[0.68rem] uppercase tracking-[0.16em] text-ink-500 font-semibold">Thèmes</dt>
-            <dd class="mt-1 font-display text-3xl sm:text-4xl text-ink-900">10</dd>
+        <dl class="mt-10 flex max-w-2xl flex-wrap gap-x-8 gap-y-5 sm:mt-12">
+          <div>
+            <dt class="text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-ink-500">Parcours</dt>
+            <dd class="mt-1 font-display text-3xl text-ink-900 sm:text-4xl">3</dd>
           </div>
-          <div class="min-w-0">
-            <dt class="text-[0.68rem] uppercase tracking-[0.16em] text-ink-500 font-semibold">Questions</dt>
-            <dd class="mt-1 font-display text-3xl sm:text-4xl text-ink-900">200<span class="text-ink-500">+</span></dd>
+          <div>
+            <dt class="text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-ink-500">Questions d'entraînement</dt>
+            <dd class="mt-1 font-display text-3xl text-ink-900 sm:text-4xl">{trainingQuestionCount}</dd>
           </div>
-          <div class="min-w-0">
-            <dt class="text-[0.68rem] uppercase tracking-[0.16em] text-ink-500 font-semibold">Examen blanc</dt>
-            <dd class="mt-1 font-display text-3xl sm:text-4xl text-ink-900">45<span class="text-sm text-ink-500 font-sans align-middle"> min</span></dd>
+          <div>
+            <dt class="text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-ink-500">Examen blanc</dt>
+            <dd class="mt-1 font-display text-3xl text-ink-900 sm:text-4xl">45<span class="align-middle font-sans text-sm text-ink-500"> min</span></dd>
           </div>
         </dl>
       </div>
 
-      <!-- Decorative République card -->
-      <div class="lg:col-span-5 min-w-0 animate-fade-up" style="animation-delay: 0.1s;">
-        <div class="relative">
-          <div aria-hidden="true" class="pointer-events-none absolute -inset-3 sm:-inset-4 rounded-3xl bg-france-700/5 blur-2xl"></div>
-          <div class="relative card-feature p-0 overflow-hidden">
-            <div class="stripe-tricolore" aria-hidden="true"></div>
-            <div class="p-5 sm:p-7">
-              <div class="flex items-start justify-between gap-3">
-                <div class="min-w-0">
-                  <p class="text-[0.68rem] uppercase tracking-[0.14em] text-france-700 font-semibold break-words">Liberté · Égalité · Fraternité</p>
-                  <p class="font-display text-2xl sm:text-3xl mt-2">République française</p>
-                </div>
-                <span aria-hidden="true" class="shrink-0 inline-flex h-10 w-10 items-center justify-center rounded-full border border-paper-300 bg-paper-50">
-                  <svg viewBox="0 0 24 24" class="w-5 h-5 text-france-700" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <path d="M12 2 4 6v6c0 5 3.5 8.5 8 10 4.5-1.5 8-5 8-10V6l-8-4Z"/>
-                  </svg>
-                </span>
+      <div class="min-w-0 lg:col-span-5 animate-fade-up" style="animation-delay:0.1s">
+        <div class="card-feature overflow-hidden p-0">
+          <div class="stripe-tricolore" aria-hidden="true"></div>
+          <div class="p-5 sm:p-7">
+            <p class="text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-france-700">Simulation structurée</p>
+            <h2 class="mt-2 font-display text-3xl">40 questions</h2>
+            <div class="mt-6 grid grid-cols-2 gap-3">
+              <div class="rounded-2xl bg-france-50 p-4 ring-1 ring-france-200">
+                <p class="font-display text-4xl text-france-700">28</p>
+                <p class="mt-1 text-xs text-ink-700">Connaissances</p>
               </div>
-              <hr class="my-5 sm:my-6"/>
-              <ul class="space-y-3 text-sm">
-                <li class="flex items-start gap-3">
-                  <span aria-hidden="true" class="shrink-0 mt-1.5 inline-block w-2 h-2 rounded-full bg-france-700"></span>
-                  <span><strong class="text-ink-900">Programme officiel 2026</strong> — entrée en vigueur 1<sup>er</sup> janvier 2026.</span>
-                </li>
-                <li class="flex items-start gap-3">
-                  <span aria-hidden="true" class="shrink-0 mt-1.5 inline-block w-2 h-2 rounded-full bg-marianne-400"></span>
-                  <span><strong class="text-ink-900">Niveau A2 / B1</strong> — phrases courtes, vocabulaire accessible.</span>
-                </li>
-                <li class="flex items-start gap-3">
-                  <span aria-hidden="true" class="shrink-0 mt-1.5 inline-block w-2 h-2 rounded-full bg-ink-700"></span>
-                  <span><strong class="text-ink-900">Sans inscription</strong> — votre progression reste sur votre appareil.</span>
-                </li>
-              </ul>
+              <div class="rounded-2xl bg-marianne-50 p-4 ring-1 ring-marianne-200">
+                <p class="font-display text-4xl text-marianne-500">12</p>
+                <p class="mt-1 text-xs text-ink-700">Mises en situation</p>
+              </div>
             </div>
+            <ul class="mt-6 space-y-3 text-sm text-ink-700">
+              <li class="flex gap-3"><span aria-hidden="true" class="text-success-700">✓</span><span>Seuil indicatif : 32/40</span></li>
+              <li class="flex gap-3"><span aria-hidden="true" class="text-success-700">✓</span><span>Bilan par thème et par type</span></li>
+              <li class="flex gap-3"><span aria-hidden="true" class="text-success-700">✓</span><span>Score local ou synchronisé avec un compte</span></li>
+            </ul>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- PROGRESSION -->
   <section class="container-page">
     <ProgressSummary />
   </section>
 
-  <!-- 3 piliers -->
   <section class="container-page pt-14 sm:pt-20">
     <div class="max-w-2xl">
-      <p class="eyebrow">Comment ça marche</p>
-      <h2 class="mt-4 font-display text-3xl sm:text-4xl lg:text-5xl text-balance leading-[1.1]">
-        Trois étapes pour avancer <em class="italic-accent">à votre rythme</em>.
+      <p class="eyebrow">Choisir sa démarche</p>
+      <h2 class="mt-4 font-display text-3xl leading-[1.1] text-balance sm:text-4xl lg:text-5xl">
+        Trois objectifs, <em class="italic-accent">trois parcours distincts</em>.
       </h2>
     </div>
-
-    <div class="mt-8 sm:mt-10 grid gap-4 sm:gap-5 sm:grid-cols-2 lg:grid-cols-3">
-      <article class="card-feature group p-5 sm:p-7">
-        <div class="flex items-center gap-3 flex-wrap">
-          <span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-france-50 text-france-700 font-display text-lg ring-1 ring-france-200">1</span>
-          <span class="badge-france">Apprendre</span>
-        </div>
-        <h3 class="mt-5 font-display text-2xl">Lisez les fiches</h3>
-        <p class="mt-2 text-ink-700 text-sm leading-relaxed">
-          10 thèmes essentiels — valeurs, laïcité, institutions, histoire, vie quotidienne — rédigés en français simple.
-        </p>
-      </article>
-      <article class="card-feature group p-5 sm:p-7">
-        <div class="flex items-center gap-3 flex-wrap">
-          <span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-france-50 text-france-700 font-display text-lg ring-1 ring-france-200">2</span>
-          <span class="badge-france">Vous tester</span>
-        </div>
-        <h3 class="mt-5 font-display text-2xl">Faites les quiz</h3>
-        <p class="mt-2 text-ink-700 text-sm leading-relaxed">
-          QCM et mises en situation, avec correction expliquée après chaque validation. Recommencez ce que vous voulez.
-        </p>
-      </article>
-      <article class="card-feature group p-5 sm:p-7 sm:col-span-2 lg:col-span-1">
-        <div class="flex items-center gap-3 flex-wrap">
-          <span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-marianne-50 text-marianne-500 font-display text-lg ring-1 ring-marianne-200">3</span>
-          <span class="badge-marianne">Le jour J</span>
-        </div>
-        <h3 class="mt-5 font-display text-2xl">L'examen blanc</h3>
-        <p class="mt-2 text-ink-700 text-sm leading-relaxed">
-          40 questions, 45 minutes, seuil indicatif 32/40 — comme le jour réel, avec un bilan thème par thème.
-        </p>
-      </article>
+    <div class="mt-9 grid gap-5 lg:grid-cols-3">
+      {EXAM_PATHS.map((path, index) => (
+        <article class="card-feature flex flex-col p-5 sm:p-7">
+          <div class="flex items-center justify-between gap-3">
+            <span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-france-50 font-display text-lg text-france-700 ring-1 ring-france-200">{index + 1}</span>
+            <span class="badge-france">{path.level}</span>
+          </div>
+          <h3 class="mt-5 font-display text-2xl">{path.title}</h3>
+          <p class="mt-3 flex-1 text-sm leading-relaxed text-ink-700">{path.description}</p>
+          <a href={pathHome(path.slug)} class="btn-secondary mt-6 justify-center">Découvrir ce parcours</a>
+        </article>
+      ))}
     </div>
   </section>
 
-  <!-- Pourquoi cette plateforme -->
   <section class="container-page pt-16 sm:pt-20">
-    <div class="card-france p-5 sm:p-8 lg:p-10 grid gap-6 lg:gap-10 lg:grid-cols-12 lg:items-center">
-      <div class="lg:col-span-7 min-w-0">
-        <p class="eyebrow">Pourquoi ce site</p>
-        <h2 class="mt-4 font-display text-3xl sm:text-4xl lg:text-5xl text-balance leading-[1.1]">
-          Pédagogie claire, <em class="italic-accent">sans pression</em>, sans tracking.
-        </h2>
+    <div class="grid gap-6 rounded-3xl border border-france-200 bg-white p-5 shadow-soft sm:p-8 lg:grid-cols-12 lg:items-center lg:p-10">
+      <div class="min-w-0 lg:col-span-7">
+        <p class="eyebrow">Une promesse claire</p>
+        <h2 class="mt-4 font-display text-3xl leading-[1.1] text-balance sm:text-4xl lg:text-5xl">Gratuit, indépendant et transparent.</h2>
         <p class="mt-4 text-ink-700 text-pretty">
-          Cette plateforme est conçue pour les personnes qui préparent leur naturalisation ou un titre de séjour.
-          Tout est gratuit, sans publicité, sans inscription. Vos réponses ne quittent jamais votre appareil.
+          Aucun compte n'est obligatoire. Les fonctionnalités de synchronisation sont facultatives. Certains liens de la rubrique « ressources » sont affiliés et toujours identifiés comme tels.
         </p>
-        <ul class="mt-6 grid gap-3 sm:grid-cols-2">
-          <li class="flex items-start gap-2 text-sm text-ink-800"><span aria-hidden="true" class="text-france-700 mt-0.5">✔</span> Contenus originaux non officiels</li>
-          <li class="flex items-start gap-2 text-sm text-ink-800"><span aria-hidden="true" class="text-france-700 mt-0.5">✔</span> Accessible (clavier, lecteurs d'écran)</li>
-          <li class="flex items-start gap-2 text-sm text-ink-800"><span aria-hidden="true" class="text-france-700 mt-0.5">✔</span> Aucun compte requis</li>
-          <li class="flex items-start gap-2 text-sm text-ink-800"><span aria-hidden="true" class="text-france-700 mt-0.5">✔</span> Mobile-friendly</li>
+        <ul class="mt-6 grid gap-3 text-sm text-ink-800 sm:grid-cols-2">
+          <li class="flex gap-2"><span aria-hidden="true" class="text-france-700">✓</span> Parcours utilisable sans inscription</li>
+          <li class="flex gap-2"><span aria-hidden="true" class="text-france-700">✓</span> Données de compte protégées par RLS</li>
+          <li class="flex gap-2"><span aria-hidden="true" class="text-france-700">✓</span> Sources et vérifications éditoriales</li>
+          <li class="flex gap-2"><span aria-hidden="true" class="text-france-700">✓</span> Liens commerciaux signalés</li>
         </ul>
       </div>
-      <aside class="lg:col-span-5 min-w-0">
-        <div class="rounded-2xl bg-white border border-paper-300 p-5 sm:p-6 shadow-soft">
-          <p class="text-[0.68rem] uppercase tracking-[0.16em] text-ink-500 font-semibold">Méthode recommandée</p>
+      <aside class="min-w-0 lg:col-span-5">
+        <div class="card-paper p-5 sm:p-6">
+          <p class="text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-ink-500">Méthode recommandée</p>
           <ol class="mt-4 space-y-3 text-sm text-ink-800">
-            <li class="flex gap-3"><span class="numeral text-base shrink-0">01</span> <span>Lire la fiche d'un thème.</span></li>
-            <li class="flex gap-3"><span class="numeral text-base shrink-0">02</span> <span>Faire le quiz, valider question par question.</span></li>
-            <li class="flex gap-3"><span class="numeral text-base shrink-0">03</span> <span>Refaire les quiz les moins maîtrisés.</span></li>
-            <li class="flex gap-3"><span class="numeral text-base shrink-0">04</span> <span>Lancer l'examen blanc quand vous êtes prêt·e.</span></li>
-            <li class="flex gap-3"><span class="numeral text-base shrink-0">05</span> <span>Relire les thèmes faibles, recommencer.</span></li>
+            <li class="flex gap-3"><span class="numeral shrink-0 text-base">01</span><span>Choisir le bon parcours.</span></li>
+            <li class="flex gap-3"><span class="numeral shrink-0 text-base">02</span><span>Lire une fiche puis faire son quiz.</span></li>
+            <li class="flex gap-3"><span class="numeral shrink-0 text-base">03</span><span>Revoir les notions sous 70 %.</span></li>
+            <li class="flex gap-3"><span class="numeral shrink-0 text-base">04</span><span>Faire une simulation complète.</span></li>
           </ol>
         </div>
       </aside>
     </div>
   </section>
 
-  <!-- Ressources complémentaires -->
   <section class="container-page pt-14 sm:pt-20">
     <div class="max-w-2xl">
       <p class="eyebrow">Ressources complémentaires</p>
-      <h2 class="mt-4 font-display text-3xl sm:text-4xl lg:text-5xl text-balance leading-[1.1]">
-        Quelques lectures pour <em class="italic-accent">approfondir</em>.
-      </h2>
+      <h2 class="mt-4 font-display text-3xl leading-[1.1] text-balance sm:text-4xl lg:text-5xl">Approfondir avec des lectures <em class="italic-accent">clairement identifiées</em>.</h2>
     </div>
-    <AffiliateBlock title="Notre sélection" />
+    <AffiliateBlock title="Sélection de ressources" />
   </section>
 
-  <!-- Soutien -->
-  <section class="container-page pt-14 sm:pt-20">
-    <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-marianne-50 via-white to-france-50 border border-marianne-200 p-6 sm:p-10">
-      <div aria-hidden="true" class="pointer-events-none absolute -top-16 -right-16 w-56 h-56 rounded-full bg-marianne-400/15 blur-3xl"></div>
-      <div class="relative grid gap-6 lg:grid-cols-12 lg:items-center">
-        <div class="lg:col-span-8 min-w-0">
-          <p class="eyebrow text-marianne-600">Soutenir le site</p>
-          <h2 class="mt-3 font-display text-3xl sm:text-4xl text-balance leading-[1.1]">
-            Ce site est <em class="italic-accent">100 % gratuit</em>, sans publicité.
-          </h2>
-          <p class="mt-4 text-ink-700 max-w-2xl text-pretty">
-            Si les fiches et les quiz vous aident à préparer votre examen, vous pouvez offrir un café
-            pour soutenir son développement. C'est entièrement facultatif — paiement sécurisé par Stripe.
-          </p>
-        </div>
-        <div class="lg:col-span-4 flex lg:justify-end">
-          <a
-            href="https://buy.stripe.com/fZu4gy2ZodYJ8pEbxj7g400"
-            rel="nofollow noopener"
-            target="_blank"
-            class="inline-flex items-center justify-center gap-2 rounded-full bg-marianne-500 hover:bg-marianne-600 text-white font-semibold px-6 py-4 no-underline shadow-lift transition-colors text-base"
-            aria-label="Soutenir le site — paiement sécurisé par Stripe (ouvre un nouvel onglet)"
-          >
-            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-            </svg>
-            Offrir un café
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA final -->
-  <section class="container-page pt-14 sm:pt-16 pb-16 sm:pb-20">
+  <section class="container-page pt-14 pb-16 sm:pt-16 sm:pb-20">
     <div class="relative overflow-hidden rounded-3xl border border-paper-300 bg-white shadow-soft">
-      <div aria-hidden="true" class="pointer-events-none absolute -top-24 -right-24 w-72 h-72 rounded-full bg-france-700/10 blur-3xl"></div>
-      <div aria-hidden="true" class="pointer-events-none absolute -bottom-24 -left-24 w-72 h-72 rounded-full bg-marianne-400/10 blur-3xl"></div>
-      <div class="relative p-6 sm:p-10 lg:p-12 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+      <div aria-hidden="true" class="pointer-events-none absolute -top-24 -right-24 h-72 w-72 rounded-full bg-france-700/10 blur-3xl"></div>
+      <div class="relative flex flex-col gap-6 p-6 sm:p-10 lg:flex-row lg:items-center lg:justify-between lg:p-12">
         <div class="max-w-2xl">
-          <p class="eyebrow">Prêt·e à commencer ?</p>
-          <h2 class="mt-3 font-display text-3xl sm:text-4xl lg:text-5xl text-balance leading-[1.1]">
-            Choisissez un thème et démarrez en <em class="italic-accent">30 secondes</em>.
-          </h2>
+          <p class="eyebrow">Prêt à commencer ?</p>
+          <h2 class="mt-3 font-display text-3xl leading-[1.1] text-balance sm:text-4xl lg:text-5xl">Choisissez votre démarche, puis avancez étape par étape.</h2>
         </div>
-        <div class="flex flex-col sm:flex-row flex-wrap gap-3">
-          <a href="/themes" class="btn-primary btn-lg justify-center">Voir les thèmes</a>
-          <a href="/examen-blanc" class="btn-marianne btn-lg justify-center">Examen blanc</a>
+        <div class="flex flex-col flex-wrap gap-3 sm:flex-row">
+          <a href="/parcours" class="btn-primary btn-lg justify-center">Choisir mon parcours</a>
+          <a href="/connexion" class="btn-secondary btn-lg justify-center">Créer un compte</a>
         </div>
       </div>
       <div class="stripe-tricolore" aria-hidden="true"></div>

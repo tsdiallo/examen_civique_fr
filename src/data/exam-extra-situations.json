@@ -1,0 +1,73 @@
+{
+  "questions": [
+    {
+      "id": "ex-extra-01",
+      "type": "situation",
+      "questionType": "situation",
+      "officialTheme": "vie-societe",
+      "themeSlug": "vivre-en-societe",
+      "examMentions": ["csp", "resident", "naturalisation"],
+      "prompt": "Vous voyez une personne blessée après un accident de la route. Quel numéro pouvez-vous appeler pour joindre les secours médicaux ?",
+      "choices": [
+        { "id": "a", "text": "Le 15" },
+        { "id": "b", "text": "Le 119" },
+        { "id": "c", "text": "Le 3020" },
+        { "id": "d", "text": "Le 3939" }
+      ],
+      "answer": "a",
+      "explanation": "Le 15 permet de joindre le Samu. Le 112 est également un numéro d'urgence utilisable dans l'Union européenne.",
+      "difficulty": 1,
+      "source": {
+        "title": "Numéros d'urgence — Service-Public.fr",
+        "url": "https://www.service-public.fr/particuliers/actualites/A17758",
+        "verifiedAt": "2026-07-29"
+      }
+    },
+    {
+      "id": "ex-extra-02",
+      "type": "situation",
+      "questionType": "situation",
+      "officialTheme": "droits-devoirs",
+      "themeSlug": "egalite-situations",
+      "examMentions": ["resident", "naturalisation"],
+      "prompt": "Pendant un entretien d'embauche, le recruteur demande à une candidate si elle prévoit d'avoir des enfants et écarte sa candidature pour cette raison. Que dit la loi ?",
+      "choices": [
+        { "id": "a", "text": "Le recruteur peut poser toutes les questions qu'il souhaite" },
+        { "id": "b", "text": "Cette décision peut constituer une discrimination interdite" },
+        { "id": "c", "text": "La règle dépend uniquement du règlement de l'entreprise" },
+        { "id": "d", "text": "La candidate doit obligatoirement répondre" }
+      ],
+      "answer": "b",
+      "explanation": "Les questions doivent avoir un lien direct avec l'emploi. Écarter une candidature en raison de la situation familiale ou d'un projet de grossesse peut constituer une discrimination.",
+      "difficulty": 2,
+      "source": {
+        "title": "Informations autorisées pendant un recrutement — Service-Public.fr",
+        "url": "https://www.service-public.fr/particuliers/actualites/A17894",
+        "verifiedAt": "2026-07-29"
+      }
+    },
+    {
+      "id": "ex-extra-03",
+      "type": "situation",
+      "questionType": "situation",
+      "officialTheme": "vie-societe",
+      "themeSlug": "vivre-en-societe",
+      "examMentions": ["csp"],
+      "prompt": "Une personne ne comprend pas un courrier administratif important. Quelle attitude est la plus adaptée ?",
+      "choices": [
+        { "id": "a", "text": "L'ignorer définitivement" },
+        { "id": "b", "text": "Demander rapidement de l'aide à l'administration ou à un service d'accompagnement" },
+        { "id": "c", "text": "Répondre au hasard" },
+        { "id": "d", "text": "Le publier avec ses données personnelles sur un réseau social" }
+      ],
+      "answer": "b",
+      "explanation": "Un courrier administratif peut contenir un délai ou une action à effectuer. Il est préférable de demander une explication à l'organisme concerné ou à un accompagnateur compétent.",
+      "difficulty": 1,
+      "source": {
+        "title": "L'examen civique pour une demande de CSP ou de carte de résident",
+        "url": "https://www.immigration.interieur.gouv.fr/documentation/guides-textes-et-brochures/lexamen-civique-pour-demande-de-carte-de-sejour-pluriannuelle-csp-ou-de-carte-de-resident-cr.html",
+        "verifiedAt": "2026-07-29"
+      }
+    }
+  ]
+}

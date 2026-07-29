@@ -1,0 +1,415 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { EXAM_PATHS } from "../lib/learning/paths";
+---
+<BaseLayout
+  title="Mon espace — Examen civique"
+  description="Consultez votre parcours, votre maîtrise par thème et vos examens blancs."
+  noindex={true}
+>
+  <section class="container-page py-8 sm:py-12 lg:py-16" data-ui="account-dashboard-v2">
+    <div class="overflow-hidden rounded-[2rem] border border-paper-300 bg-white p-6 shadow-soft sm:p-8" data-account-loading>
+      <div class="animate-pulse space-y-5" aria-hidden="true">
+        <div class="h-4 w-32 rounded bg-paper-200"></div>
+        <div class="h-10 w-72 max-w-full rounded bg-paper-200"></div>
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div class="h-28 rounded-2xl bg-paper-100"></div>
+          <div class="h-28 rounded-2xl bg-paper-100"></div>
+          <div class="h-28 rounded-2xl bg-paper-100"></div>
+          <div class="h-28 rounded-2xl bg-paper-100"></div>
+        </div>
+      </div>
+      <p class="sr-only">Chargement sécurisé de votre espace…</p>
+    </div>
+
+    <div class="hidden" data-account-dashboard>
+      <section class="relative overflow-hidden rounded-[2rem] bg-ink-900 px-6 py-8 text-white shadow-lift sm:px-9 sm:py-10">
+        <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+          <div class="absolute -right-20 -top-28 h-80 w-80 rounded-full bg-france-700/55 blur-3xl"></div>
+          <div class="absolute -bottom-20 left-1/3 h-56 w-56 rounded-full bg-marianne-500/15 blur-3xl"></div>
+          <div class="absolute inset-0 bg-dots opacity-10"></div>
+        </div>
+        <div class="relative flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+          <div class="max-w-2xl">
+            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-white/60">Votre préparation personnelle</p>
+            <h1 class="mt-4 font-display text-4xl leading-tight text-white sm:text-5xl">Continuez à votre rythme.</h1>
+            <p class="mt-4 flex flex-wrap items-center gap-2 text-sm text-white/70">
+              <span>Compte connecté :</span>
+              <strong class="rounded-full border border-white/15 bg-white/10 px-3 py-1 font-semibold text-white" data-account-email></strong>
+            </p>
+          </div>
+          <div class="flex flex-col gap-3 sm:flex-row">
+            <a href="/examen-blanc" class="inline-flex items-center justify-center rounded-full bg-white px-5 py-3 text-sm font-semibold text-france-700 no-underline transition hover:bg-france-50">
+              Lancer un examen blanc
+            </a>
+            <button type="button" class="inline-flex items-center justify-center rounded-full border border-white/25 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10" data-sign-out>
+              Se déconnecter
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="relative z-10 -mt-3 mx-3 rounded-[1.75rem] border border-france-200 bg-white p-5 shadow-soft sm:mx-6 sm:p-7">
+        <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
+          <div>
+            <div class="flex items-start gap-4">
+              <span class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-france-50 text-france-700" aria-hidden="true">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+              </span>
+              <div>
+                <p class="text-xs font-semibold uppercase tracking-[0.14em] text-france-700">Parcours actuel</p>
+                <h2 class="mt-1 font-display text-2xl" data-selected-path-title>Naturalisation française</h2>
+                <p class="mt-2 text-sm leading-relaxed text-ink-600">Ce choix personnalise les recommandations et les examens blancs.</p>
+              </div>
+            </div>
+            <label for="selected-path" class="sr-only">Parcours préparé</label>
+            <select id="selected-path" class="mt-5 w-full max-w-2xl rounded-2xl border border-paper-300 bg-paper-50 px-4 py-3.5 font-medium text-ink-900 transition hover:border-paper-400 focus:border-france-700" data-selected-path>
+              {EXAM_PATHS.map((path) => <option value={path.slug}>{path.title}</option>)}
+            </select>
+          </div>
+          <button type="button" class="btn-primary w-full justify-center lg:w-auto" data-save-path>Enregistrer le parcours</button>
+        </div>
+        <p class="mt-4 hidden rounded-xl px-4 py-3 text-sm" role="status" aria-live="polite" data-profile-status></p>
+      </section>
+
+      <section class="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4" aria-label="Résumé de progression">
+        <article class="rounded-[1.5rem] border border-paper-300 bg-white p-5 shadow-soft">
+          <div class="flex items-center justify-between gap-3">
+            <span class="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-france-50 text-france-700" aria-hidden="true">
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+            </span>
+            <span class="text-xs font-semibold uppercase tracking-[0.12em] text-ink-500">Thèmes</span>
+          </div>
+          <p class="mt-5 font-display text-4xl" data-stat-themes>0</p>
+          <p class="mt-1 text-sm text-ink-600">thèmes déjà travaillés</p>
+        </article>
+        <article class="rounded-[1.5rem] border border-paper-300 bg-white p-5 shadow-soft">
+          <div class="flex items-center justify-between gap-3">
+            <span class="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-success-50 text-success-700" aria-hidden="true">
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V9M10 19V5M16 19v-8M22 19V2"/></svg>
+            </span>
+            <span class="text-xs font-semibold uppercase tracking-[0.12em] text-ink-500">Maîtrise</span>
+          </div>
+          <p class="mt-5 font-display text-4xl"><span data-stat-mastery>0</span><span class="ml-1 text-lg text-ink-500">%</span></p>
+          <p class="mt-1 text-sm text-ink-600">moyenne sur vos thèmes</p>
+        </article>
+        <article class="rounded-[1.5rem] border border-paper-300 bg-white p-5 shadow-soft">
+          <div class="flex items-center justify-between gap-3">
+            <span class="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-paper-100 text-ink-700" aria-hidden="true">
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            </span>
+            <span class="text-xs font-semibold uppercase tracking-[0.12em] text-ink-500">Examens</span>
+          </div>
+          <p class="mt-5 font-display text-4xl" data-stat-attempts>0</p>
+          <p class="mt-1 text-sm text-ink-600">examens blancs terminés</p>
+        </article>
+        <article class="rounded-[1.5rem] border border-paper-300 bg-white p-5 shadow-soft">
+          <div class="flex items-center justify-between gap-3">
+            <span class="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-marianne-50 text-marianne-600" aria-hidden="true">
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M7 6H4v2a4 4 0 0 0 4 4M17 6h3v2a4 4 0 0 1-4 4"/></svg>
+            </span>
+            <span class="text-xs font-semibold uppercase tracking-[0.12em] text-ink-500">Record</span>
+          </div>
+          <p class="mt-5 font-display text-4xl"><span data-stat-best>—</span><span class="ml-1 text-lg text-ink-500" data-stat-best-total></span></p>
+          <p class="mt-1 text-sm text-ink-600">votre meilleur résultat</p>
+        </article>
+      </section>
+
+      <section class="mt-8 grid gap-6 xl:grid-cols-12">
+        <article class="rounded-[1.75rem] border border-paper-300 bg-white p-5 shadow-soft sm:p-7 xl:col-span-7">
+          <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p class="eyebrow">Maîtrise par thème</p>
+              <h2 class="mt-3 font-display text-2xl sm:text-3xl">Ce qu’il faut consolider</h2>
+              <p class="mt-2 text-sm text-ink-600">Les thèmes les moins maîtrisés apparaissent en premier.</p>
+            </div>
+            <a href="/themes" class="btn-secondary justify-center">Voir tous les thèmes</a>
+          </div>
+
+          <div class="mt-7 rounded-2xl border border-dashed border-paper-300 bg-paper-50 p-6 text-center" data-progress-empty>
+            <span class="mx-auto inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-france-700 shadow-soft" aria-hidden="true">
+              <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+            </span>
+            <h3 class="mt-4 font-display text-xl">Votre progression commencera ici</h3>
+            <p class="mx-auto mt-2 max-w-md text-sm leading-relaxed text-ink-600">Terminez un premier quiz pour obtenir une mesure de maîtrise et des recommandations personnalisées.</p>
+            <a href="/themes" class="btn-primary mt-5 justify-center">Commencer une révision</a>
+          </div>
+          <ul class="mt-7 hidden space-y-5" data-progress-list></ul>
+        </article>
+
+        <aside class="relative overflow-hidden rounded-[1.75rem] bg-france-700 p-6 text-white shadow-soft sm:p-7 xl:col-span-5">
+          <div class="pointer-events-none absolute -right-14 -top-14 h-48 w-48 rounded-full border-[28px] border-white/10" aria-hidden="true"></div>
+          <div class="relative">
+            <p class="text-xs font-semibold uppercase tracking-[0.16em] text-white/65">Prochaine action recommandée</p>
+            <h2 class="mt-4 font-display text-3xl text-white" data-next-action-title>Commencer votre parcours</h2>
+            <p class="mt-4 leading-relaxed text-white/75" data-next-action-copy>Travaillez un premier thème pour construire votre tableau de progression.</p>
+            <a href="/themes" class="mt-7 inline-flex w-full items-center justify-center rounded-full bg-white px-5 py-3 text-sm font-semibold text-france-700 no-underline transition hover:bg-france-50" data-next-action-link>
+              Continuer ma préparation
+            </a>
+          </div>
+
+          <div class="relative mt-8 border-t border-white/15 pt-6">
+            <p class="text-sm font-semibold text-white">La méthode conseillée</p>
+            <ol class="mt-4 space-y-3 text-sm text-white/72">
+              <li class="flex gap-3"><span class="font-semibold text-white">1.</span><span>Réviser les thèmes sous 70 %.</span></li>
+              <li class="flex gap-3"><span class="font-semibold text-white">2.</span><span>Refaire les questions mal comprises.</span></li>
+              <li class="flex gap-3"><span class="font-semibold text-white">3.</span><span>Terminer par un examen blanc complet.</span></li>
+            </ol>
+          </div>
+        </aside>
+      </section>
+
+      <section class="mt-8 rounded-[1.75rem] border border-paper-300 bg-white p-5 shadow-soft sm:p-7">
+        <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p class="eyebrow">Historique</p>
+            <h2 class="mt-3 font-display text-2xl">Derniers examens blancs</h2>
+          </div>
+          <a href="/examen-blanc" class="btn-primary justify-center">Faire un nouvel examen</a>
+        </div>
+        <p class="mt-6 rounded-2xl bg-paper-50 p-5 text-sm text-ink-600" data-attempts-empty>Aucun examen blanc synchronisé pour le moment.</p>
+        <ul class="mt-6 hidden divide-y divide-paper-300" data-attempts-list></ul>
+      </section>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  import { getSupabaseBrowserClient, isSupabaseConfigured } from "../lib/supabase/client";
+  import { getCurrentSession, signOut } from "../lib/supabase/session";
+  import { getExamPath, parseExamPath } from "../lib/learning/paths";
+
+  const loading = document.querySelector<HTMLElement>("[data-account-loading]");
+  const dashboard = document.querySelector<HTMLElement>("[data-account-dashboard]");
+  const email = document.querySelector<HTMLElement>("[data-account-email]");
+  const pathSelect = document.querySelector<HTMLSelectElement>("[data-selected-path]");
+  const pathTitle = document.querySelector<HTMLElement>("[data-selected-path-title]");
+  const profileStatus = document.querySelector<HTMLElement>("[data-profile-status]");
+  const progressList = document.querySelector<HTMLUListElement>("[data-progress-list]");
+  const progressEmpty = document.querySelector<HTMLElement>("[data-progress-empty]");
+  const attemptsList = document.querySelector<HTMLUListElement>("[data-attempts-list]");
+  const attemptsEmpty = document.querySelector<HTMLElement>("[data-attempts-empty]");
+  const nextActionTitle = document.querySelector<HTMLElement>("[data-next-action-title]");
+  const nextActionCopy = document.querySelector<HTMLElement>("[data-next-action-copy]");
+  const nextActionLink = document.querySelector<HTMLAnchorElement>("[data-next-action-link]");
+
+  function fail(message: string) {
+    if (loading) {
+      loading.innerHTML = `
+        <div class="rounded-2xl border border-marianne-200 bg-marianne-50 p-5">
+          <p class="font-semibold text-marianne-600">Impossible de charger votre espace</p>
+          <p class="mt-2 text-sm leading-relaxed text-ink-700">${message}</p>
+          <a href="/connexion?redirect=/mon-espace" class="btn-primary mt-5 justify-center">Se reconnecter</a>
+        </div>`;
+    }
+  }
+
+  function setProfileStatus(message: string, success: boolean) {
+    if (!profileStatus) return;
+    profileStatus.textContent = message;
+    profileStatus.className = `mt-4 rounded-xl px-4 py-3 text-sm ${success ? "bg-success-50 text-success-700" : "bg-marianne-50 text-marianne-600"}`;
+  }
+
+  function formatModule(value: string): string {
+    const text = value.replaceAll("-", " ").trim();
+    return text ? text.charAt(0).toUpperCase() + text.slice(1) : "Thème";
+  }
+
+  function formatDate(value: string | null | undefined): string {
+    if (!value) return "Date non disponible";
+    return new Intl.DateTimeFormat("fr-FR", { day: "numeric", month: "short", year: "numeric" }).format(new Date(value));
+  }
+
+  function updatePathTitle(value: string | null | undefined) {
+    const selectedPath = parseExamPath(value);
+    if (pathTitle) pathTitle.textContent = getExamPath(selectedPath).title;
+  }
+
+  function renderProgress(progress: Array<{ module_slug: string; mastery: number | null; next_review_at: string | null }>) {
+    if (!progressList || !progressEmpty) return;
+    const hasProgress = progress.length > 0;
+    progressEmpty.classList.toggle("hidden", hasProgress);
+    progressList.classList.toggle("hidden", !hasProgress);
+    progressList.innerHTML = "";
+
+    progress.slice(0, 8).forEach((row) => {
+      const masteryValue = Math.max(0, Math.min(100, Number(row.mastery ?? 0)));
+      const item = document.createElement("li");
+      const heading = document.createElement("div");
+      heading.className = "flex items-start justify-between gap-4";
+
+      const text = document.createElement("div");
+      const name = document.createElement("p");
+      name.className = "font-semibold text-ink-900";
+      name.textContent = formatModule(String(row.module_slug));
+      const review = document.createElement("p");
+      review.className = "mt-1 text-xs text-ink-500";
+      review.textContent = row.next_review_at ? `Prochaine révision : ${formatDate(row.next_review_at)}` : "Révision à planifier";
+      text.append(name, review);
+
+      const score = document.createElement("span");
+      score.className = "shrink-0 rounded-full bg-paper-100 px-3 py-1 text-sm font-semibold tabular-nums text-ink-700";
+      score.textContent = `${masteryValue} %`;
+      heading.append(text, score);
+
+      const track = document.createElement("div");
+      track.className = "mt-3 h-2.5 overflow-hidden rounded-full bg-paper-200";
+      const bar = document.createElement("div");
+      bar.className = masteryValue >= 70 ? "h-full rounded-full bg-success-600" : masteryValue >= 40 ? "h-full rounded-full bg-france-700" : "h-full rounded-full bg-marianne-400";
+      bar.style.width = `${masteryValue}%`;
+      track.appendChild(bar);
+      item.append(heading, track);
+      progressList.appendChild(item);
+    });
+  }
+
+  function renderAttempts(attempts: Array<{ score: number; total: number; created_at: string }>) {
+    if (!attemptsList || !attemptsEmpty) return;
+    const hasAttempts = attempts.length > 0;
+    attemptsEmpty.classList.toggle("hidden", hasAttempts);
+    attemptsList.classList.toggle("hidden", !hasAttempts);
+    attemptsList.innerHTML = "";
+
+    attempts.slice(0, 5).forEach((attempt) => {
+      const item = document.createElement("li");
+      item.className = "flex flex-col gap-3 py-4 sm:flex-row sm:items-center sm:justify-between";
+      const left = document.createElement("div");
+      const title = document.createElement("p");
+      title.className = "font-semibold text-ink-900";
+      title.textContent = `Examen du ${formatDate(attempt.created_at)}`;
+      const detail = document.createElement("p");
+      detail.className = "mt-1 text-sm text-ink-600";
+      const percentage = Math.round((Number(attempt.score) / Number(attempt.total)) * 100);
+      detail.textContent = percentage >= 80 ? "Objectif indicatif atteint" : "À consolider avant le prochain essai";
+      left.append(title, detail);
+
+      const score = document.createElement("span");
+      score.className = "inline-flex w-fit rounded-full bg-france-50 px-4 py-2 font-display text-lg font-semibold text-france-700";
+      score.textContent = `${attempt.score}/${attempt.total}`;
+      item.append(left, score);
+      attemptsList.appendChild(item);
+    });
+  }
+
+  function updateRecommendation(progress: Array<{ module_slug: string; mastery: number | null }>, attempts: Array<unknown>) {
+    if (!nextActionTitle || !nextActionCopy || !nextActionLink) return;
+    const weakest = progress[0];
+    if (!weakest) {
+      nextActionTitle.textContent = "Commencer votre parcours";
+      nextActionCopy.textContent = "Travaillez un premier thème pour construire votre tableau de progression.";
+      nextActionLink.href = "/themes";
+      nextActionLink.textContent = "Choisir un premier thème";
+      return;
+    }
+
+    const mastery = Number(weakest.mastery ?? 0);
+    if (mastery < 70) {
+      const moduleName = formatModule(String(weakest.module_slug));
+      nextActionTitle.textContent = `Revoir : ${moduleName}`;
+      nextActionCopy.textContent = `Votre maîtrise est de ${mastery} %. Une révision ciblée est prioritaire avant un nouvel examen blanc.`;
+      nextActionLink.href = `/themes/${encodeURIComponent(String(weakest.module_slug))}`;
+      nextActionLink.textContent = "Réviser ce thème";
+      return;
+    }
+
+    nextActionTitle.textContent = attempts.length ? "Refaire un examen blanc" : "Tester vos acquis";
+    nextActionCopy.textContent = "Vos thèmes sont bien engagés. Passez maintenant à une simulation complète de 40 questions.";
+    nextActionLink.href = "/examen-blanc";
+    nextActionLink.textContent = "Lancer l’examen blanc";
+  }
+
+  async function loadDashboard() {
+    if (!isSupabaseConfigured()) {
+      fail("Supabase n’est pas encore configuré sur cette préproduction.");
+      return;
+    }
+
+    const session = await getCurrentSession();
+    if (!session) {
+      window.location.replace("/connexion?redirect=/mon-espace");
+      return;
+    }
+
+    const client = getSupabaseBrowserClient();
+    const user = session.user;
+    if (email) email.textContent = user.email ?? "votre compte";
+
+    const [profileResult, progressResult, attemptsResult] = await Promise.all([
+      client.from("profiles").select("selected_path").eq("id", user.id).maybeSingle(),
+      client.from("learning_progress").select("module_slug, mastery, next_review_at, last_attempt_at").eq("user_id", user.id).order("mastery", { ascending: true }),
+      client.from("exam_attempts").select("score, total, created_at").eq("user_id", user.id).order("created_at", { ascending: false }).limit(50),
+    ]);
+
+    if (profileResult.error || progressResult.error || attemptsResult.error) {
+      throw profileResult.error ?? progressResult.error ?? attemptsResult.error;
+    }
+
+    const storedPath = window.localStorage.getItem("ecfr.selectedPath");
+    const selectedPath = parseExamPath(profileResult.data?.selected_path ?? storedPath);
+    if (pathSelect) pathSelect.value = selectedPath;
+    updatePathTitle(selectedPath);
+    window.localStorage.setItem("ecfr.selectedPath", selectedPath);
+
+    if (!profileResult.data) {
+      await client.from("profiles").upsert({
+        id: user.id,
+        email: user.email ?? "",
+        selected_path: selectedPath,
+      });
+    }
+
+    const progress = progressResult.data ?? [];
+    const attempts = attemptsResult.data ?? [];
+    const mastery = progress.length
+      ? Math.round(progress.reduce((total, row) => total + Number(row.mastery ?? 0), 0) / progress.length)
+      : 0;
+    const best = attempts.reduce<{ score: number; total: number } | null>((current, row) => {
+      if (!current || row.score / row.total > current.score / current.total) return { score: row.score, total: row.total };
+      return current;
+    }, null);
+
+    document.querySelector<HTMLElement>("[data-stat-themes]")!.textContent = String(progress.length);
+    document.querySelector<HTMLElement>("[data-stat-mastery]")!.textContent = String(mastery);
+    document.querySelector<HTMLElement>("[data-stat-attempts]")!.textContent = String(attempts.length);
+    document.querySelector<HTMLElement>("[data-stat-best]")!.textContent = best ? String(best.score) : "—";
+    document.querySelector<HTMLElement>("[data-stat-best-total]")!.textContent = best ? `/${best.total}` : "";
+
+    renderProgress(progress);
+    renderAttempts(attempts);
+    updateRecommendation(progress, attempts);
+
+    loading?.classList.add("hidden");
+    dashboard?.classList.remove("hidden");
+  }
+
+  pathSelect?.addEventListener("change", () => updatePathTitle(pathSelect.value));
+
+  document.querySelector<HTMLButtonElement>("[data-save-path]")?.addEventListener("click", async () => {
+    if (!pathSelect) return;
+    const session = await getCurrentSession();
+    if (!session) return;
+    const selectedPath = parseExamPath(pathSelect.value);
+    const { error } = await getSupabaseBrowserClient().from("profiles").upsert({
+      id: session.user.id,
+      email: session.user.email ?? "",
+      selected_path: selectedPath,
+    });
+    if (error) {
+      setProfileStatus("Impossible d’enregistrer le parcours.", false);
+      return;
+    }
+    window.localStorage.setItem("ecfr.selectedPath", selectedPath);
+    updatePathTitle(selectedPath);
+    setProfileStatus("Votre parcours a bien été enregistré.", true);
+  });
+
+  document.querySelector<HTMLButtonElement>("[data-sign-out]")?.addEventListener("click", async () => {
+    await signOut();
+    window.location.assign("/");
+  });
+
+  loadDashboard().catch((error) => {
+    console.error(error);
+    fail("Reconnectez-vous ou réessayez dans quelques instants.");
+  });
+</script>

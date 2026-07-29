@@ -1,0 +1,84 @@
+---
+import type { Question } from "../../lib/types";
+
+interface Props {
+  questions: Question[];
+}
+const { questions } = Astro.props;
+const selected = questions.slice(0, 3);
+const payload = JSON.stringify(selected);
+---
+<section class="diagnostic-root mt-8 rounded-3xl border border-france-200 bg-france-50/50 p-5 sm:p-7" data-diagnostic={payload}>
+  <div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+    <div>
+      <p class="eyebrow">Avant de lire</p>
+      <h2 class="mt-3 font-display text-2xl sm:text-3xl">Que savez-vous déjà ?</h2>
+      <p class="mt-2 text-sm text-ink-700">Trois questions rapides. Le résultat n'est pas enregistré.</p>
+    </div>
+    <span class="badge-france">Diagnostic</span>
+  </div>
+
+  <div class="mt-6 space-y-6" data-diagnostic-questions></div>
+  <button type="button" class="btn-primary mt-6 justify-center" data-diagnostic-submit>Voir mon diagnostic</button>
+  <div class="mt-5 hidden rounded-2xl border border-paper-300 bg-white p-5" role="status" aria-live="polite" data-diagnostic-result></div>
+</section>
+
+<script>
+  import type { ChoiceId, Question } from "../../lib/types";
+
+  const root = document.querySelector<HTMLElement>(".diagnostic-root");
+  if (root) {
+    const questions = JSON.parse(root.dataset.diagnostic || "[]") as Question[];
+    const container = root.querySelector<HTMLElement>("[data-diagnostic-questions]")!;
+    const submit = root.querySelector<HTMLButtonElement>("[data-diagnostic-submit]")!;
+    const result = root.querySelector<HTMLElement>("[data-diagnostic-result]")!;
+
+    questions.forEach((question, questionIndex) => {
+      const fieldset = document.createElement("fieldset");
+      fieldset.className = "rounded-2xl border border-paper-300 bg-white p-4 sm:p-5";
+      const legend = document.createElement("legend");
+      legend.className = "px-1 font-semibold text-ink-900";
+      legend.textContent = `${questionIndex + 1}. ${question.prompt}`;
+      fieldset.appendChild(legend);
+
+      const choices = document.createElement("div");
+      choices.className = "mt-4 grid gap-2";
+      question.choices.forEach((choice) => {
+        const label = document.createElement("label");
+        label.className = "flex cursor-pointer items-start gap-3 rounded-xl border border-paper-300 px-3 py-2.5 text-sm hover:border-france-300 has-[:checked]:border-france-700 has-[:checked]:bg-france-50";
+        const input = document.createElement("input");
+        input.type = "radio";
+        input.name = `diagnostic-${question.id}`;
+        input.value = choice.id;
+        input.className = "mt-1 accent-france-700";
+        const text = document.createElement("span");
+        text.textContent = choice.text;
+        label.append(input, text);
+        choices.appendChild(label);
+      });
+      fieldset.appendChild(choices);
+      container.appendChild(fieldset);
+    });
+
+    submit.addEventListener("click", () => {
+      const answers = questions.map((question) => {
+        const input = root.querySelector<HTMLInputElement>(`input[name="diagnostic-${question.id}"]:checked`);
+        return input?.value as ChoiceId | undefined;
+      });
+      if (answers.some((answer) => !answer)) {
+        result.textContent = "Répondez aux trois questions avant d'afficher le diagnostic.";
+        result.className = "mt-5 rounded-2xl border border-marianne-200 bg-marianne-50 p-5 text-sm text-marianne-600";
+        return;
+      }
+
+      const score = questions.reduce((total, question, index) => total + (answers[index] === question.answer ? 1 : 0), 0);
+      result.innerHTML = `
+        <p class="font-display text-2xl text-ink-900">${score}/3</p>
+        <p class="mt-2 text-sm text-ink-700">${score === 3 ? "Très bon départ. Lisez la fiche pour consolider les détails." : score === 2 ? "Bonne base. Repérez les notions qui vous ont fait hésiter." : "Cette fiche vous sera utile : lisez d'abord le résumé, puis les exemples."}</p>
+      `;
+      result.classList.remove("hidden");
+      submit.disabled = true;
+      root.querySelectorAll<HTMLInputElement>("input").forEach((input) => { input.disabled = true; });
+    });
+  }
+</script>

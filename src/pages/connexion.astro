@@ -1,0 +1,339 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+<BaseLayout
+  title="Connexion et création de compte — Examen civique"
+  description="Créez un compte avec votre email et un mot de passe pour synchroniser votre progression."
+  noindex={true}
+>
+  <section class="container-page py-8 sm:py-12 lg:py-16" data-ui="auth-shell-v2">
+    <div class="overflow-hidden rounded-[2rem] border border-paper-300 bg-white shadow-lift lg:grid lg:min-h-[680px] lg:grid-cols-[minmax(0,0.95fr)_minmax(420px,0.85fr)]">
+      <aside class="relative overflow-hidden bg-ink-900 px-6 py-9 text-white sm:px-10 sm:py-12 lg:flex lg:flex-col lg:justify-between lg:px-12 lg:py-14">
+        <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+          <div class="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-france-700/50 blur-3xl"></div>
+          <div class="absolute -bottom-24 -left-20 h-64 w-64 rounded-full bg-marianne-500/20 blur-3xl"></div>
+          <div class="absolute inset-0 bg-dots opacity-10"></div>
+        </div>
+
+        <div class="relative">
+          <a href="/" class="inline-flex items-center gap-3 text-white no-underline">
+            <span class="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-white/20 bg-white/10 font-display text-lg font-semibold">EC</span>
+            <span>
+              <span class="block font-display text-lg font-semibold">Examen civique</span>
+              <span class="block text-xs uppercase tracking-[0.16em] text-white/60">Votre préparation personnelle</span>
+            </span>
+          </a>
+
+          <p class="mt-12 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-white/80">
+            Compte facultatif
+          </p>
+          <h1 class="mt-5 max-w-xl font-display text-4xl leading-[1.05] text-white sm:text-5xl">
+            Gardez le fil de votre préparation.
+          </h1>
+          <p class="mt-5 max-w-lg text-base leading-relaxed text-white/72 sm:text-lg">
+            Retrouvez votre parcours, vos thèmes à revoir et vos examens blancs sur tous vos appareils.
+          </p>
+        </div>
+
+        <div class="relative mt-10 grid gap-3 sm:grid-cols-3 lg:mt-14 lg:grid-cols-1">
+          <div class="flex gap-3 rounded-2xl border border-white/10 bg-white/5 p-4">
+            <span class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white/10" aria-hidden="true">
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4L19 6"/></svg>
+            </span>
+            <div>
+              <p class="font-semibold text-white">Progression synchronisée</p>
+              <p class="mt-1 text-sm leading-relaxed text-white/60">Vos résultats restent disponibles après chaque session.</p>
+            </div>
+          </div>
+          <div class="flex gap-3 rounded-2xl border border-white/10 bg-white/5 p-4">
+            <span class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white/10" aria-hidden="true">
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7l8-4z"/><path d="M9 12l2 2 4-4"/></svg>
+            </span>
+            <div>
+              <p class="font-semibold text-white">Données limitées</p>
+              <p class="mt-1 text-sm leading-relaxed text-white/60">Seules les données utiles à votre apprentissage sont enregistrées.</p>
+            </div>
+          </div>
+          <div class="flex gap-3 rounded-2xl border border-white/10 bg-white/5 p-4">
+            <span class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white/10" aria-hidden="true">
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            </span>
+            <div>
+              <p class="font-semibold text-white">Révision ciblée</p>
+              <p class="mt-1 text-sm leading-relaxed text-white/60">L’espace vous indique clairement quoi travailler ensuite.</p>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <div class="flex items-center px-5 py-8 sm:px-10 sm:py-12 lg:px-12">
+        <div class="mx-auto w-full max-w-md">
+          <div class="inline-flex w-full rounded-2xl bg-paper-100 p-1.5" role="tablist" aria-label="Accès au compte">
+            <button
+              type="button"
+              class="flex-1 rounded-xl bg-white px-4 py-3 text-sm font-semibold text-france-700 shadow-soft transition"
+              data-auth-mode="login"
+              role="tab"
+              aria-selected="true"
+            >
+              Se connecter
+            </button>
+            <button
+              type="button"
+              class="flex-1 rounded-xl px-4 py-3 text-sm font-semibold text-ink-600 transition hover:text-france-700"
+              data-auth-mode="signup"
+              role="tab"
+              aria-selected="false"
+            >
+              Créer un compte
+            </button>
+          </div>
+
+          <div class="mt-8">
+            <p class="eyebrow">Votre espace</p>
+            <h2 class="mt-3 font-display text-3xl sm:text-4xl" data-auth-title>Bon retour</h2>
+            <p class="mt-3 leading-relaxed text-ink-600" data-auth-description>
+              Connectez-vous pour reprendre là où vous vous êtes arrêté.
+            </p>
+          </div>
+
+          <form class="mt-8 space-y-5" data-auth-form novalidate>
+            <div data-email-field>
+              <label for="email" class="block text-sm font-semibold text-ink-900">Adresse email</label>
+              <div class="relative mt-2">
+                <span class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-ink-400" aria-hidden="true">
+                  <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="M4 6l8 7 8-7"/></svg>
+                </span>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  autocomplete="email"
+                  required
+                  placeholder="vous@exemple.fr"
+                  class="w-full rounded-2xl border border-paper-300 bg-white py-3.5 pl-12 pr-4 text-ink-900 shadow-sm transition placeholder:text-ink-400 hover:border-paper-400 focus:border-france-700"
+                />
+              </div>
+            </div>
+
+            <div>
+              <div class="flex items-center justify-between gap-3">
+                <label for="password" class="block text-sm font-semibold text-ink-900" data-password-label>Mot de passe</label>
+                <button type="button" class="text-xs font-semibold text-france-700 no-underline hover:underline" data-toggle-password>Afficher</button>
+              </div>
+              <div class="relative mt-2">
+                <span class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-ink-400" aria-hidden="true">
+                  <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+                </span>
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  autocomplete="current-password"
+                  minlength="10"
+                  required
+                  class="w-full rounded-2xl border border-paper-300 bg-white py-3.5 pl-12 pr-4 text-ink-900 shadow-sm transition hover:border-paper-400 focus:border-france-700"
+                />
+              </div>
+              <p class="mt-2 text-xs leading-relaxed text-ink-500" data-password-hint>Au moins 10 caractères.</p>
+            </div>
+
+            <button type="submit" class="btn-primary btn-lg w-full justify-center" data-auth-submit>
+              Se connecter
+            </button>
+          </form>
+
+          <div class="mt-5 flex flex-wrap items-center justify-between gap-3 text-sm">
+            <button type="button" class="font-semibold text-france-700 underline underline-offset-4" data-reset-password>Mot de passe oublié ?</button>
+            <a href="/" class="text-ink-600">Continuer sans compte</a>
+          </div>
+
+          <p class="mt-5 hidden rounded-2xl border px-4 py-3 text-sm leading-relaxed" role="status" aria-live="polite" data-auth-status></p>
+
+          <div class="mt-8 flex items-start gap-3 border-t border-paper-300 pt-6 text-xs leading-relaxed text-ink-500">
+            <svg class="mt-0.5 h-4 w-4 shrink-0 text-france-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+            <p>Votre progression locale reste disponible sans compte. La création d’un compte sert uniquement à la synchroniser.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  import { getSupabaseBrowserClient, isSupabaseConfigured } from "../lib/supabase/client";
+  import { safeRedirectPath } from "../lib/supabase/session";
+
+  type AuthMode = "login" | "signup" | "recovery";
+
+  const form = document.querySelector<HTMLFormElement>("[data-auth-form]");
+  const emailField = document.querySelector<HTMLElement>("[data-email-field]");
+  const emailInput = document.querySelector<HTMLInputElement>("#email");
+  const passwordInput = document.querySelector<HTMLInputElement>("#password");
+  const passwordLabel = document.querySelector<HTMLElement>("[data-password-label]");
+  const passwordHint = document.querySelector<HTMLElement>("[data-password-hint]");
+  const submit = document.querySelector<HTMLButtonElement>("[data-auth-submit]");
+  const title = document.querySelector<HTMLElement>("[data-auth-title]");
+  const description = document.querySelector<HTMLElement>("[data-auth-description]");
+  const status = document.querySelector<HTMLElement>("[data-auth-status]");
+  const reset = document.querySelector<HTMLButtonElement>("[data-reset-password]");
+  const togglePassword = document.querySelector<HTMLButtonElement>("[data-toggle-password]");
+  const modeButtons = Array.from(document.querySelectorAll<HTMLButtonElement>("[data-auth-mode]"));
+  const tabBase = "flex-1 rounded-xl px-4 py-3 text-sm font-semibold transition";
+  let mode: AuthMode = "login";
+
+  function showStatus(message: string, tone: "info" | "error" | "success" = "info") {
+    if (!status) return;
+    status.textContent = message;
+    status.classList.remove("hidden", "border-france-200", "bg-france-50", "text-france-700", "border-marianne-200", "bg-marianne-50", "text-marianne-600", "border-success-200", "bg-success-50", "text-success-700");
+    const tones = {
+      info: ["border-france-200", "bg-france-50", "text-france-700"],
+      error: ["border-marianne-200", "bg-marianne-50", "text-marianne-600"],
+      success: ["border-success-200", "bg-success-50", "text-success-700"],
+    } as const;
+    status.classList.add(...tones[tone]);
+  }
+
+  function friendlyError(error: unknown): string {
+    const message = error instanceof Error ? error.message.toLowerCase() : "";
+    if (message.includes("invalid login credentials")) return "Adresse email ou mot de passe incorrect.";
+    if (message.includes("email not confirmed")) return "Confirmez d’abord votre adresse depuis l’email reçu.";
+    if (message.includes("user already registered")) return "Un compte existe déjà avec cette adresse.";
+    if (message.includes("password")) return "Le mot de passe doit contenir au moins 10 caractères.";
+    if (message.includes("rate limit")) return "Trop de tentatives. Réessayez dans quelques minutes.";
+    return "La demande n’a pas pu aboutir. Vérifiez vos informations et réessayez.";
+  }
+
+  function setMode(nextMode: AuthMode) {
+    mode = nextMode;
+    modeButtons.forEach((button) => {
+      const active = button.dataset.authMode === mode;
+      button.setAttribute("aria-selected", String(active));
+      button.className = `${tabBase} ${active ? "bg-white text-france-700 shadow-soft" : "text-ink-600 hover:text-france-700"}`;
+    });
+
+    const isRecovery = mode === "recovery";
+    emailField?.classList.toggle("hidden", isRecovery);
+    if (emailInput) emailInput.required = !isRecovery;
+    reset?.classList.toggle("hidden", mode !== "login");
+
+    if (mode === "login") {
+      if (title) title.textContent = "Bon retour";
+      if (description) description.textContent = "Connectez-vous pour reprendre là où vous vous êtes arrêté.";
+      if (submit) submit.textContent = "Se connecter";
+      if (passwordLabel) passwordLabel.textContent = "Mot de passe";
+      if (passwordHint) passwordHint.textContent = "Au moins 10 caractères.";
+      if (passwordInput) passwordInput.autocomplete = "current-password";
+    } else if (mode === "signup") {
+      if (title) title.textContent = "Créer votre espace";
+      if (description) description.textContent = "Une adresse email confirmée suffit pour synchroniser votre progression.";
+      if (submit) submit.textContent = "Créer mon compte";
+      if (passwordLabel) passwordLabel.textContent = "Choisissez un mot de passe";
+      if (passwordHint) passwordHint.textContent = "Utilisez au moins 10 caractères difficiles à deviner.";
+      if (passwordInput) passwordInput.autocomplete = "new-password";
+    } else {
+      if (title) title.textContent = "Nouveau mot de passe";
+      if (description) description.textContent = "Choisissez un nouveau mot de passe pour sécuriser votre compte.";
+      if (submit) submit.textContent = "Enregistrer le mot de passe";
+      if (passwordLabel) passwordLabel.textContent = "Nouveau mot de passe";
+      if (passwordHint) passwordHint.textContent = "Au moins 10 caractères.";
+      if (passwordInput) passwordInput.autocomplete = "new-password";
+    }
+
+    status?.classList.add("hidden");
+  }
+
+  modeButtons.forEach((button) => {
+    button.addEventListener("click", () => setMode(button.dataset.authMode === "signup" ? "signup" : "login"));
+  });
+
+  togglePassword?.addEventListener("click", () => {
+    if (!passwordInput) return;
+    const reveal = passwordInput.type === "password";
+    passwordInput.type = reveal ? "text" : "password";
+    togglePassword.textContent = reveal ? "Masquer" : "Afficher";
+  });
+
+  const params = new URLSearchParams(window.location.search);
+  if (params.get("reset") === "1") {
+    setMode("recovery");
+    showStatus("Le lien est vérifié. Choisissez maintenant votre nouveau mot de passe.", "info");
+  } else if (params.get("confirmed") === "1") {
+    showStatus("Votre adresse est confirmée. Vous pouvez maintenant vous connecter.", "success");
+  }
+
+  if (!isSupabaseConfigured()) {
+    showStatus("La connexion n’est pas encore disponible sur cet environnement.", "info");
+    if (submit) submit.disabled = true;
+  }
+
+  form?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (!form.reportValidity() || !passwordInput || !submit) return;
+
+    const idleLabel = submit.textContent ?? "Continuer";
+    submit.disabled = true;
+    submit.textContent = "Vérification…";
+    showStatus("Connexion sécurisée en cours…", "info");
+
+    try {
+      const client = getSupabaseBrowserClient();
+      const password = passwordInput.value;
+
+      if (mode === "recovery") {
+        const { error } = await client.auth.updateUser({ password });
+        if (error) throw error;
+        showStatus("Votre mot de passe a été mis à jour.", "success");
+        window.location.assign("/mon-espace");
+        return;
+      }
+
+      if (!emailInput) return;
+      const email = emailInput.value.trim().toLowerCase();
+
+      if (mode === "signup") {
+        const { error } = await client.auth.signUp({
+          email,
+          password,
+          options: {
+            emailRedirectTo: `${window.location.origin}/connexion?confirmed=1`,
+          },
+        });
+        if (error) throw error;
+        showStatus("Compte créé. Ouvrez l’email reçu pour confirmer votre adresse.", "success");
+        passwordInput.value = "";
+        return;
+      }
+
+      const { error } = await client.auth.signInWithPassword({ email, password });
+      if (error) throw error;
+      const redirect = safeRedirectPath(params.get("redirect"));
+      window.location.assign(redirect);
+    } catch (error) {
+      showStatus(friendlyError(error), "error");
+    } finally {
+      submit.disabled = false;
+      submit.textContent = idleLabel;
+    }
+  });
+
+  reset?.addEventListener("click", async () => {
+    if (!emailInput?.value.trim()) {
+      showStatus("Saisissez d’abord votre adresse email.", "error");
+      emailInput?.focus();
+      return;
+    }
+    try {
+      reset.disabled = true;
+      const { error } = await getSupabaseBrowserClient().auth.resetPasswordForEmail(emailInput.value.trim().toLowerCase(), {
+        redirectTo: `${window.location.origin}/connexion?reset=1`,
+      });
+      if (error) throw error;
+      showStatus("Un lien de réinitialisation a été envoyé si cette adresse existe.", "success");
+    } catch (error) {
+      showStatus(friendlyError(error), "error");
+    } finally {
+      reset.disabled = false;
+    }
+  });
+</script>

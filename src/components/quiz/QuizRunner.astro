@@ -60,6 +60,7 @@ const payload = JSON.stringify(quiz);
       </div>
     </div>
     <p class="mt-4 text-sm text-ink-700" data-qr-feedback></p>
+    <p class="mt-3 text-xs text-ink-500">Le résultat reste local sans compte et se synchronise automatiquement lorsque vous êtes connecté.</p>
     <div class="mt-6 flex flex-col sm:flex-row flex-wrap gap-3">
       <button type="button" class="btn-secondary justify-center" data-qr-retry>Recommencer</button>
       <a href="/themes" class="btn-ghost justify-center">Retour aux thèmes</a>
@@ -70,6 +71,7 @@ const payload = JSON.stringify(quiz);
 
 <script>
   import { saveThemeAttempt } from "../../lib/progress";
+  import { syncThemeProgress } from "../../lib/progress/cloud";
   import type { Quiz, Question, ChoiceId } from "../../lib/types";
 
   const root = document.querySelector<HTMLElement>(".quiz-root");
@@ -106,20 +108,20 @@ const payload = JSON.stringify(quiz);
   let finalSaved = false;
 
   function render() {
-    const q: Question = quiz.questions[index];
+    const question: Question = quiz.questions[index];
     els.progress.textContent = `Question ${index + 1} sur ${quiz.questions.length}`;
-    els.type.textContent = q.type === "situation" ? "Mise en situation" : "QCM";
-    els.prompt.textContent = q.prompt;
-    els.bar.style.width = `${((index) / quiz.questions.length) * 100}%`;
+    els.type.textContent = question.type === "situation" ? "Mise en situation" : "QCM";
+    els.prompt.textContent = question.prompt;
+    els.bar.style.width = `${index / quiz.questions.length * 100}%`;
 
     els.choices.innerHTML = "";
-    q.choices.forEach((c) => {
-      const id = `q${q.id}-${c.id}`;
+    question.choices.forEach((choice) => {
+      const id = `q${question.id}-${choice.id}`;
       const label = document.createElement("label");
       label.className = "flex items-start gap-3 p-4 rounded-2xl border border-paper-300 bg-white transition-all duration-150 hover:border-france-400 hover:bg-france-50/40 cursor-pointer has-[:checked]:border-france-700 has-[:checked]:bg-france-50";
       label.innerHTML = `
-        <input type="radio" id="${id}" name="q-${q.id}" value="${c.id}" class="mt-1 accent-france-700" ${selected[index] === c.id ? "checked" : ""} ${validated[index] ? "disabled" : ""} />
-        <span class="text-ink-900 leading-relaxed"><span class="font-display font-semibold text-france-700 mr-2">${c.id.toUpperCase()}.</span>${c.text}</span>
+        <input type="radio" id="${id}" name="q-${question.id}" value="${choice.id}" class="mt-1 accent-france-700" ${selected[index] === choice.id ? "checked" : ""} ${validated[index] ? "disabled" : ""} />
+        <span class="text-ink-900 leading-relaxed"><span class="font-display font-semibold text-france-700 mr-2">${choice.id.toUpperCase()}.</span>${choice.text}</span>
       `;
       const input = label.querySelector<HTMLInputElement>("input")!;
       input.addEventListener("change", () => {
@@ -129,20 +131,20 @@ const payload = JSON.stringify(quiz);
       els.choices.appendChild(label);
 
       if (validated[index]) {
-        if (c.id === q.answer) {
+        if (choice.id === question.answer) {
           label.classList.add("!border-success-600", "!bg-success-50");
-        } else if (c.id === selected[index]) {
+        } else if (choice.id === selected[index]) {
           label.classList.add("!border-marianne-400", "!bg-marianne-50");
         }
       }
     });
 
     if (validated[index]) {
-      const ok = selected[index] === q.answer;
+      const correct = selected[index] === question.answer;
       els.explanation.classList.remove("hidden");
-      els.verdict.textContent = ok ? "✓ Bonne réponse" : "✗ Réponse incorrecte";
-      els.verdict.className = `font-semibold mb-1 ${ok ? "text-success-700" : "text-marianne-500"}`;
-      els.explanationText.textContent = q.explanation;
+      els.verdict.textContent = correct ? "✓ Bonne réponse" : "✗ Réponse incorrecte";
+      els.verdict.className = `font-semibold mb-1 ${correct ? "text-success-700" : "text-marianne-500"}`;
+      els.explanationText.textContent = question.explanation;
       els.check.classList.add("hidden");
       els.next.classList.remove("hidden");
       els.next.textContent = index === quiz.questions.length - 1 ? "Voir le résultat" : "Suivant →";
@@ -179,28 +181,38 @@ const payload = JSON.stringify(quiz);
     finalSaved = false;
     els.result.classList.add("hidden");
     render();
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    root.scrollIntoView({ behavior: "smooth", block: "start" });
   });
 
   function showResult() {
     const correct = quiz.questions.reduce(
-      (acc, q, i) => acc + (selected[i] === q.answer ? 1 : 0),
-      0
+      (total, question, questionIndex) => total + (selected[questionIndex] === question.answer ? 1 : 0),
+      0,
     );
     const total = quiz.questions.length;
+    const wrongConcepts = quiz.questions
+      .filter((question, questionIndex) => selected[questionIndex] !== question.answer)
+      .map((question) => question.id);
+
     els.score.textContent = String(correct);
     els.total.textContent = String(total);
-    els.scoreBar.style.width = `${(correct / total) * 100}%`;
-    const pct = Math.round((correct / total) * 100);
+    els.scoreBar.style.width = `${correct / total * 100}%`;
+    const percentage = Math.round(correct / total * 100);
     els.feedback.textContent =
-      pct >= 80 ? "Excellent — vous maîtrisez ce thème."
-      : pct >= 60 ? "Bon début — relisez les pièges fréquents."
+      percentage >= 80 ? "Excellent — vous maîtrisez ce thème."
+      : percentage >= 60 ? "Bon début — relisez les pièges fréquents."
       : "À retravailler — reprenez la fiche, puis refaites le quiz.";
     els.result.classList.remove("hidden");
     els.bar.style.width = "100%";
 
     if (!finalSaved && slug) {
       saveThemeAttempt(slug, correct);
+      void syncThemeProgress({
+        moduleSlug: slug,
+        correct,
+        total,
+        wrongConcepts,
+      }).catch((error) => console.warn("Quiz sync skipped", error));
       finalSaved = true;
     }
     els.result.scrollIntoView({ behavior: "smooth", block: "start" });

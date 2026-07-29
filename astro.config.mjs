@@ -2,9 +2,11 @@ import { defineConfig } from "astro/config";
 import tailwind from "@astrojs/tailwind";
 import sitemap from "@astrojs/sitemap";
 
-// On Netlify, the deploy URL is exposed as process.env.URL.
-// Locally, fallback to the production Netlify subdomain.
-const SITE_URL = process.env.URL || "https://examen-civique-fr.netlify.app";
+const SITE_URL =
+  process.env.PUBLIC_SITE_URL ||
+  process.env.DEPLOY_PRIME_URL ||
+  process.env.URL ||
+  "https://examen-civique-fr.netlify.app";
 
 export default defineConfig({
   site: SITE_URL,
@@ -12,7 +14,7 @@ export default defineConfig({
   integrations: [
     tailwind({ applyBaseStyles: false }),
     sitemap({
-      filter: (page) => !page.includes("/mentions-legales"),
+      filter: (page) => !page.includes("/mentions-legales") && !page.includes("/admin") && !page.includes("/connexion") && !page.includes("/mon-espace"),
     }),
   ],
   build: { inlineStylesheets: "auto" },

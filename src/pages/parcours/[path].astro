@@ -1,0 +1,86 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { EXAM_PATHS, getExamPath } from "../../lib/learning/paths";
+import type { ExamMention } from "../../lib/types";
+
+export function getStaticPaths() {
+  return EXAM_PATHS.map((path) => ({
+    params: { path: path.slug },
+    props: { pathSlug: path.slug },
+  }));
+}
+
+const { pathSlug } = Astro.props as { pathSlug: ExamMention };
+const path = getExamPath(pathSlug);
+const recommendations: Record<ExamMention, string[]> = {
+  csp: [
+    "Commencer par les valeurs de la République et la vie quotidienne.",
+    "Faire les quiz courts avant le premier examen blanc.",
+    "Revoir les erreurs jusqu'à atteindre au moins 80 % de maîtrise.",
+  ],
+  resident: [
+    "Approfondir les institutions, les droits et les devoirs.",
+    "Alterner fiches, mises en situation et examens blancs.",
+    "Planifier une révision des notions faibles tous les trois jours.",
+  ],
+  naturalisation: [
+    "Travailler les cinq domaines officiels et les repères historiques.",
+    "S'entraîner aux questions de connaissance et aux mises en situation.",
+    "Faire plusieurs examens blancs complets en conditions chronométrées.",
+  ],
+};
+---
+<BaseLayout
+  title={`${path.title} — Parcours de préparation`}
+  description={path.description}
+>
+  <section class="container-page py-12 sm:py-20">
+    <a href="/parcours" class="inline-flex items-center gap-1.5 text-sm text-ink-500 no-underline hover:underline">← Changer de parcours</a>
+    <div class="mt-8 grid gap-8 lg:grid-cols-12 lg:items-start">
+      <div class="lg:col-span-8">
+        <p class="eyebrow">{path.level}</p>
+        <h1 class="mt-4 font-display text-display-sm sm:text-display text-balance">{path.title}</h1>
+        <p class="mt-5 max-w-2xl text-lg text-ink-700 text-pretty">{path.description}</p>
+
+        <div class="mt-8 flex flex-col sm:flex-row gap-3">
+          <a href={`/themes?parcours=${path.slug}`} class="btn-primary btn-lg justify-center">Commencer les fiches</a>
+          <a href={`/examen-blanc?parcours=${path.slug}`} class="btn-secondary btn-lg justify-center">Faire un examen blanc</a>
+        </div>
+      </div>
+
+      <aside class="lg:col-span-4 card-france p-5 sm:p-6">
+        <p class="eyebrow">Méthode conseillée</p>
+        <ol class="mt-5 space-y-4">
+          {recommendations[path.slug].map((item, index) => (
+            <li class="flex gap-3 text-sm text-ink-700">
+              <span class="shrink-0 inline-flex h-7 w-7 items-center justify-center rounded-full bg-white text-france-700 font-semibold ring-1 ring-france-200">{index + 1}</span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ol>
+      </aside>
+    </div>
+
+    <section class="mt-14 grid gap-5 md:grid-cols-3">
+      <article class="card-feature">
+        <span class="badge-france">1 · Apprendre</span>
+        <h2 class="mt-4 font-display text-2xl">Fiches sourcées</h2>
+        <p class="mt-2 text-sm text-ink-700">Des notions courtes, des exemples concrets et une date de dernière vérification.</p>
+      </article>
+      <article class="card-feature">
+        <span class="badge-france">2 · Mémoriser</span>
+        <h2 class="mt-4 font-display text-2xl">Quiz et erreurs</h2>
+        <p class="mt-2 text-sm text-ink-700">Les corrections expliquent la notion à revoir, pas seulement la bonne lettre.</p>
+      </article>
+      <article class="card-feature">
+        <span class="badge-marianne">3 · Simuler</span>
+        <h2 class="mt-4 font-display text-2xl">Examen 28/12</h2>
+        <p class="mt-2 text-sm text-ink-700">40 questions : 28 connaissances et 12 mises en situation, en 45 minutes.</p>
+      </article>
+    </section>
+  </section>
+</BaseLayout>
+
+<script define:vars={{ selectedPath: path.slug }}>
+  window.localStorage.setItem("ecfr.selectedPath", selectedPath);
+</script>

@@ -1,0 +1,93 @@
+---
+interface Props {
+  pagePath: string;
+}
+const { pagePath } = Astro.props;
+---
+<section class="mt-10 rounded-2xl border border-paper-300 bg-paper-50 p-5" data-content-report data-page-path={pagePath}>
+  <details>
+    <summary class="cursor-pointer text-sm font-semibold text-france-700">Signaler une information incorrecte ou dépassée</summary>
+    <div class="mt-5">
+      <p class="text-sm leading-relaxed text-ink-700">
+        Décrivez précisément le passage concerné et, lorsque c’est possible, indiquez une source officielle.
+      </p>
+      <form class="mt-4" data-report-form>
+        <label for="report-message" class="block text-sm font-semibold text-ink-900">Votre signalement</label>
+        <textarea
+          id="report-message"
+          name="message"
+          rows="5"
+          minlength="10"
+          maxlength="2000"
+          required
+          class="mt-2 w-full rounded-xl border border-paper-300 bg-white px-4 py-3 text-sm text-ink-900"
+          placeholder="Exemple : la date indiquée dans la section… semble avoir changé. Source : …"
+        ></textarea>
+        <div class="mt-4 flex flex-wrap items-center gap-3">
+          <button type="submit" class="btn-primary" data-report-submit>Envoyer le signalement</button>
+          <p class="text-xs text-ink-500">Un compte confirmé est requis pour limiter les abus.</p>
+        </div>
+      </form>
+      <p class="mt-4 hidden rounded-xl border px-4 py-3 text-sm" role="status" aria-live="polite" data-report-status></p>
+    </div>
+  </details>
+</section>
+
+<script>
+  import { getSupabaseBrowserClient, isSupabaseConfigured } from "../../lib/supabase/client";
+  import { getCurrentSession } from "../../lib/supabase/session";
+
+  const root = document.querySelector<HTMLElement>("[data-content-report]");
+  const form = root?.querySelector<HTMLFormElement>("[data-report-form]");
+  const textarea = root?.querySelector<HTMLTextAreaElement>("textarea[name='message']");
+  const submit = root?.querySelector<HTMLButtonElement>("[data-report-submit]");
+  const status = root?.querySelector<HTMLElement>("[data-report-status]");
+
+  function showStatus(message: string, tone: "info" | "error" | "success") {
+    if (!status) return;
+    status.textContent = message;
+    status.className = "mt-4 rounded-xl border px-4 py-3 text-sm";
+    const classes = tone === "success"
+      ? ["border-success-200", "bg-success-50", "text-success-700"]
+      : tone === "error"
+        ? ["border-marianne-200", "bg-marianne-50", "text-marianne-600"]
+        : ["border-france-200", "bg-france-50", "text-france-700"];
+    status.classList.add(...classes);
+  }
+
+  form?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (!form.reportValidity() || !root || !textarea || !submit) return;
+
+    if (!isSupabaseConfigured()) {
+      showStatus("Le signalement sera activé dès que la base de préproduction sera configurée.", "info");
+      return;
+    }
+
+    submit.disabled = true;
+    try {
+      const session = await getCurrentSession();
+      if (!session) {
+        const redirect = encodeURIComponent(window.location.pathname + window.location.search);
+        showStatus("Connectez-vous pour envoyer ce signalement.", "info");
+        window.setTimeout(() => window.location.assign(`/connexion?redirect=${redirect}`), 700);
+        return;
+      }
+
+      const { error } = await getSupabaseBrowserClient().from("content_reports").insert({
+        user_id: session.user.id,
+        page_path: root.dataset.pagePath ?? window.location.pathname,
+        message: textarea.value.trim(),
+      });
+      if (error) throw error;
+
+      textarea.value = "";
+      showStatus("Merci. Le signalement a été enregistré pour vérification.", "success");
+    } catch (error) {
+      console.error(error);
+      showStatus("Impossible d’envoyer le signalement pour le moment.", "error");
+    } finally {
+      submit.disabled = false;
+    }
+  });
+</script>

@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import ExamRunner from "../components/exam/ExamRunner.astro";
+import OfficialExamRunner from "../components/exam/OfficialExamRunner.astro";
 import Alert from "../components/ui/Alert.astro";
 import { getCollection } from "astro:content";
 import { getExam } from "../lib/quiz-loader";
@@ -8,20 +8,19 @@ import { getExam } from "../lib/quiz-loader";
 const exam = await getExam();
 const themes = await getCollection("themes");
 const themeTitles: Record<string, string> = Object.fromEntries(
-  themes.map((t) => [t.slug, t.data.title])
+  themes.map((theme) => [theme.slug, theme.data.title]),
 );
 
-const total = exam?.total ?? 40;
-const durationMin = Math.round((exam?.durationSec ?? 2700) / 60);
-const passing = exam?.passingScore ?? 32;
-
-const description = `Entraînez-vous en conditions réelles : ${total} questions, ${durationMin} minutes, seuil indicatif ${passing}/${total}. Examen blanc gratuit pour la naturalisation française.`;
+const total = 40;
+const durationMin = 45;
+const passing = 32;
+const description = "Examen blanc civique personnalisé : 40 questions en 45 minutes, dont 28 connaissances et 12 mises en situation, pour la CSP, la carte de résident ou la naturalisation.";
 const keywords = [
   "examen blanc civique",
   "simulation naturalisation",
-  "test chronométré citoyenneté",
+  "carte de résident examen",
+  "carte de séjour pluriannuelle examen",
   "QCM examen civique",
-  "préparation examen naturalisation",
 ];
 
 const examLd = {
@@ -30,9 +29,8 @@ const examLd = {
   name: "Examen blanc — Examen civique français",
   description,
   inLanguage: "fr-FR",
-  educationalLevel: "A2/B1",
   learningResourceType: "Assessment",
-  timeRequired: `PT${durationMin}M`,
+  timeRequired: "PT45M",
   url: new URL("/examen-blanc", Astro.site ?? "https://examen-civique-fr.netlify.app").toString(),
   provider: {
     "@type": "Organization",
@@ -49,20 +47,20 @@ const examLd = {
   jsonLd={examLd}
 >
   <section class="container-page pt-12 pb-6">
-    <p class="eyebrow">Conditions réelles</p>
+    <p class="eyebrow">Conditions proches de l'épreuve</p>
     <h1 class="mt-4 font-display text-display-sm sm:text-display text-balance">
-      Examen <span class="text-gradient">blanc</span>.
+      Examen <span class="text-gradient">blanc personnalisé</span>.
     </h1>
-    <p class="mt-5 max-w-2xl text-ink-700 text-pretty">
-      Entraînez-vous dans des conditions proches de l'examen réel : <strong>{exam?.total ?? 40} questions</strong>,
-      <strong>{Math.round((exam?.durationSec ?? 2700) / 60)} minutes</strong>, seuil indicatif <strong>{exam?.passingScore ?? 32}/{exam?.total ?? 40}</strong>.
+    <p class="mt-5 max-w-3xl text-ink-700 text-pretty">
+      Choisissez votre démarche puis répondez à <strong>{total} questions</strong> en <strong>{durationMin} minutes</strong> :
+      <strong>28 connaissances</strong>, <strong>12 mises en situation</strong> et un seuil indicatif de <strong>{passing}/{total}</strong>.
     </p>
   </section>
 
   <section class="container-page pb-20">
     {exam
-      ? <ExamRunner exam={exam} themeTitles={themeTitles} />
-      : <Alert tone="info" title="Examen en préparation">L'examen blanc sera ajouté en phase 6.</Alert>
+      ? <OfficialExamRunner examBank={exam} themeTitles={themeTitles} />
+      : <Alert tone="info" title="Examen indisponible">La banque de questions n'a pas pu être chargée.</Alert>
     }
   </section>
 </BaseLayout>
