@@ -10,6 +10,8 @@ Ce document décrit l’activation de l’authentification, de la synchronisatio
 - Pages privées : `noindex`
 - Base de données : migration prête, mais projet Supabase à créer ou à connecter
 
+Le connecteur Supabase n’a pas été autorisé à créer le projet de préproduction pendant l’implémentation. Le code est compilé et testé avec une configuration factice, mais les scénarios réels d’inscription, de confirmation d’email, de RLS et d’administration doivent être exécutés après la création du projet.
+
 ## 2. Créer le projet Supabase de préproduction
 
 Créer un projet distinct de toute future production, de préférence dans la région `eu-west-3`.
