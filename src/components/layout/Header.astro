@@ -13,16 +13,21 @@ const isActive = (href: string) => current === href || current.startsWith(href +
   <div class="stripe-tricolore" aria-hidden="true"></div>
   <div class="border-b border-paper-300 bg-white/95 shadow-[0_4px_24px_-20px_rgba(0,0,0,0.55)] backdrop-blur-xl supports-[backdrop-filter]:bg-white/88">
     <div class="container-page flex h-[4.5rem] items-center justify-between gap-3">
-      <a href="/" class="group flex min-w-0 items-center gap-3 no-underline" aria-label="Examen civique — accueil">
-        <span aria-hidden="true" class="relative inline-flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-paper-300 bg-white shadow-soft transition group-hover:-translate-y-0.5 group-hover:shadow-lift">
-          <span class="absolute inset-x-0 top-0 h-1 bg-france-700"></span>
-          <span class="font-display text-base font-semibold text-ink-900">EC</span>
-          <span class="absolute inset-x-0 bottom-0 h-1 bg-marianne-500"></span>
-        </span>
-        <span class="min-w-0 leading-tight">
-          <span class="block truncate font-display text-[1.08rem] font-semibold text-ink-900 sm:text-lg">Examen civique</span>
-          <span class="mt-0.5 hidden text-[0.66rem] font-semibold uppercase tracking-[0.15em] text-ink-500 sm:block">Préparation indépendante</span>
-        </span>
+      <a href="/" class="group flex min-w-0 items-center no-underline" aria-label="PrepaexamCivique — accueil">
+        <picture class="block shrink-0">
+          <source
+            media="(min-width: 640px)"
+            srcset="/branding/prepaexam-civique-logo.svg"
+            type="image/svg+xml"
+          />
+          <img
+            src="/branding/prepaexam-civique-mark.svg"
+            alt="PrepaexamCivique"
+            class="h-11 w-auto max-w-[13rem] object-contain transition-transform duration-200 group-hover:-translate-y-0.5 sm:h-10 sm:max-w-[12rem]"
+            loading="eager"
+            decoding="async"
+          />
+        </picture>
       </a>
 
       <nav class="hidden items-center gap-3 lg:flex" aria-label="Navigation principale">
