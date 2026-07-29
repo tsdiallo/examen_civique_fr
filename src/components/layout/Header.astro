@@ -1,6 +1,6 @@
 ---
 const nav = [
-  { href: "/", label: "Accueil" },
+  { href: "/parcours", label: "Parcours" },
   { href: "/themes", label: "Thèmes" },
   { href: "/examen-blanc", label: "Examen blanc" },
   { href: "/a-propos", label: "À propos" },
@@ -8,7 +8,7 @@ const nav = [
 const DONATION_URL = "https://buy.stripe.com/fZu4gy2ZodYJ8pEbxj7g400";
 const current = Astro.url.pathname;
 const isActive = (href: string) =>
-  href === "/" ? current === "/" : current === href || current.startsWith(href + "/");
+  current === href || current.startsWith(href + "/");
 ---
 <header class="sticky top-0 z-40">
   <div class="stripe-tricolore" aria-hidden="true"></div>
@@ -26,8 +26,7 @@ const isActive = (href: string) =>
         </span>
       </a>
 
-      <!-- Desktop nav -->
-      <nav class="hidden md:flex items-center gap-4" aria-label="Navigation principale">
+      <nav class="hidden lg:flex items-center gap-3" aria-label="Navigation principale">
         <ul class="flex items-center gap-1 text-sm">
           {nav.map((item) => {
             const active = isActive(item.href);
@@ -42,14 +41,13 @@ const isActive = (href: string) =>
                   aria-current={active ? "page" : undefined}
                 >
                   {item.label}
-                  {active && (
-                    <span aria-hidden="true" class="absolute left-1/2 -translate-x-1/2 -bottom-0.5 h-[3px] w-6 rounded-full bg-france-700"></span>
-                  )}
+                  {active && <span aria-hidden="true" class="absolute left-1/2 -translate-x-1/2 -bottom-0.5 h-[3px] w-6 rounded-full bg-france-700"></span>}
                 </a>
               </li>
             );
           })}
         </ul>
+        <a href="/mon-espace" class="btn-secondary px-4 py-2">Mon espace</a>
         <a
           href={DONATION_URL}
           rel="nofollow noopener"
@@ -57,17 +55,14 @@ const isActive = (href: string) =>
           class="group inline-flex items-center gap-2 rounded-full bg-marianne-500 hover:bg-marianne-600 text-white text-sm font-semibold px-4 py-2 no-underline shadow-soft transition-colors"
           aria-label="Soutenir le site — paiement sécurisé par Stripe (ouvre un nouvel onglet)"
         >
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-          </svg>
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
           <span>Soutenir</span>
         </a>
       </nav>
 
-      <!-- Mobile toggle -->
       <button
         type="button"
-        class="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-full border border-paper-300 bg-white text-ink-800 hover:bg-paper-100"
+        class="lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-full border border-paper-300 bg-white text-ink-800 hover:bg-paper-100"
         aria-label="Ouvrir le menu"
         aria-expanded="false"
         aria-controls="mobile-nav"
@@ -78,13 +73,7 @@ const isActive = (href: string) =>
       </button>
     </div>
 
-    <!-- Mobile nav -->
-    <nav
-      id="mobile-nav"
-      aria-label="Navigation mobile"
-      class="md:hidden hidden border-t border-paper-300 bg-paper-50/95 backdrop-blur-md"
-      data-menu-panel
-    >
+    <nav id="mobile-nav" aria-label="Navigation mobile" class="lg:hidden hidden border-t border-paper-300 bg-paper-50/95 backdrop-blur-md" data-menu-panel>
       <ul class="container-page py-3 flex flex-col">
         {nav.map((item) => {
           const active = isActive(item.href);
@@ -104,16 +93,10 @@ const isActive = (href: string) =>
             </li>
           );
         })}
+        <li class="mt-2 px-3"><a href="/mon-espace" class="btn-secondary w-full justify-center">Mon espace</a></li>
         <li class="mt-2 px-3">
-          <a
-            href={DONATION_URL}
-            rel="nofollow noopener"
-            target="_blank"
-            class="flex items-center justify-center gap-2 rounded-full bg-marianne-500 hover:bg-marianne-600 text-white font-semibold px-4 py-3 no-underline shadow-soft"
-          >
-            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-            </svg>
+          <a href={DONATION_URL} rel="nofollow noopener" target="_blank" class="flex items-center justify-center gap-2 rounded-full bg-marianne-500 hover:bg-marianne-600 text-white font-semibold px-4 py-3 no-underline shadow-soft">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
             <span>Soutenir le site</span>
           </a>
         </li>
@@ -127,14 +110,21 @@ const isActive = (href: string) =>
   const panel = document.querySelector<HTMLElement>("[data-menu-panel]");
   const openIcon = document.querySelector<SVGElement>("[data-menu-icon-open]");
   const closeIcon = document.querySelector<SVGElement>("[data-menu-icon-close]");
-  if (btn && panel && openIcon && closeIcon) {
-    btn.addEventListener("click", () => {
-      const open = panel.classList.toggle("hidden") === false;
-      btn.setAttribute("aria-expanded", String(open));
-      openIcon.classList.toggle("hidden", open);
-      openIcon.classList.toggle("block", !open);
-      closeIcon.classList.toggle("hidden", !open);
-      closeIcon.classList.toggle("block", open);
-    });
+
+  function setMenuOpen(open: boolean, restoreFocus = false) {
+    if (!btn || !panel || !openIcon || !closeIcon) return;
+    panel.classList.toggle("hidden", !open);
+    btn.setAttribute("aria-expanded", String(open));
+    btn.setAttribute("aria-label", open ? "Fermer le menu" : "Ouvrir le menu");
+    openIcon.classList.toggle("hidden", open);
+    openIcon.classList.toggle("block", !open);
+    closeIcon.classList.toggle("hidden", !open);
+    closeIcon.classList.toggle("block", open);
+    if (restoreFocus) btn.focus();
   }
+
+  btn?.addEventListener("click", () => setMenuOpen(btn.getAttribute("aria-expanded") !== "true"));
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && btn?.getAttribute("aria-expanded") === "true") setMenuOpen(false, true);
+  });
 </script>
