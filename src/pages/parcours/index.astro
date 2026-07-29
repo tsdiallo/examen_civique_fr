@@ -1,0 +1,51 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { EXAM_PATHS, pathHome } from "../../lib/learning/paths";
+---
+<BaseLayout
+  title="Choisir mon parcours — Examen civique"
+  description="Choisissez la démarche que vous préparez : carte de séjour pluriannuelle, carte de résident ou naturalisation française."
+>
+  <section class="container-page py-12 sm:py-20">
+    <p class="eyebrow">Parcours personnalisé</p>
+    <h1 class="mt-4 font-display text-display-sm sm:text-display text-balance">Quelle démarche préparez-vous ?</h1>
+    <p class="mt-5 max-w-2xl text-ink-700 text-pretty">
+      Le contenu, la difficulté et les examens blancs sont adaptés à votre objectif. Vous pourrez changer de parcours depuis votre espace personnel.
+    </p>
+
+    <div class="mt-10 grid gap-5 lg:grid-cols-3">
+      {EXAM_PATHS.map((path, index) => (
+        <article class="card-feature flex flex-col">
+          <div class="flex items-center justify-between gap-3">
+            <span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-france-50 text-france-700 font-display text-lg ring-1 ring-france-200">
+              {index + 1}
+            </span>
+            <span class="badge-france">{path.level}</span>
+          </div>
+          <h2 class="mt-5 font-display text-2xl">{path.title}</h2>
+          <p class="mt-3 text-sm leading-relaxed text-ink-700 flex-1">{path.description}</p>
+          <a
+            href={pathHome(path.slug)}
+            data-select-path={path.slug}
+            class="btn-primary mt-6 justify-center"
+          >
+            Choisir {path.shortTitle}
+          </a>
+        </article>
+      ))}
+    </div>
+
+    <aside class="mt-10 card-paper p-5 sm:p-6 text-sm text-ink-700">
+      <strong class="text-ink-900">Important :</strong> cette plateforme est indépendante et pédagogique. Elle indique clairement les sources et dates de vérification, mais ne remplace pas les informations de l’administration.
+    </aside>
+  </section>
+</BaseLayout>
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-select-path]").forEach((link) => {
+    link.addEventListener("click", () => {
+      const path = link.dataset.selectPath;
+      if (path) window.localStorage.setItem("ecfr.selectedPath", path);
+    });
+  });
+</script>
