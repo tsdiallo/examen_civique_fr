@@ -1,4 +1,4 @@
-import type { Quiz, ExamPayload } from "./types";
+import type { Quiz, ExamPayload, Question } from "./types";
 
 const quizModules = import.meta.glob<Quiz>("../data/quizzes/*.json", {
   eager: true,
@@ -23,9 +23,21 @@ let examCache: ExamPayload | null | undefined;
 export async function getExam(): Promise<ExamPayload | null> {
   if (examCache !== undefined) return examCache;
   try {
-    const mod = await import("../data/exam-final.json");
-    examCache = (mod.default ?? mod) as ExamPayload;
-  } catch {
+    const [baseModule, extraModule] = await Promise.all([
+      import("../data/exam-final.json"),
+      import("../data/exam-extra-situations.json"),
+    ]);
+    const base = (baseModule.default ?? baseModule) as ExamPayload;
+    const extra = (extraModule.default ?? extraModule) as { questions: Question[] };
+    examCache = {
+      ...base,
+      total: 40,
+      durationSec: 2700,
+      passingScore: 32,
+      questions: [...base.questions, ...extra.questions],
+    };
+  } catch (error) {
+    console.error("Unable to load exam bank", error);
     examCache = null;
   }
   return examCache;
