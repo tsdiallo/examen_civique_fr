@@ -1,4 +1,5 @@
 import type { Quiz, ExamPayload, Question } from "./types";
+import { normalizeQuestion } from "./exam/blueprint";
 
 const quizModules = import.meta.glob<Quiz>("../data/quizzes/*.json", {
   eager: true,
@@ -7,15 +8,20 @@ const quizModules = import.meta.glob<Quiz>("../data/quizzes/*.json", {
 
 export function getQuizBySlug(slug: string): Quiz | null {
   for (const [path, quiz] of Object.entries(quizModules)) {
-    if (path.endsWith(`/${slug}.json`)) return quiz;
+    if (path.endsWith(`/${slug}.json`)) {
+      return {
+        ...quiz,
+        questions: quiz.questions.map(normalizeQuestion),
+      };
+    }
   }
   return null;
 }
 
 export function listQuizSlugs(): string[] {
-  return Object.keys(quizModules).map((p) => {
-    const m = p.match(/\/([^/]+)\.json$/);
-    return m ? m[1] : "";
+  return Object.keys(quizModules).map((path) => {
+    const match = path.match(/\/([^/]+)\.json$/);
+    return match ? match[1] : "";
   }).filter(Boolean);
 }
 
@@ -34,7 +40,7 @@ export async function getExam(): Promise<ExamPayload | null> {
       total: 40,
       durationSec: 2700,
       passingScore: 32,
-      questions: [...base.questions, ...extra.questions],
+      questions: [...base.questions, ...extra.questions].map(normalizeQuestion),
     };
   } catch (error) {
     console.error("Unable to load exam bank", error);
